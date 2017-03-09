@@ -23,8 +23,9 @@ void GameDynamicData::removeAbility(unitID unitID, string abilityType) {
 }
 
 int GameDynamicData::createUnit(char unitType, int x, int y) {
-	Unit u = game->unitTypes[unitType].makeUnit();
+	Unit u = game->unitTypes.at(unitType).makeUnit();
 	units.insert({u.id, u});
+	return u.id;
 }
 
 TerrainID GameDynamicData::getTerrain(int x, int y) {
