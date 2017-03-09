@@ -20,4 +20,4 @@ public:
     json toJson();
 };
 
-GameDynamicData dynamicData;
+extern GameDynamicData dynamicData;
