@@ -2,6 +2,7 @@
 
 #include "UnitType.hpp"
 #include "AbilityType.hpp"
+#include "Unit.hpp"
 
 class Game {
 public:
@@ -10,7 +11,7 @@ public:
     std::map<string, AbilityType> abilityTypes;
     bool displayRNG;
     int mapHeight, mapWidth;
-	int highestUnitID = 0;
+	unitID highestUnitID = 0;
 private:
 };
 

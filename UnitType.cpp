@@ -27,4 +27,6 @@ Unit UnitType::makeUnit() {
 	result.unitTypeID = id;
 	result.data_keys = extraData;
 	result.abilities = abilities;
+
+	return result;
 }
