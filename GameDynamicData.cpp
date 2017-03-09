@@ -1,5 +1,6 @@
 #include "GlobalIncludes.hpp"
 #include "GameDynamicData.hpp"
+#include "Game.hpp"
 
 GameDynamicData dynamicData;
 
@@ -23,11 +24,16 @@ void GameDynamicData::removeAbility(unitID unitID, string abilityType) {
 
 int GameDynamicData::createUnit(char unitType, int x, int y) {
 	Unit u = game->unitTypes[unitType].makeUnit();
-	units.insert(u.id, u);
+	units.insert({u.id, u});
 }
 
 TerrainID GameDynamicData::getTerrain(int x, int y) {
 }
 
 std::vector<unitID> GameDynamicData::getAllUnits() {
+	std::vector<unitID> result;
+	for (auto pair : units) {
+		result.push_back(pair.first);
+	}
+	return result;
 }
