@@ -6,6 +6,7 @@ LuaManager lua;
 
 LuaManager::LuaManager() {
 	L = luaL_newstate();
+
 }
 
 void LuaManager::loadFile(string filename) {

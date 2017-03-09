@@ -1,8 +1,5 @@
 *.o
 *.gch
-datagame
+dataGame
 /.vs
-/VisualStudioProject/.vs/VisualStudioProject/v15
-/VisualStudioProject/Debug
-/VisualStudioProject
 /VisualStudioProject

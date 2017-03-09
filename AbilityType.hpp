@@ -12,4 +12,6 @@ public:
     std::map<LuaFunction, string> functionNames;
 
     void useAbility(LuaFunction ability);
+private:
+	void conditionalAdd(json jsonSection, LuaFunction function, string jsonName);
 };

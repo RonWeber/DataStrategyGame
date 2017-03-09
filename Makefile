@@ -12,3 +12,5 @@ dataGame : $(OBJ)
 
 clean:
 	rm *.o *.gch dataGame
+
+headers:
