@@ -1,5 +1,6 @@
 #include "json.hpp"
 #include "AbilityType.hpp"
+#include <string>
 
 using json = nlohmann::json;
 using string = std::string;

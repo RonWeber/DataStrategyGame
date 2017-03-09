@@ -1,0 +1,84 @@
+{
+  "displayRNG": false,
+  "luaFiles": [
+    "testGame.lua",
+    "testGame2.lua"
+  ],
+  "terrainData": [
+    {
+      "id": ".",
+      "imageFile": "grass.png"
+    }
+  ],
+  "abilityData": [
+    {
+      "id": "selfPunch",
+      "description": "Punches self to make room",
+      "imageFile": "selfPunch.png",
+      "selection": false,
+      "availableFn": "selfPunchAvailable",
+      "actionFn": "selfPunchAction",
+      "helperDataFn": "selfPunchHelperData"
+    },
+    {
+      "id": "teleport",
+      "description": "Goes to a place",
+      "imageFile": "teleport.png",
+      "selection": true,
+      "availableFn": "teleportAvailable",
+      "actionFn": "teleportAction",
+      "allowedLocationsFn": "teleportAllowedLocations",
+      "helperDataFn": "teleportHelperData"
+    }
+  ],
+  "unitData": [
+    {
+      "id": "b",
+      "side": 0,
+      "Image": "bear.png",
+      "maxHP": 10,
+      "maxMoves": 2,
+      "maxAP": 1,
+      "extraData": [
+        {
+          "key": "Bear?",
+          "value": "Bear!"
+        },
+        {
+          "key": "magicResistance",
+          "value": "12"
+        }
+      ],
+      "abilities": [
+        "selfPunch",
+        "teleport"
+      ],
+      "name": "Bear",
+      "description": "A very, very scary animal.  If one mauls you, you get an Oscar."
+    },
+    {
+      "id": "c",
+      "side": 1,
+      "Image": "sorcerer.png",
+      "maxHP": 5,
+      "maxMoves": 1,
+      "maxAP": 2,
+      "extraData": [
+        {
+          "key": "Bear?",
+          "value": "No bear"
+        },
+        {
+          "key": "magicResistance",
+          "value": "25"
+        }
+      ],
+      "abilities": [
+        "selfPunch",
+        "teleport"
+      ],
+      "name": "Sorcerer",
+      "description": "Probably does some kinda magic."
+    }
+  ]
+};

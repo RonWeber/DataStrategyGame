@@ -1,6 +1,7 @@
 #pragma once
 #include "UnitType.hpp"
 #include "AbilityType.hpp"
+#include <string>
 
 using string = std::string;
 

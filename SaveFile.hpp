@@ -1,3 +1,5 @@
+#include <string>
+
 using string = std::string;
 
 void Save(string fileName);
