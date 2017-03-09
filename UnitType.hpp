@@ -1,11 +1,9 @@
-#include <string>
-#include "json.hpp"
+#pragma once
+
 #include "AbilityType.hpp"
 #include "Unit.hpp"
 #include "Image.hpp"
 
-using json = nlohmann::json;
-using string = std::string;
 
 class UnitType {
 public:

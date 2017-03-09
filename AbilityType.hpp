@@ -1,9 +1,4 @@
 #pragma once
-#include <string>
-#include "json.hpp"
-
-using json = nlohmann::json;
-using string = std::string;
 
 enum LuaFunction { Available, Action, AllowedLocations, HelperData, UnitCreated, UnitDied, TurnStart, TurnEnd };
 

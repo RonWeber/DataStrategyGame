@@ -1,4 +1,4 @@
-#include <iostream>
+#include "GlobalIncludes.hpp"
 #include "AbilityType.hpp"
 
 AbilityType::AbilityType(json jsonSection) {

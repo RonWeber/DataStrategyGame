@@ -1,11 +1,7 @@
-#include <iostream>
-#include <fstream>
-#include <string>
+#include "GlobalIncludes.hpp"
 #include "Map.hpp"
 #include "Game.hpp"
 
-using string = std::string;
-using ifstream = std::ifstream;
 
 void LoadMap(string fileName) {
     //Parse the map file.
@@ -15,7 +11,7 @@ void LoadMap(string fileName) {
     std::getline(mapFile, widthStr, ' ');
     std::getline(mapFile, heightStr, ' ');
     std::getline(mapFile, jsonFileName);
-
-    std::cout << "Map loaded.  JSON file at " << jsonFileName << "\n";
+	
+    std::cout << "Map loaded("<< widthStr <<","<< heightStr <<").  JSON file at " << jsonFileName << "\n";
     game = Game(jsonFileName); //Load the game.
 }

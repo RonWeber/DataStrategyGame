@@ -1,8 +1,7 @@
-#include "Unit.hpp"
-#include "json.hpp"
+#pragma once
 
-using json = nlohmann::json;
-using string=std::string;
+#include "Unit.hpp"
+
 typedef char TerrainID;
 
 class GameDynamicData {

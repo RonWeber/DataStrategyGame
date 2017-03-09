@@ -1,4 +1,3 @@
-#include <string>
-using string = std::string;
+#pragma once
 
 void LoadMap(string fileName);

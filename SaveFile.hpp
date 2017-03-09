@@ -1,6 +1,4 @@
-#include <string>
-
-using string = std::string;
+#pragma once
 
 void Save(string fileName);
 void LoadSave(string fileName);
