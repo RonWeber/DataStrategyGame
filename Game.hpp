@@ -5,7 +5,6 @@
 
 class Game {
 public:
-    Game();
     Game(string globalFileName);
     std::map<char, UnitType> unitTypes;
     std::map<string, AbilityType> abilityTypes;
@@ -14,5 +13,5 @@ public:
 private:
 };
 
-extern Game game; //Defined in Game.cpp
+extern std::unique_ptr<Game> game; //Defined in Game.cpp
 //The extern is our low-rent multiple-include guard.

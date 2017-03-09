@@ -13,5 +13,5 @@ void LoadMap(string fileName) {
     std::getline(mapFile, jsonFileName);
 	
     std::cout << "Map loaded("<< widthStr <<","<< heightStr <<").  JSON file at " << jsonFileName << "\n";
-    game = Game(jsonFileName); //Load the game.
+    game = std::unique_ptr<Game>(new Game(jsonFileName)); //Load the game.
 }

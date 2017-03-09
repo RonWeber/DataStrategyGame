@@ -3,11 +3,7 @@
 #include "Window.hpp"
 #include "UI.hpp"
 
-Game game;
-
-Game::Game() {
-	//You shouldn't be doing this.
-}
+std::unique_ptr<Game> game;
 
 Game::Game(string globalFileName) {
 	//initialize data
