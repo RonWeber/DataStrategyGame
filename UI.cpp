@@ -1,10 +1,13 @@
 #include "GlobalIncludes.hpp"
 #include "UI.hpp"
 #include "Window.hpp"
-
+#include "LuaManager.hpp"
+UI::UI() {
+	scrollOffsetX = scrollOffsetY = 0;
+}
 void UI::update() {
-	gridX = gfx.mouseX / 32;
-	gridY = gfx.mouseY / 32;
+	gridX = (gfx.mouseX - scrollOffsetX) / 32;
+	gridY = (gfx.mouseY - scrollOffsetY) / 32;
 
 	if (gfx.Lclicked) {
 		switch (selectionLevel) {
@@ -13,10 +16,19 @@ void UI::update() {
 			//unitSelected = getUnitAt(gridX,gridY)
 			break;
 		case unit:
-			selectionLevel = ability;
+			/*abilitySelected = 
+			if (ability is available){
+				if (ability is instant)
+					lua.callFunction(unitSlected, AbilitySelected)
+				else
+					selectionLevel = ability;
+			}*/
 			break;
 		case ability:
-			//do ability
+			//coord c = coord(gridX, gridY)
+			//if c is valid{
+			//lua.callFunction(unitSelected, AbilitySelected, c)
+			//selectionLevel = unit
 			break;
 		}
 	}

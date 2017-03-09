@@ -37,7 +37,7 @@ Game::Game(string globalFileName) {
 
 		ui.draw_grid();
 
-		i->draw_at(5*32, 5 * 32);
+		i->draw_at({ 5, 5 });
 
 	gfx.EndFrame();
     }
