@@ -5,7 +5,7 @@
 using json = nlohmann::json;
 using string = std::string;
 
-Enum LuaFunction { Available, Action, AllowedLocations, HelperData, UnitCreated, UnitDied, TurnStart, TurnEnd };
+enum LuaFunction { Available, Action, AllowedLocations, HelperData, UnitCreated, UnitDied, TurnStart, TurnEnd };
 
 class AbilityType {
 public:

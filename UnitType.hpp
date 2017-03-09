@@ -1,6 +1,8 @@
+#include <string>
 #include "json.hpp"
 #include "AbilityType.hpp"
-#include <string>
+#include "Unit.hpp"
+#include "Image.hpp"
 
 using json = nlohmann::json;
 using string = std::string;
@@ -16,7 +18,6 @@ public:
     std::vector<AbilityType> abilities;
     string name;
     string description;
-    Image image;
 
     Unit makeUnit();
 };
