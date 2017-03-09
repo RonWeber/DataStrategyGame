@@ -1,13 +1,25 @@
 #include "GlobalIncludes.hpp"
 #include "AbilityType.hpp"
 
-AbilityType::AbilityType(json jsonSection) {
-    bool exists = jsonSection.find("turnStartFn") != jsonSection.end();
-    if (exists) {
-	json turnStartFnJson = jsonSection.at("turnStartFn");
-	functionNames.insert({TurnStart, turnStartFnJson.get<string>()});
-    }
+bool existsInJson(json jsonSection, string key) {
+	return jsonSection.find("turnStartFn") != jsonSection.end();
 }
+
+void AbilityType::conditionalAdd(json jsonSection, LuaFunction function, string jsonName) {
+    if (existsInJson(jsonSection, jsonName))
+		functionNames.insert({function, jsonSection[jsonName].get<string>()});
+}
+
+AbilityType::AbilityType(json json) {
+	conditionalAdd(json, Available, "availableFn");
+	conditionalAdd(json, Action, "actionFn");
+	conditionalAdd(json, AllowedLocations, "allowedLocationsFn");
+	conditionalAdd(json, UnitCreated, "unitCreatedFn");
+	conditionalAdd(json, UnitDied, "unitDiedFn");
+	conditionalAdd(json, TurnStart, "turnStartFn");
+	conditionalAdd(json, TurnEnd, "turnEndFn");
+}
+
 
 void AbilityType::useAbility(LuaFunction ability) {
 }

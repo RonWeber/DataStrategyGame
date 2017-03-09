@@ -10,6 +10,7 @@ public:
     std::map<char, UnitType> unitTypes;
     std::map<string, AbilityType> abilityTypes;
     bool displayRNG;
+    int mapHeight, mapWidth;
 private:
 };
 

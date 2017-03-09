@@ -10,7 +10,7 @@ bool Window::initWindow()//0 = windowed (default), 1 = 1.5x screen, 2 = fullscre
 
 	//Initialization flag
 	bool success = true;
-
+	
 	//Initialize SDL
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{

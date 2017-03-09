@@ -5,6 +5,7 @@ LuaManager lua;
 
 LuaManager::LuaManager() {
 	L = luaL_newstate();
+
 }
 
 void LuaManager::loadFile(string filename) {
@@ -14,3 +15,4 @@ void LuaManager::loadFile(string filename) {
 LuaManager::~LuaManager() {
 	lua_close(L);
 }
+

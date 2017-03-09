@@ -6,19 +6,20 @@
 Game game;
 
 Game::Game() {
-    //You shouldn't be doing this.
+	//You shouldn't be doing this.
 }
 
 Game::Game(string globalFileName) {
 	//initialize data
-    std::ifstream file(globalFileName);
-    json json;
+	std::ifstream file(globalFileName);
+    
+	json json;
 
 
-    file >> json;
-    displayRNG = json["displayRNG"];
-    //TODO: Do something with lua files.
-    //TODO: Implement terrain
+	file >> json;
+	displayRNG = json["displayRNG"];
+	//TODO: Do something with lua files.
+	//TODO: Implement terrain
 	for (auto ability : json["abilityData"]) {
 		AbilityType newType = AbilityType(ability);
 		abilityTypes.insert({ newType.id, newType });
@@ -39,7 +40,7 @@ Game::Game(string globalFileName) {
 
 		i->draw_at(5*32, 5 * 32);
 
-		gfx.EndFrame();
+	gfx.EndFrame();
     }
-	delete i;
+    delete i;
 }
