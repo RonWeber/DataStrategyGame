@@ -27,6 +27,9 @@ Game::Game(string globalFileName) {
 	
 	//run game
 	UI ui = UI();
+
+	Image* i = new Image("games/testgame/tmp2.png");
+
 	while (1) {
 		gfx.InitFrame();
 		if (gfx.quit) break;
@@ -34,6 +37,9 @@ Game::Game(string globalFileName) {
 
 		ui.draw_grid();
 
+		i->draw_at(5*32, 5 * 32);
+
 		gfx.EndFrame();
     }
+	delete i;
 }

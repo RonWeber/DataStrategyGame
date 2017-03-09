@@ -1,12 +1,13 @@
 #include "GlobalIncludes.hpp"
-#include "Graphics.hpp"
+#include "Window.hpp"
 
 /*Much of the code in this file was originally from Lazy Foo' Productions
 (http://lazyfoo.net/)*/
 
-Graphics gfx;
-bool Graphics::initWindow()//0 = windowed (default), 1 = 1.5x screen, 2 = fullscreen, 3 = 1.5x fullscreen mode
+Window gfx;
+bool Window::initWindow()//0 = windowed (default), 1 = 1.5x screen, 2 = fullscreen, 3 = 1.5x fullscreen mode
 {
+
 	//Initialization flag
 	bool success = true;
 
@@ -73,6 +74,7 @@ bool Graphics::initWindow()//0 = windowed (default), 1 = 1.5x screen, 2 = fullsc
 					printf("Unable to initialize OpenGL!\n");
 					success = false;
 				}
+
 			}
 		}
 	}
@@ -81,7 +83,7 @@ bool Graphics::initWindow()//0 = windowed (default), 1 = 1.5x screen, 2 = fullsc
 }
 
 
-bool Graphics::initGL()
+bool Window::initGL()
 {
 	GLenum error = GL_NO_ERROR;
 
@@ -125,36 +127,46 @@ bool Graphics::initGL()
 	return true;
 }
 
-SDL_Texture* Graphics::loadTexture(std::string path)
+GLuint Window::loadTexture(std::string path)
 {
-	//The final texture
-	SDL_Texture* newTexture = NULL;
-
-	//Load image at specified path
-	SDL_Surface* loadedSurface = IMG_Load(path.c_str());
-	if (loadedSurface == NULL)
+	GLuint TextureID;
+	SDL_Surface* Surface = IMG_Load(path.c_str());
+	if (Surface == NULL)
 	{
-		printf("Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError());
+		std::cerr << "Unable to load image! SDL_image Error: " << IMG_GetError() << "\n";
+		//throw?
 	}
-	else
-	{
-		//Create texture from surface pixels
-		newTexture = SDL_CreateTextureFromSurface(gRenderer, loadedSurface);
-		if (newTexture == NULL)
-		{
-			printf("Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError());
-		}
+	glEnable(GL_TEXTURE_2D);
+	glGenTextures(1, &TextureID);
+	glBindTexture(GL_TEXTURE_2D, TextureID);
 
-		//Get rid of old loaded surface
-		SDL_FreeSurface(loadedSurface);
+	int Mode = GL_RGB;
+
+	if (Surface->format->BytesPerPixel == 4) {
+		Mode = GL_RGBA;
 	}
 
-	return newTexture;
+	glTexImage2D(GL_TEXTURE_2D, 0, Mode, Surface->w, Surface->h, 0, Mode, GL_UNSIGNED_BYTE, Surface->pixels);
+	
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	GLenum err;
+	if ((err = glGetError()) != GL_NO_ERROR) {
+		std::cout << "openGL error" << err << "\n";
+		//throw?
+	}
+
+	glDisable(GL_TEXTURE_2D);
+	SDL_FreeSurface(Surface);
+
+	return TextureID;//increment for next texture
 }
 
 
-Graphics::Graphics() {
+Window::Window() {
 	screenmode = 0;
+
 	initWindow();
 
 	glLoadIdentity();
@@ -167,9 +179,11 @@ Graphics::Graphics() {
 	frame = 0;
 	endTime = SDL_GetTicks();
 
+	Lclicked = Rclicked = false;
+
 }
 
-Graphics::~Graphics() {
+Window::~Window() {
 	//Destroy window    
 	SDL_DestroyWindow(gWindow);
 	gWindow = NULL;
@@ -179,7 +193,7 @@ Graphics::~Graphics() {
 	SDL_Quit();
 }
 
-void Graphics::InitFrame() {
+void Window::InitFrame() {
 	SDL_Event e;
 	endTime = endTime + 17;
 	frame++;
@@ -206,7 +220,9 @@ void Graphics::InitFrame() {
 			mouseX = e.button.x;
 			mouseY = e.button.y;
 			if (e.button.button == SDL_BUTTON_LEFT)
-				clicked = (e.button.state == SDL_PRESSED);
+				Lclicked = (e.button.state == SDL_PRESSED);
+			if (e.button.button == SDL_BUTTON_RIGHT)
+				Rclicked = (e.button.state == SDL_PRESSED);
 			if (screenmode == 1 || screenmode == 3) {
 				mouseX /= 1.5;
 				mouseY /= 1.5;
@@ -224,7 +240,7 @@ void Graphics::InitFrame() {
 	glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void Graphics::EndFrame() {
+void Window::EndFrame() {
 	//Update screen
 	SDL_GL_SwapWindow(gWindow);
 	if (SDL_GetTicks() < endTime) {
@@ -234,5 +250,9 @@ void Graphics::EndFrame() {
 	else {
 		//std::cout << SDL_GetTicks()-endTime << "\n";
 	}
+
+	GLenum err;
+	if ((err = glGetError()) != GL_NO_ERROR)
+		std::cout << "GL error!" << err << "\n";
 
 }
