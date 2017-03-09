@@ -5,6 +5,9 @@ Image::Image(string filename) {
 	img = gfx.loadTexture(filename);
 }
 
+
+#pragma warning( push )
+#pragma warning( disable : 4244)
 void Image::draw_at(int x, int y) {
 
 	glEnable(GL_BLEND);
@@ -29,3 +32,4 @@ void Image::draw_at(int x, int y) {
 	glDisable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
 }
+#pragma warning( pop )
