@@ -7,6 +7,7 @@ public:
 	LuaManager();
 	~LuaManager();
 	void loadFile(string filename);
+	void CallFunction(string fn);
 private:
 	lua_State* L;
 
