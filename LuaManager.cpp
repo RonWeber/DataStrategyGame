@@ -40,6 +40,13 @@ void LuaManager::CallFunction(string fn, int unitID) {
 	lua_pushinteger(L, unitID);
 	lua_call(L, 1, 0);
 }
+void LuaManager::CallFunction(string fn, int unitID, coord pos) {
+	lua_getglobal(L, fn.c_str());
+	lua_pushinteger(L, unitID);
+	lua_pushinteger(L, pos.x);
+	lua_pushinteger(L, pos.y);
+	lua_call(L, 3, 0);
+}
 
 bool LuaManager::CallFunctionAvailable(string fn, int unitID) {
 	lua_getglobal(L, fn.c_str());
