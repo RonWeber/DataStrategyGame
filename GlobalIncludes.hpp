@@ -5,13 +5,12 @@
 #include <string>
 #include "include/json.hpp"
 
-#include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #define GLEW_STATIC
 #include <glew.h>
-#include <SDL/SDL_opengl.h>
-
-
+#define NO_SDL_GLEXT
+#include <SDL2/SDL_opengl.h>
 
 
 using json = nlohmann::json;
