@@ -37,7 +37,6 @@ private:
 	SDL_GLContext gContext;
 
 	unsigned int endTime;
-	int screenmode;//0 = windowed (default), 1 = 1.5x screen, 2 = fullscreen, 3 = 1.5x fullscreen mode*
 };
 
 extern Window gfx; //Defined in Window.cpp, opened in Main.cpp

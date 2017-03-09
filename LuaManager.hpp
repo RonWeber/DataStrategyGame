@@ -7,7 +7,8 @@ public:
 	LuaManager();
 	~LuaManager();
 	void loadFile(string filename);
-	void CallFunction(string fn);
+	void CallFunction(string fn, int unitID);
+	bool CallFunctionAvailable(string fn, int unitID);
 private:
 	lua_State* L;
 

@@ -25,20 +25,7 @@ bool Window::initWindow()//0 = windowed (default), 1 = 1.5x screen, 2 = fullscre
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
 
-		//Create window
-		switch (screenmode) {
-		case 1:
-			gWindow = SDL_CreateWindow("Data Strategy Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH*1.5, SCREEN_HEIGHT*1.5, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
-			break;
-		case 2:
-			gWindow = SDL_CreateWindow("Data Strategy Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_FULLSCREEN);
-			break;
-		case 3:
-			gWindow = SDL_CreateWindow("Data Strategy Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH*1.5, SCREEN_HEIGHT*1.5, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_FULLSCREEN);
-			break;
-		default:
-			gWindow = SDL_CreateWindow("Data Strategy Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
-		}
+		gWindow = SDL_CreateWindow("Data Strategy Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 		if (gWindow == NULL)
 		{
 			printf("Window could not be created! SDL Error: %s\n", SDL_GetError());
@@ -165,8 +152,6 @@ GLuint Window::loadTexture(std::string path)
 
 
 Window::Window() {
-	screenmode = 0;
-
 	initWindow();
 
 	glLoadIdentity();
@@ -211,10 +196,6 @@ void Window::InitFrame() {
 			//Get the mouse offsets 
 			mouseX = e.motion.x;
 			mouseY = e.motion.y;
-			if (screenmode == 1 || screenmode == 3) {
-				mouseX /= 1.5;
-				mouseY /= 1.5;
-			}
 		}
 		if (e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP) {
 			mouseX = e.button.x;
@@ -223,10 +204,6 @@ void Window::InitFrame() {
 				Lclicked = (e.button.state == SDL_PRESSED);
 			if (e.button.button == SDL_BUTTON_RIGHT)
 				Rclicked = (e.button.state == SDL_PRESSED);
-			if (screenmode == 1 || screenmode == 3) {
-				mouseX /= 1.5;
-				mouseY /= 1.5;
-			}
 		}
 		if (e.type == SDL_KEYDOWN) {
 			keydown = e.key.keysym.scancode;
