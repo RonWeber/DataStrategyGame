@@ -4,9 +4,31 @@
 
 LuaManager lua;
 
+//Functions lua code calls
+static int getValue(lua_State *L) {
+	int unitID = (int)lua_tointeger(L, -1);
+	const char* key = lua_tostring(L, -2);
+	lua_pushinteger(L, dynamicData.getValue(unitID, key));
+	return 1;
+}
+
+static int setValue(lua_State *L) {
+	int unitID = (int)lua_tointeger(L, -1);
+	const char* key = lua_tostring(L, -2);
+	int value = (int)lua_tointeger(L, -3);
+	dynamicData.setValue(unitID, key, value);
+	return 0;
+}
+
+
+//LuaManager itself
 LuaManager::LuaManager() {
 	L = luaL_newstate();
 
+	lua_pushcfunction(L, getValue);
+	lua_setglobal(L, "getValue");
+	lua_pushcfunction(L, setValue);
+	lua_setglobal(L, "setValue");
 }
 
 void LuaManager::loadFile(string filename) {
@@ -28,23 +50,4 @@ bool LuaManager::CallFunctionAvailable(string fn, int unitID) {
 
 LuaManager::~LuaManager() {
 	lua_close(L);
-}
-
-//Functions lua code calls
-static int getValue(lua_State *L) {
-	int n = lua_gettop(L);    /* number of arguments */
-	if (n != 2) {//throw?
-		std::cout << "getValue from lua incorrect argument count\n";
-	}
-	lua_pushinteger(L, dynamicData.getValue((int)lua_tointeger(L, 0), lua_tostring(L, 1)));
-	return 1;
-}
-
-static int setValue(lua_State *L) {
-	int n = lua_gettop(L);    /* number of arguments */
-	if (n != 3) {//throw?
-		std::cout << "setValue from lua incorrect argument count\n";
-	}
-	dynamicData.setValue((int)lua_tointeger(L, 0), lua_tostring(L, 1), (int)lua_tointeger(L, 2));
-	return 0;
 }
