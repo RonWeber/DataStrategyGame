@@ -10,6 +10,7 @@ public:
     std::map<string, AbilityType> abilityTypes;
     bool displayRNG;
     int mapHeight, mapWidth;
+	int highestUnitID = 0;
 private:
 };
 

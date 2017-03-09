@@ -10,9 +10,9 @@ public:
     UnitType(json jsonSection);
 
     char id;
-    Image image;
+	std::shared_ptr<Image> image;
     int maxHP, movesPerTurn, actionsPerTurn;
-    std::map<string, string> extraData;
+    std::map<string, int> extraData;
     std::vector<string> abilities;
     string name;
     string description;
