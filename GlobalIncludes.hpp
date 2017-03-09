@@ -17,13 +17,6 @@ using json = nlohmann::json;
 using string = std::string;
 using ifstream = std::ifstream;
 
-
-static double xdir(double angle, double distance) {
-	return -sin((angle * M_PI) / 180)*distance;
-}
-static double ydir(double angle, double distance) {
-	return cos((angle * M_PI) / 180)*distance;
-}
-static bool bbox(double x, double y, double x1, double y1, double w, double h) {
-	return ((x >= x1 && x <= x1 + w) && (y >= y1 && y <= y1 + h));
-}
+typedef struct {
+	int x, y;
+} coord;
