@@ -13,9 +13,10 @@ public:
     Image image;
     int maxHP, movesPerTurn, actionsPerTurn;
     std::map<string, string> extraData;
-    std::vector<AbilityType> abilities;
+    std::vector<string> abilities;
     string name;
     string description;
+	int side;
 
     Unit makeUnit();
 };

@@ -20,7 +20,10 @@ Game::Game(string globalFileName) {
 		AbilityType newType = AbilityType(ability);
 		abilityTypes.insert({ newType.id, newType });
 	}
-	
+	for (auto unitType : json["unitData"]) {
+		UnitType newType = UnitType(unitType);
+		unitTypes.insert({newType.id, newType});
+	}
 	
 	//run game
 	UI ui = UI();
