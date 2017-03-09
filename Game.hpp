@@ -1,3 +1,4 @@
+#pragma once
 #include "UnitType.hpp"
 #include "AbilityType.hpp"
 

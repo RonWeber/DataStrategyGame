@@ -1,0 +1,16 @@
+20 15 games/testgame/game.json
+aaaaaaaaaaaaaaaaaaaa
+aaaabaaaaaaaaaaaaaaa
+aaaaaaaaaaaabaaaaaaa
+aaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaa
+aaaaaaaabaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaacaaaaaa
+aaaaaaaaaaaaaaaaaaaa
+aaaaacaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaa
+aaaaaaaaacaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaa
