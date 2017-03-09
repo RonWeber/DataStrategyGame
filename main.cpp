@@ -1,5 +1,6 @@
 #include <iostream>
+#include "Map.hpp"
 
 int main(int argc, char* argv[]) {
-    std::cout << "Hello, world.";
+    LoadMap("games/testgame/testgamemap.txt");
 }
