@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Unit.hpp"
+#include "GlobalIncludes.hpp"
 
 typedef char TerrainID;
 
@@ -16,6 +17,7 @@ public:
     unitID createUnit(char unitType, int x, int y);
     TerrainID getTerrain(int x, int y);
     std::vector<unitID> getAllUnits();
+	unitID unitAt(coord coord);
 
     json toJson();
 };

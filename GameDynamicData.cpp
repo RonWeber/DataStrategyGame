@@ -38,3 +38,13 @@ std::vector<unitID> GameDynamicData::getAllUnits() {
 	}
 	return result;
 }
+
+
+unitID GameDynamicData::unitAt(coord coord) {
+	for (auto pair : units) {
+		if (pair.second.data_keys["x"] == coord.x && pair.second.data_keys["y"] == coord.y) {
+			return pair.first;
+		}
+	}
+	return -1;
+}
