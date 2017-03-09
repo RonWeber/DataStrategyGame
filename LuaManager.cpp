@@ -36,7 +36,7 @@ static int getValue(lua_State *L) {
 	if (n != 2) {//throw?
 		std::cout << "getValue from lua incorrect argument count\n";
 	}
-	lua_pushinteger(L, dynamicData.getValue(lua_tointeger(L, 0), lua_tostring(L, 1)));
+	lua_pushinteger(L, dynamicData.getValue((int)lua_tointeger(L, 0), lua_tostring(L, 1)));
 	return 1;
 }
 
@@ -45,6 +45,6 @@ static int setValue(lua_State *L) {
 	if (n != 3) {//throw?
 		std::cout << "setValue from lua incorrect argument count\n";
 	}
-	dynamicData.setValue(lua_tointeger(L, 0), lua_tostring(L, 1), lua_tointeger(L, 2));
+	dynamicData.setValue((int)lua_tointeger(L, 0), lua_tostring(L, 1), (int)lua_tointeger(L, 2));
 	return 0;
 }

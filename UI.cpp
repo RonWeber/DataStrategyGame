@@ -34,6 +34,10 @@ void UI::update() {
 		}
 	}
 }
+
+#pragma warning( push )
+#pragma warning( disable : 4244)
+
 void UI::draw_grid() {
 	glBegin(GL_TRIANGLE_STRIP);
 	glColor3f(0.4f, 0.4f, 0.4f);
@@ -79,3 +83,5 @@ void UI::draw_grid() {
 
 	glDisable(GL_BLEND);
 }
+
+#pragma warning( pop ) 
