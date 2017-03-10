@@ -26,18 +26,15 @@ Game::Game(string globalFileName) {
 		unitTypes.insert({newType.id, newType});
 	}
 
-	Image* i = new Image("games/testgame/tmp2.png");
 
 	while (1) {
 		gfx.InitFrame();
 		if (gfx.quit) break;
 		ui.update();
 		ui.drawBackground();
-
+		ui.drawUnits();
 		ui.drawForeground();
-		i->draw_at({ 5, 5 });
 
-	gfx.EndFrame();
+		gfx.EndFrame();
     }
-    delete i;
 }

@@ -95,22 +95,22 @@ void LuaManager::loadFile(string filename) {
 	luaL_loadfile(L, filename.c_str());
 }
 
-void LuaManager::CallFunction(string fn, int unitID) {
+void LuaManager::CallFunction(string fn, unitID unit) {
 	lua_getglobal(L, fn.c_str());
-	lua_pushinteger(L, unitID);
+	lua_pushinteger(L, unit);
 	lua_call(L, 1, 0);
 }
-void LuaManager::CallFunction(string fn, int unitID, coord pos) {
+void LuaManager::CallFunction(string fn, unitID unit, coord pos) {
 	lua_getglobal(L, fn.c_str());
-	lua_pushinteger(L, unitID);
+	lua_pushinteger(L, unit);
 	lua_pushinteger(L, pos.x);
 	lua_pushinteger(L, pos.y);
 	lua_call(L, 3, 0);
 }
 
-bool LuaManager::CallFunctionAvailable(string fn, int unitID) {
+bool LuaManager::CallFunctionAvailable(string fn, unitID unit) {
 	lua_getglobal(L, fn.c_str());
-	lua_pushinteger(L, unitID);
+	lua_pushinteger(L, unit);
 	lua_call(L, 1, 0);
 	return lua_toboolean(L, 0);
 }
