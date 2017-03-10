@@ -119,6 +119,13 @@ void UI::drawBackground() {
 }
 
 
+void UI::drawUnits() {
+	for(Unit u: dynamicData.getAllUnits) {
+		game->unitTypes.at(u.unitTypeID).image->draw_at(u.coordinate);
+	}
+}
+
+
 void UI::drawForeground() {
 	switch (selectionLevel) {
 	case none: break;

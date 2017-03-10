@@ -6,6 +6,7 @@ public:
 	UI();
 	void update();
 	void drawBackground();
+	void drawUnits();
 	void drawForeground();
 private:
 	int gridX, gridY;
