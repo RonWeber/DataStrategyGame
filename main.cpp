@@ -4,7 +4,7 @@
 
 int main(int argc, char* argv[]) {
 	
-	_chdir("games/testgame/");
+	chdir("games/testgame/");
     LoadMap("testgamemap.txt");
 
 	return 0;

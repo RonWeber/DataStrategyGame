@@ -3,6 +3,8 @@
 #include "Window.hpp"
 #include "LuaManager.hpp"
 #include "GameDynamicData.hpp"
+#include "Unit.hpp"
+#include "Game.hpp"
 UI::UI() {
 	scrollOffsetX = scrollOffsetY = 0;
 }
@@ -13,17 +15,21 @@ void UI::update() {
 	if (gfx.Lclicked) {
 		switch (selectionLevel) {
 		case none:
-			selectionLevel = unit;
-			//unitSelected = getUnitAt(gridX,gridY)
+			unitSelected = dynamicData.unitAt({ gridX,gridY });
+			if (unitSelected != -1) {
+				selectionLevel = unit;
+			}
 			break;
 		case unit:
-			/*abilitySelected = 
-			if (ability is available){
-				if (ability is instant)
-					lua.callFunction(unitSlected, AbilitySelected)
-				else
-					selectionLevel = ability;
-			}*/
+			if (gridY == 600 / 32 && gridX < dynamicData.units[unitSelected].abilities.size()) {
+				abilitySelected = dynamicData.units[unitSelected].abilities[gridX];
+				if (lua.CallFunctionAvailable(abilitySelected, unitSelected)) {
+					if (game->abilityTypes.at(abilitySelected).selectionAbility)
+						selectionLevel = ability;
+					else
+						lua.CallFunction(abilitySelected, unitSelected);
+				}
+			}
 			break;
 		case ability:
 			//coord c = coord(gridX, gridY)
