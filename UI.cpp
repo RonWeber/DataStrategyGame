@@ -135,8 +135,8 @@ void UI::drawForeground() {
 		drawSquare({ abilitySelectionPosition , gfx.SCREEN_HEIGHT / 32 - 1 }, .2, .2, .2);
 	case unit:
 		auto abilities = dynamicData->units[unitSelected].abilities;
-		for (int i = 0; i < abilities.size; i++) {
-			game->abilityTypes.at(abilitySelected).image->draw_at({ gfx.SCREEN_HEIGHT / 32 - 1 , i});
+		for (int i = 0; i < abilities.size(); i++) {
+			game->abilityTypes.at(abilities[i]).image->draw_at({ i, gfx.SCREEN_HEIGHT / 32 - 1 });
 		}
 		for (unitID uID : dynamicData->getAllUnits()) {
 			Unit u = dynamicData->units.at(uID);
