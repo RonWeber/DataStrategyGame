@@ -23,13 +23,13 @@ void Image::draw_at(coord pos) {
 	int y = pos.y;
 	glBegin(GL_QUADS);
 	glTexCoord2f(0, 1);
-	glVertex2f(x, y + 32);
+	glVertex2f(32*x, 32 * y + 32);
 	glTexCoord2f(1, 1);
-	glVertex2f(x + 32, y + 32);
+	glVertex2f(32 * x + 32, 32 * y + 32);
 	glTexCoord2f(1, 0);
-	glVertex2f(x + 32, y);
+	glVertex2f(32 * x + 32, 32 * y);
 	glTexCoord2f(0, 0);
-	glVertex2f(x, y);
+	glVertex2f(32 * x, 32 * y);
 	glEnd();
 
 	glDisable(GL_TEXTURE_2D);

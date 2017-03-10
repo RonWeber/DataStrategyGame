@@ -8,6 +8,7 @@
 std::unique_ptr<UI> ui;
 UI::UI() {
 	scrollOffsetX = scrollOffsetY = 0;
+	selectionLevel = none;
 }
 void UI::update() {
 	gridX = (gfx.mouseX - scrollOffsetX) / 32;
@@ -69,6 +70,8 @@ void drawSquare(coord pos, float r, float g, float b) {
 }
 
 void UI::drawBackground() {
+
+
 	//draw square selection
 	switch (selectionLevel) {
 	case none:
@@ -82,8 +85,6 @@ void UI::drawBackground() {
 		drawSquare(dynamicData->getPos(unitSelected), .6f, .6f, .6f);
 		break;
 	}
-
-
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
