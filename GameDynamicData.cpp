@@ -4,16 +4,31 @@
 
 GameDynamicData dynamicData;
 
+GameDynamicData::GameDynamicData() {}
+
+GameDynamicData::GameDynamicData(int height, int width) {
+	positions.resize(width);
+	for(int x = 0; x < width; x++) {
+		positions[x].resize(height, -1);
+	}
+}
+
 int GameDynamicData::getValue(unitID unitID, string key) {
 	return units[unitID].data_keys[key];
 }
 
 void GameDynamicData::setValue(unitID unitID, string key, int newValue) {
-	units[unitID].data_keys[key] = newValue;
+	Unit u = units[unitID];
+	u.data_keys[key] = newValue;
+	units[unitID] = u;
 }
 
 void GameDynamicData::setPos(unitID unitID, coord newPos) {
-	units[unitID].coordinate = newPos;
+	Unit u = units[unitID];
+	positions[u.coordinate.x][u.coordinate.y] = -1;
+	u.coordinate = newPos;
+	positions[u.coordinate.x][u.coordinate.y] = u.id;
+	units[unitID] = u;
 }
 
 coord GameDynamicData::getPos(unitID unitID) {
@@ -33,10 +48,12 @@ void GameDynamicData::removeAbility(unitID unitID, string abilityType) {
 int GameDynamicData::createUnit(char unitType, coord coord) {
 	Unit u = game->unitTypes.at(unitType).makeUnit(coord);
 	units.insert({u.id, u});
+	positions[u.coordinate.x][u.coordinate.y] = u.id;
 	return u.id;
 }
 
 TerrainID GameDynamicData::getTerrain(int x, int y) {
+	return '\0';
 }
 
 std::vector<unitID> GameDynamicData::getAllUnits() {
@@ -49,10 +66,5 @@ std::vector<unitID> GameDynamicData::getAllUnits() {
 
 
 unitID GameDynamicData::unitAt(coord coord) {
-	for (auto pair : units) {
-		if (pair.second.data_keys["x"] == coord.x && pair.second.data_keys["y"] == coord.y) {
-			return pair.first;
-		}
-	}
-	return -1;
+	return positions[coord.x][coord.y];
 }

@@ -7,8 +7,10 @@ typedef char TerrainID;
 
 class GameDynamicData {
 public:
+	GameDynamicData();
+	GameDynamicData(int height, int width);
     std::map<unitID, Unit> units;
-    std::vector<std::vector<TerrainID>> terrain;
+	std::vector<std::vector<TerrainID>> terrain;
 
     int getValue(unitID unitID, string key);
     void setValue(unitID unitID, string key, int newValue);
@@ -18,11 +20,12 @@ public:
     void removeAbility(unitID unitID, string abilityType);
     unitID createUnit(char unitType, coord coord);
     TerrainID getTerrain(int x, int y);
-    std::vector<unitID> getAllUnits();
+	std::vector<unitID> getAllUnits();
 	unitID unitAt(coord coord);
 
-
     json toJson();
+private:
+	std::vector<std::vector<unitID>> positions;
 };
 
 extern GameDynamicData dynamicData;
