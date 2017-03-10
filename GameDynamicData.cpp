@@ -9,7 +9,7 @@ GameDynamicData::GameDynamicData() {}
 GameDynamicData::GameDynamicData(int height, int width) {
 	positions.resize(width);
 	for(int x = 0; x < width; x++) {
-		positions[x].resize(height, -1);
+		positions[x].resize(height, NO_UNIT);
 	}
 }
 
@@ -25,7 +25,7 @@ void GameDynamicData::setValue(unitID unitID, string key, int newValue) {
 
 void GameDynamicData::setPos(unitID unitID, coord newPos) {
 	Unit u = units[unitID];
-	positions[u.coordinate.x][u.coordinate.y] = -1;
+	positions[u.coordinate.x][u.coordinate.y] = NO_UNIT;
 	u.coordinate = newPos;
 	positions[u.coordinate.x][u.coordinate.y] = u.id;
 	units[unitID] = u;

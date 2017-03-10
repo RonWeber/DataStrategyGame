@@ -10,7 +10,7 @@ UnitType::UnitType(json jsonSection) {
 	movesPerTurn = jsonSection["maxMoves"];
 	actionsPerTurn = jsonSection["maxAP"];
 	for (auto json : jsonSection["extraData"]) {
-		extraData.insert({jsonSection["key"].get<string>(), jsonSection["value"].get<int>()});
+		extraData.insert({json["key"].get<string>(), json["value"].get<int>()});
 	}
 	for (auto json : jsonSection["abilities"]) {
 		abilities.push_back(json.get<string>());
