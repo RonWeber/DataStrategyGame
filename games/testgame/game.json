@@ -50,8 +50,7 @@
         }
       ],
       "abilities": [
-        "selfPunch",
-        "teleport"
+        "selfPunch"
       ],
       "name": "Bear",
       "description": "A very, very scary animal.  If one mauls you, you get an Oscar."

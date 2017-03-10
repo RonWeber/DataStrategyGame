@@ -1,6 +1,7 @@
 #include "GlobalIncludes.hpp"
 #include "Game.hpp"
 #include "Window.hpp"
+#include "GameDynamicData.hpp"
 #include <iostream>
 
 std::unique_ptr<Game> game;
@@ -26,6 +27,10 @@ Game::Game(string globalFileName) {
 		unitTypes.insert({newType.id, newType});
 	}
 
+
+	dynamicData.createUnit('b', { 4, 5 });
+	dynamicData.createUnit('b', { 8, 5 });
+	dynamicData.createUnit('c', { 6, 7 });
 
 	while (1) {
 		gfx.InitFrame();
