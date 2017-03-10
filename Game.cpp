@@ -28,9 +28,9 @@ Game::Game(string globalFileName) {
 	}
 
 
-	dynamicData.createUnit('b', { 4, 5 });
-	dynamicData.createUnit('b', { 8, 5 });
-	dynamicData.createUnit('c', { 6, 7 });
+	dynamicData->createUnit('b', { 4, 5 });
+	dynamicData->createUnit('b', { 8, 5 });
+	dynamicData->createUnit('c', { 6, 7 });
 
 	while (1) {
 		gfx.InitFrame();

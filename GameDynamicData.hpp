@@ -7,7 +7,6 @@ typedef char TerrainID;
 
 class GameDynamicData {
 public:
-	GameDynamicData();
 	GameDynamicData(int height, int width);
     std::map<unitID, Unit> units;
 	std::vector<std::vector<TerrainID>> terrain;
@@ -28,4 +27,4 @@ private:
 	std::vector<std::vector<unitID>> positions;
 };
 
-extern GameDynamicData dynamicData;
+extern std::unique_ptr<GameDynamicData> dynamicData;
