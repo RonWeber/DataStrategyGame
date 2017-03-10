@@ -120,7 +120,8 @@ void UI::drawBackground() {
 
 
 void UI::drawUnits() {
-	for(Unit u: dynamicData.getAllUnits) {
+	for(unitID uID: dynamicData.getAllUnits()) {
+		Unit u = dynamicData.units.at(uID);
 		game->unitTypes.at(u.unitTypeID).image->draw_at(u.coordinate);
 	}
 }
