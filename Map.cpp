@@ -3,6 +3,8 @@
 #include "Map.hpp"
 #include "Game.hpp"
 #include "GameDynamicData.hpp"
+#include "Window.hpp"
+#include "UI.hpp"
 
 
 void LoadMap(string fileName) {
@@ -20,4 +22,20 @@ void LoadMap(string fileName) {
 	width = std::stoi(widthStr);
 	height = std::stoi(heightStr);
 	dynamicData = GameDynamicData(height, width);
+
+
+	dynamicData.createUnit('b', { 4, 5 });
+	dynamicData.createUnit('b', { 8, 5 });
+	dynamicData.createUnit('c', { 6, 7 });
+
+	while (1) {
+		gfx.InitFrame();
+		if (gfx.quit) break;
+		ui.update();
+		ui.drawBackground();
+		ui.drawUnits();
+		ui.drawForeground();
+
+		gfx.EndFrame();
+	}
 }

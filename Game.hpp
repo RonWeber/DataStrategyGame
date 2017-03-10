@@ -13,7 +13,6 @@ public:
     bool displayRNG;
     int mapHeight, mapWidth;
 	unitID highestUnitID = 0;
-	UI ui;
 private:
 };
 
