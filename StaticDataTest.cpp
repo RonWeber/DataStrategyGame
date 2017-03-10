@@ -17,7 +17,7 @@ TEST_CASE("Test ability.") {
 	CHECK(type.id == "selfPunch");
 	CHECK(type.Name == "Punches self to make room");
 	CHECK(type.selectionAbility == false);
-	REQUIRE(type.functionNames.size == 3)
+	REQUIRE(type.functionNames.size() == 3)
 	CHECK(type.functionNames.at(Available) == "selfPunchAvailable");
 	CHECK(type.functionNames.at(Action) == "selfPunchAction");
 	CHECK(type.functionNames.at(HelperData) == "selfPunchHelperData");
