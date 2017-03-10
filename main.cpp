@@ -1,6 +1,11 @@
 #include "GlobalIncludes.hpp"
 #include "Map.hpp"
-#include <direct.h>  
+
+#ifdef _WIN32
+#include <direct.h>
+#elif __unix__
+#include <unistd.h>
+#endif
 
 int main(int argc, char* argv[]) {
 	

@@ -1,6 +1,7 @@
 #pragma once
 
 typedef int unitID;
+const unitID NO_UNIT = -1;
 
 class Unit {
 public:
