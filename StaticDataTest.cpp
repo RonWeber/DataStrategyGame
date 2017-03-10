@@ -14,6 +14,12 @@ TEST_CASE("Test ability.") {
       \"helperDataFn\": \"selfPunchHelperData\"\
     }"_json;
 	AbilityType type = AbilityType(test);
+	CHECK(type.id == "selfPunch");
+	CHECK(type.Name == "Punches self to make room");
+	CHECK(type.selectionAbility == false);
+	CHECK(type.functionNames.at(Available) == "selfPunchAvailable");
+	CHECK(type.functionNames.at(Action) == "selfPunchAction");
+	CHECK(type.functionNames.at(HelperData) == "selfPunchHelperData");
 }
 
 TEST_CASE("A game is loaded from the predetermined file.") {

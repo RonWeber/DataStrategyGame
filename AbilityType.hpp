@@ -1,4 +1,5 @@
 #pragma once
+#include "Image.hpp"
 
 enum LuaFunction { Available, Action, AllowedLocations, HelperData, UnitCreated, UnitDied, TurnStart, TurnEnd };
 
@@ -10,6 +11,7 @@ public:
     string Name;
     bool selectionAbility;
     std::map<LuaFunction, string> functionNames;
+	std::shared_ptr<Image> image;
 
     void useAbility(LuaFunction ability);
 private:

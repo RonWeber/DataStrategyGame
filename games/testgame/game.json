@@ -14,8 +14,8 @@
     {
       "id": "selfPunch",
       "description": "Punches self to make room",
-      "imageFile": "clawPunch.png",
-      "selection": false,
+      "Image": "clawPunch.png",
+		"selection": false,
       "availableFn": "selfPunchAvailable",
       "actionFn": "selfPunchAction",
       "helperDataFn": "selfPunchHelperData"
@@ -23,7 +23,7 @@
     {
       "id": "teleport",
       "description": "Goes to a place",
-      "imageFile": "clawPunch.png",
+      "Image": "clawPunch.png",
       "selection": true,
       "availableFn": "teleportAvailable",
       "actionFn": "teleportAction",
