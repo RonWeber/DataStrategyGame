@@ -9,7 +9,7 @@
 #include <unistd.h>
 #endif
 
-TEST_CASE("Test ability.") {
+TEST_CASE("Test constructor of ability.") {
 	json test = "{\
       \"id\": \"selfPunch\",\
       \"description\": \"Punches self to make room\",\
@@ -27,6 +27,32 @@ TEST_CASE("Test ability.") {
 	CHECK(type.functionNames.at(Available) == "selfPunchAvailable");
 	CHECK(type.functionNames.at(Action) == "selfPunchAction");
 	CHECK(type.functionNames.at(HelperData) == "selfPunchHelperData");
+}
+
+TEST_CASE("Test constructor of UnitType") {
+	json test = "{\
+      \"id\": \"b\",\
+      \"side\": 0,\
+      \"Image\": \"tmp2.png\",\
+      \"maxHP\": 10,\
+      \"maxMoves\": 2,\
+      \"maxAP\": 1,\
+      \"extraData\": [\
+        {\
+          \"key\": \"Bear?\",\
+          \"value\": 1\
+        },\
+        {\
+          \"key\": \"magicResistance\",\
+          \"value\": 12\
+        }\
+      ],\
+      \"abilities\": [\
+        \"selfPunch\"\
+      ],\
+      \"name\": \"Bear\",\
+      \"description\": \"A very, very scary animal.  If one mauls you, you get an Oscar.\"\
+    }"_json;
 }
 
 TEST_CASE("A game is loaded from the predetermined file.") {
