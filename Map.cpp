@@ -21,7 +21,7 @@ void LoadMap(string fileName) {
 
 	width = std::stoi(widthStr);
 	height = std::stoi(heightStr);
-	dynamicData = GameDynamicData(height, width);
+	dynamicData = std::unique_ptr<GameDynamicData>(new GameDynamicData(height, width));
 
 
 	dynamicData.createUnit('b', { 4, 5 });

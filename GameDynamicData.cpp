@@ -2,9 +2,8 @@
 #include "GameDynamicData.hpp"
 #include "Game.hpp"
 
-GameDynamicData dynamicData;
+std::unique_ptr<GameDynamicData> dynamicData;
 
-GameDynamicData::GameDynamicData() {}
 
 GameDynamicData::GameDynamicData(int height, int width) {
 	positions.resize(width);
