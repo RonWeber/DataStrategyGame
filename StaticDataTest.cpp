@@ -3,11 +3,17 @@
 #include "Game.hpp"
 #include "AbilityType.hpp"
 
+#ifdef _WIN32
+#include <direct.h>
+#elif __unix__
+#include <unistd.h>
+#endif
+
 TEST_CASE("Test ability.") {
 	json test = "{\
       \"id\": \"selfPunch\",\
       \"description\": \"Punches self to make room\",\
-      \"imageFile\": \"selfPunch.png\",\
+      \"imageFile\": \"games/testgame/ClawPunch.png\",\
       \"selection\": false,\
       \"availableFn\": \"selfPunchAvailable\",\
       \"actionFn\": \"selfPunchAction\",\
@@ -24,5 +30,6 @@ TEST_CASE("Test ability.") {
 }
 
 TEST_CASE("A game is loaded from the predetermined file.") {
-	Game testGame("games/testgame/game.json");
+	(void)chdir("games/testgame/");	
+	Game testGame("game.json");
 }
