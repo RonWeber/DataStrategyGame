@@ -13,7 +13,7 @@ TEST_CASE("Test constructor of ability.") {
 	json test = "{\
       \"id\": \"selfPunch\",\
       \"description\": \"Punches self to make room\",\
-      \"imageFile\": \"games/testgame/ClawPunch.png\",\
+      \"Image\": \"games/testgame/ClawPunch.png\",\
       \"selection\": false,\
       \"availableFn\": \"selfPunchAvailable\",\
       \"actionFn\": \"selfPunchAction\",\
@@ -33,7 +33,7 @@ TEST_CASE("Test constructor of UnitType") {
 	json test = "{\
       \"id\": \"b\",\
       \"side\": 0,\
-      \"Image\": \"tmp2.png\",\
+      \"Image\": \"games/testgame/ClawPunch.png\",\
       \"maxHP\": 10,\
       \"maxMoves\": 2,\
       \"maxAP\": 1,\
@@ -51,9 +51,21 @@ TEST_CASE("Test constructor of UnitType") {
         \"selfPunch\"\
       ],\
       \"name\": \"Bear\",\
-      \"description\": \"A very, very scary animal.  If one mauls you, you get an Oscar.\"\
+      \"description\": \"Its a bear.\"\
     }"_json;
-	CHECK("
+	UnitType ut(test);
+	CHECK(ut.id == 'b');
+	CHECK(ut.maxHP == 10);
+	CHECK(ut.movesPerTurn == 2);
+	CHECK(ut.actionsPerTurn == 1);
+	REQUIRE(ut.extraData.size() == 2);
+	CHECK(ut.extraData["Bear?"] == 1);
+	CHECK(ut.extraData["magicResistance"] == 12);
+	REQUIRE(ut.abilities.size() == 1);
+	CHECK(ut.abilities[0] == "selfPunch");
+	CHECK(ut.name == "Bear");
+	CHECK(ut.description == "Its a bear.");
+	CHECK(ut.side == 0);
 }
 
 TEST_CASE("A game is loaded from the predetermined file.") {
