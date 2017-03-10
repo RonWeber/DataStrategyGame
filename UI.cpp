@@ -2,6 +2,7 @@
 #include "UI.hpp"
 #include "Window.hpp"
 #include "LuaManager.hpp"
+#include "GameDynamicData.hpp"
 UI::UI() {
 	scrollOffsetX = scrollOffsetY = 0;
 }
@@ -49,26 +50,31 @@ void UI::update() {
 
 #pragma warning( push )
 #pragma warning( disable : 4244)
+void drawSquare(coord pos, float r, float g, float b) {
+	glBegin(GL_TRIANGLE_STRIP);
+	glColor3f(0.4f, 0.4f, 0.4f);
+	glVertex2f(pos.x * 32, pos.y * 32);
+	glVertex2f(pos.x * 32 + 32, pos.y * 32);
+	glVertex2f(pos.x * 32, pos.y * 32 + 32);
+	glVertex2f(pos.x * 32 + 32, pos.y * 32 + 32);
+	glEnd();
+
+}
 
 void UI::drawBackground() {
 	//draw square selection
-	int chosenX, chosenY;
 	switch (selectionLevel) {
-		//draw current selection
-	case none: chosenX = gridX; chosenY = gridY;
-	case ability:
-		//highlight currently selected ability
+	case none:
+		drawSquare({ gridX, gridY }, .6f, .6f, .6f);
+		break;
 	case unit:
-		//draw all abilities of unit
+		drawSquare(dynamicData.getPos(unitSelected), .6f, .6f, .6f);
+		break;
+	case ability:
+		drawSquare({ gridX, gridY }, .4f, .4f, .4f);
+		drawSquare(dynamicData.getPos(unitSelected), .6f, .6f, .6f);
 		break;
 	}
-	glBegin(GL_TRIANGLE_STRIP);
-	glColor3f(0.4f, 0.4f, 0.4f);
-	glVertex2f(gridX * 32, gridY * 32);
-	glVertex2f(gridX * 32 + 32, gridY * 32);
-	glVertex2f(gridX * 32, gridY * 32 + 32);
-	glVertex2f(gridX * 32 + 32, gridY * 32 + 32);
-	glEnd();
 
 
 

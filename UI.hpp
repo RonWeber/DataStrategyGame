@@ -1,4 +1,6 @@
 #pragma once
+#include "Unit.hpp"
+
 class UI {
 public:
 	UI();
@@ -10,6 +12,6 @@ private:
 	int scrollOffsetX, scrollOffsetY;
 	enum selectionType { none = 0, unit, ability };
 	selectionType selectionLevel; //0 = top, 1 = unit selected, 2 = ability selected
-	int unitSelected = 0;
+	unitID unitSelected = 0;
 	string abilitySelected = "";
 };

@@ -14,7 +14,7 @@
     {
       "id": "selfPunch",
       "description": "Punches self to make room",
-      "imageFile": "selfPunch.png",
+      "imageFile": "clawPunch.png",
       "selection": false,
       "availableFn": "selfPunchAvailable",
       "actionFn": "selfPunchAction",
@@ -23,7 +23,7 @@
     {
       "id": "teleport",
       "description": "Goes to a place",
-      "imageFile": "teleport.png",
+      "imageFile": "clawPunch.png",
       "selection": true,
       "availableFn": "teleportAvailable",
       "actionFn": "teleportAction",
@@ -35,7 +35,7 @@
     {
       "id": "b",
       "side": 0,
-      "Image": "bear.png",
+      "Image": "tmp2.png",
       "maxHP": 10,
       "maxMoves": 2,
       "maxAP": 1,
@@ -59,14 +59,14 @@
     {
       "id": "c",
       "side": 1,
-      "Image": "sorcerer.png",
+      "Image": "tmp2.png",
       "maxHP": 5,
       "maxMoves": 1,
       "maxAP": 2,
       "extraData": [
         {
           "key": "Bear?",
-          "value": 1
+          "value": 0
         },
         {
           "key": "magicResistance",
