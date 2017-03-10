@@ -1,5 +1,6 @@
 #include "GlobalIncludes.hpp"
 #include "Game.hpp"
+#include "LuaManager.hpp"
 #include <iostream>
 
 std::unique_ptr<Game> game;
@@ -13,7 +14,9 @@ Game::Game(string globalFileName) {
 
 	file >> json;
 	displayRNG = json["displayRNG"];
-	//TODO: Do something with lua files.
+	for (auto file : json["luaFiles"]) {
+		lua.loadFile(file);
+	}
 	//TODO: Implement terrain
 	for (auto ability : json["abilityData"]) {
 		AbilityType newType = AbilityType(ability);

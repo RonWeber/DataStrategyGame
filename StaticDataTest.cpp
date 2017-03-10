@@ -53,6 +53,7 @@ TEST_CASE("Test constructor of UnitType") {
       \"name\": \"Bear\",\
       \"description\": \"A very, very scary animal.  If one mauls you, you get an Oscar.\"\
     }"_json;
+	CHECK("
 }
 
 TEST_CASE("A game is loaded from the predetermined file.") {
