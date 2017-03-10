@@ -1,7 +1,6 @@
 #include "GlobalIncludes.hpp"
 #include "Game.hpp"
 #include "Window.hpp"
-#include "UI.hpp"
 
 std::unique_ptr<Game> game;
 
@@ -24,9 +23,6 @@ Game::Game(string globalFileName) {
 		UnitType newType = UnitType(unitType);
 		unitTypes.insert({newType.id, newType});
 	}
-	
-	//run game
-	UI ui = UI();
 
 	Image* i = new Image("games/testgame/tmp2.png");
 
@@ -34,9 +30,9 @@ Game::Game(string globalFileName) {
 		gfx.InitFrame();
 		if (gfx.quit) break;
 		ui.update();
+		ui.drawBackground();
 
-		ui.draw_grid();
-
+		ui.drawForeground();
 		i->draw_at({ 5, 5 });
 
 	gfx.EndFrame();

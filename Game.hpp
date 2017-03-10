@@ -3,6 +3,7 @@
 #include "UnitType.hpp"
 #include "AbilityType.hpp"
 #include "Unit.hpp"
+#include "UI.hpp"
 
 class Game {
 public:
@@ -12,6 +13,7 @@ public:
     bool displayRNG;
     int mapHeight, mapWidth;
 	unitID highestUnitID = 0;
+	UI ui;
 private:
 };
 

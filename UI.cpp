@@ -50,7 +50,18 @@ void UI::update() {
 #pragma warning( push )
 #pragma warning( disable : 4244)
 
-void UI::draw_grid() {
+void UI::drawBackground() {
+	//draw square selection
+	int chosenX, chosenY;
+	switch (selectionLevel) {
+		//draw current selection
+	case none: chosenX = gridX; chosenY = gridY;
+	case ability:
+		//highlight currently selected ability
+	case unit:
+		//draw all abilities of unit
+		break;
+	}
 	glBegin(GL_TRIANGLE_STRIP);
 	glColor3f(0.4f, 0.4f, 0.4f);
 	glVertex2f(gridX * 32, gridY * 32);
@@ -92,8 +103,20 @@ void UI::draw_grid() {
 		glEnd();
 	}
 
-
 	glDisable(GL_BLEND);
+}
+
+
+void UI::drawForeground() {
+	switch (selectionLevel) {
+	case none: break;
+	case ability:
+		//highlight currently selected ability
+	case unit:
+		//draw all abilities of unit
+		break;
+	}
+	//draw tooltips
 }
 
 #pragma warning( pop ) 

@@ -3,7 +3,8 @@ class UI {
 public:
 	UI();
 	void update();
-	void draw_grid();
+	void drawBackground();
+	void drawForeground();
 private:
 	int gridX, gridY;
 	int scrollOffsetX, scrollOffsetY;
