@@ -2,7 +2,7 @@
 #include "UI.hpp"
 #include "Window.hpp"
 #include "LuaManager.hpp"
-#include "GamedynamicData.hpp"
+#include "GameDynamicData.hpp"
 #include "Unit.hpp"
 #include "Game.hpp"
 std::unique_ptr<UI> ui;

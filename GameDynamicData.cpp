@@ -1,5 +1,5 @@
 #include "GlobalIncludes.hpp"
-#include "GamedynamicData.hpp"
+#include "GameDynamicData.hpp"
 #include "Game.hpp"
 
 std::unique_ptr<GameDynamicData> dynamicData;

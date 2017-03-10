@@ -1,6 +1,6 @@
 #include "GlobalIncludes.hpp"
 #include "LuaManager.hpp"
-#include "GamedynamicData.hpp"
+#include "GameDynamicData.hpp"
 
 LuaManager lua;
 

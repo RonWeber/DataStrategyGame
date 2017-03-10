@@ -2,7 +2,7 @@
 #include <iostream>
 #include "Map.hpp"
 #include "Game.hpp"
-#include "GamedynamicData.hpp"
+#include "GameDynamicData.hpp"
 #include "Window.hpp"
 #include "UI.hpp"
 
