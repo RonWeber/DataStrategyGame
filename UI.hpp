@@ -16,3 +16,5 @@ private:
 	unitID unitSelected = 0;
 	string abilitySelected = "";
 };
+
+extern std::unique_ptr<UI> ui;

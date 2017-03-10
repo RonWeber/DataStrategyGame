@@ -2,7 +2,7 @@
 #include <iostream>
 #include "Map.hpp"
 #include "Game.hpp"
-#include "GameDynamicData.hpp"
+#include "GamedynamicData.hpp"
 #include "Window.hpp"
 #include "UI.hpp"
 
@@ -22,19 +22,20 @@ void LoadMap(string fileName) {
 	width = std::stoi(widthStr);
 	height = std::stoi(heightStr);
 	dynamicData = std::unique_ptr<GameDynamicData>(new GameDynamicData(height, width));
+	ui = std::unique_ptr<UI>(new UI());
 
 
-	dynamicData.createUnit('b', { 4, 5 });
-	dynamicData.createUnit('b', { 8, 5 });
-	dynamicData.createUnit('c', { 6, 7 });
+	dynamicData->createUnit('b', { 4, 5 });
+	dynamicData->createUnit('b', { 8, 5 });
+	dynamicData->createUnit('c', { 6, 7 });
 
 	while (1) {
 		gfx.InitFrame();
 		if (gfx.quit) break;
-		ui.update();
-		ui.drawBackground();
-		ui.drawUnits();
-		ui.drawForeground();
+		ui->update();
+		ui->drawBackground();
+		ui->drawUnits();
+		ui->drawForeground();
 
 		gfx.EndFrame();
 	}

@@ -2,9 +2,10 @@
 #include "UI.hpp"
 #include "Window.hpp"
 #include "LuaManager.hpp"
-#include "GameDynamicData.hpp"
+#include "GamedynamicData.hpp"
 #include "Unit.hpp"
 #include "Game.hpp"
+std::unique_ptr<UI> ui;
 UI::UI() {
 	scrollOffsetX = scrollOffsetY = 0;
 }
@@ -15,14 +16,14 @@ void UI::update() {
 	if (gfx.Lclicked) {
 		switch (selectionLevel) {
 		case none:
-			unitSelected = dynamicData.unitAt({ gridX,gridY });
+			unitSelected = dynamicData->unitAt({ gridX,gridY });
 			if (unitSelected != -1) {
 				selectionLevel = unit;
 			}
 			break;
 		case unit:
-			if (gridY == 600 / 32 && gridX < dynamicData.units[unitSelected].abilities.size()) {
-				abilitySelected = dynamicData.units[unitSelected].abilities[gridX];
+			if (gridY == 600 / 32 && gridX < dynamicData->units[unitSelected].abilities.size()) {
+				abilitySelected = dynamicData->units[unitSelected].abilities[gridX];
 				if (lua.CallFunctionAvailable(abilitySelected, unitSelected)) {
 					if (game->abilityTypes.at(abilitySelected).selectionAbility)
 						selectionLevel = ability;
@@ -74,11 +75,11 @@ void UI::drawBackground() {
 		drawSquare({ gridX, gridY }, .6f, .6f, .6f);
 		break;
 	case unit:
-		drawSquare(dynamicData.getPos(unitSelected), .6f, .6f, .6f);
+		drawSquare(dynamicData->getPos(unitSelected), .6f, .6f, .6f);
 		break;
 	case ability:
 		drawSquare({ gridX, gridY }, .4f, .4f, .4f);
-		drawSquare(dynamicData.getPos(unitSelected), .6f, .6f, .6f);
+		drawSquare(dynamicData->getPos(unitSelected), .6f, .6f, .6f);
 		break;
 	}
 
@@ -120,8 +121,8 @@ void UI::drawBackground() {
 
 
 void UI::drawUnits() {
-	for(unitID uID: dynamicData.getAllUnits()) {
-		Unit u = dynamicData.units.at(uID);
+	for(unitID uID: dynamicData->getAllUnits()) {
+		Unit u = dynamicData->units.at(uID);
 		game->unitTypes.at(u.unitTypeID).image->draw_at(u.coordinate);
 	}
 }
