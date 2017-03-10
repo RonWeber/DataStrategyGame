@@ -6,10 +6,7 @@
 #include "Unit.hpp"
 #include "Game.hpp"
 std::unique_ptr<UI> ui;
-UI::UI() {
-	scrollOffsetX = scrollOffsetY = 0;
-	selectionLevel = none;
-}
+
 void UI::update() {
 	gridX = (gfx.mouseX - scrollOffsetX) / 32;
 	gridY = (gfx.mouseY - scrollOffsetY) / 32;
@@ -23,11 +20,13 @@ void UI::update() {
 			}
 			break;
 		case unit:
-			if (gridY == 600 / 32 && gridX < dynamicData->units[unitSelected].abilities.size()) {
+			if (gridY == (gfx.SCREEN_HEIGHT / 32 - 1) && gridX < dynamicData->units[unitSelected].abilities.size()) {
 				abilitySelected = dynamicData->units[unitSelected].abilities[gridX];
 				if (lua.CallFunctionAvailable(abilitySelected, unitSelected)) {
-					if (game->abilityTypes.at(abilitySelected).selectionAbility)
+					if (game->abilityTypes.at(abilitySelected).selectionAbility) {
+						abilitySelectionPosition = gridX;
 						selectionLevel = ability;
+					}
 					else
 						lua.CallFunction(abilitySelected, unitSelected);
 				}
@@ -133,9 +132,15 @@ void UI::drawForeground() {
 	switch (selectionLevel) {
 	case none: break;
 	case ability:
-		//highlight currently selected ability
+		drawSquare({ abilitySelectionPosition , gfx.SCREEN_HEIGHT / 32 - 1 }, .2, .2, .2);
 	case unit:
-		//draw all abilities of unit
+		auto abilities = dynamicData->units[unitSelected].abilities;
+		for (int i = 0; i < abilities.size; i++) {
+			game->abilityTypes.at(abilitySelected).image->draw_at({ gfx.SCREEN_HEIGHT / 32 - 1 , i});
+		}
+		for (unitID uID : dynamicData->getAllUnits()) {
+			Unit u = dynamicData->units.at(uID);
+		}
 		break;
 	}
 	//draw tooltips

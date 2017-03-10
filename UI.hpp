@@ -3,18 +3,19 @@
 
 class UI {
 public:
-	UI();
 	void update();
 	void drawBackground();
 	void drawUnits();
 	void drawForeground();
 private:
 	int gridX, gridY;
-	int scrollOffsetX, scrollOffsetY;
+	int scrollOffsetX = 0;
+	int scrollOffsetY = 0;
 	enum selectionType { none = 0, unit, ability };
-	selectionType selectionLevel; //0 = top, 1 = unit selected, 2 = ability selected
-	unitID unitSelected = 0;
-	string abilitySelected = "";
+	selectionType selectionLevel = none;
+	unitID unitSelected;
+	string abilitySelected;
+	int abilitySelectionPosition;
 };
 
 extern std::unique_ptr<UI> ui;
