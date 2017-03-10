@@ -21,12 +21,13 @@ UnitType::UnitType(json jsonSection) {
 
 
 
-Unit UnitType::makeUnit() {
+Unit UnitType::makeUnit(coord initialCoord) {
 	Unit result = Unit();
 	result.id = ++game->highestUnitID;
 	result.unitTypeID = id;
 	result.data_keys = extraData;
 	result.abilities = abilities;
+	result.coordinate = initialCoord;
 
 	return result;
 }

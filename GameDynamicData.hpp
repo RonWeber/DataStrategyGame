@@ -12,12 +12,15 @@ public:
 
     int getValue(unitID unitID, string key);
     void setValue(unitID unitID, string key, int newValue);
+	void setPos(unitID unitID, coord newPos);
+	coord getPos(unitID unitID);
     void addAbility(unitID unitID, string abilityType);
     void removeAbility(unitID unitID, string abilityType);
-    unitID createUnit(char unitType, int x, int y);
+    unitID createUnit(char unitType, coord coord);
     TerrainID getTerrain(int x, int y);
     std::vector<unitID> getAllUnits();
 	unitID unitAt(coord coord);
+
 
     json toJson();
 };

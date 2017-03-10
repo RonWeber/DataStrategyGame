@@ -18,5 +18,5 @@ public:
     string description;
 	int side;
 
-    Unit makeUnit();
+    Unit makeUnit(coord initialCoord);
 };
