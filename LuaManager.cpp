@@ -92,26 +92,40 @@ LuaManager::LuaManager() {
 }
 
 void LuaManager::loadFile(string filename) {
-	luaL_loadfile(L, filename.c_str());
+	//load the library file then execute it to register the functions
+	if (luaL_loadfile(L, filename.c_str()) || lua_pcall(L, 0, 0, NULL))
+	{
+		std::cerr << "cannot run configuration file: %s" << lua_tostring(L, -1) << std::endl;
+		//Throw?
+	}
 }
 
 void LuaManager::CallFunction(string fn, unitID unit) {
 	lua_getglobal(L, fn.c_str());
 	lua_pushinteger(L, unit);
-	lua_call(L, 1, 0);
+	if (lua_pcall(L, 1, 0, NULL) != 0) {
+		std::cerr << "error running function " << fn << ": " << lua_tostring(L, -1) << std::endl;
+		//Throw?
+	}
 }
 void LuaManager::CallFunction(string fn, unitID unit, coord pos) {
 	lua_getglobal(L, fn.c_str());
 	lua_pushinteger(L, unit);
 	lua_pushinteger(L, pos.x);
 	lua_pushinteger(L, pos.y);
-	lua_call(L, 3, 0);
+	if (lua_pcall(L, 3, 0, NULL) != 0){
+		std::cerr << "error running function " << fn << ": " << lua_tostring(L, -1) << std::endl;
+		//Throw?
+	}
 }
 
 bool LuaManager::CallFunctionAvailable(string fn, unitID unit) {
 	lua_getglobal(L, fn.c_str());
 	lua_pushinteger(L, unit);
-	lua_call(L, 1, 0);
+	if (lua_pcall(L, 1, 1, NULL) != 0){
+		std::cerr << "error running function " << fn << ": " << lua_tostring(L, -1) << std::endl;
+		//Throw?
+	}
 	return lua_toboolean(L, 0);
 }
 

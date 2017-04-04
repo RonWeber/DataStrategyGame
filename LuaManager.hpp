@@ -11,7 +11,10 @@ public:
 	void CallFunction(string fn, unitID unit);
 	void CallFunction(string fn, unitID unit, coord position);
 	bool CallFunctionAvailable(string fn, unitID unit);
+
+#ifndef TWOBLUECUBES_CATCH_HPP_INCLUDED
 private:
+#endif
 	lua_State* L;
 
 };
