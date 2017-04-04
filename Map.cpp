@@ -24,10 +24,22 @@ void LoadMap(string fileName) {
 	dynamicData = std::unique_ptr<GameDynamicData>(new GameDynamicData(height, width));
 	ui = std::unique_ptr<UI>(new UI());
 
-
-	dynamicData->createUnit('b', { 4, 5 });
+	for(int row = 0; row < height; row++) {
+		string line;
+		std::getline(mapFile, line);
+		if (line.size() < width) {
+			throw std::runtime_error("A line in the map was not long enough.");
+		}
+		for (int col = 0; col < width; col++) {
+			if (game->unitTypes.count(line[col]) > 0) { //This is a defined unit.
+				dynamicData->createUnit(line[col], { col, row });
+			}
+		}
+	}
+	
+	/*dynamicData->createUnit('b', { 4, 5 });
 	dynamicData->createUnit('b', { 8, 5 });
-	dynamicData->createUnit('c', { 6, 7 });
+	dynamicData->createUnit('c', { 6, 7 });*/
 
 	while (1) {
 		gfx.InitFrame();

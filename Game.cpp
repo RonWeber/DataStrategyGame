@@ -27,4 +27,5 @@ Game::Game(string globalFileName) {
 		UnitType newType = UnitType(unitType);
 		unitTypes.insert({newType.id, newType});
 	}
+	std::cout << "Units loaded.\n";
 }
