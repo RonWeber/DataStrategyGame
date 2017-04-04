@@ -6,16 +6,16 @@ LuaManager lua;
 
 //Functions lua code calls
 static int getValue(lua_State *L) {
-	int unitID = (int)lua_tointeger(L, -1);
-	const char* key = lua_tostring(L, -2);
+	int unitID = (int)lua_tointeger(L, -2);
+	const char* key = lua_tostring(L, -1);
 	lua_pushinteger(L, dynamicData->getValue(unitID, key));
 	return 1;
 }
 
 static int setValue(lua_State *L) {
-	int unitID = (int)lua_tointeger(L, -1);
+	int unitID = (int)lua_tointeger(L, -3);
 	const char* key = lua_tostring(L, -2);
-	int value = (int)lua_tointeger(L, -3);
+	int value = (int)lua_tointeger(L, -1);
 	dynamicData->setValue(unitID, key, value);
 	return 0;
 }
@@ -29,34 +29,34 @@ static int getPos(lua_State *L) {
 }
 
 static int setPos(lua_State *L) {
-	int unitID = (int)lua_tointeger(L, -1);
+	int unitID = (int)lua_tointeger(L, -3);
 	int x = (int)lua_tointeger(L, -2);
-	int y = (int)lua_tointeger(L, -3);
+	int y = (int)lua_tointeger(L, -1);
 	dynamicData->setPos(unitID, { x, y });
 	return 0;
 }
 static int addAbility(lua_State *L) {
-	int unitID = (int)lua_tointeger(L, -1);
-	const char* ability = lua_tostring(L, -2);
+	int unitID = (int)lua_tointeger(L, -2);
+	const char* ability = lua_tostring(L, -1);
 	dynamicData->addAbility(unitID, ability);
 	return 0;
 }
 static int removeAbility(lua_State *L) {
-	int unitID = (int)lua_tointeger(L, -1);
-	const char* ability = lua_tostring(L, -2);
+	int unitID = (int)lua_tointeger(L, -2);
+	const char* ability = lua_tostring(L, -1);
 	dynamicData->removeAbility(unitID, ability);
 	return 0;
 }
 static int createUnit(lua_State *L) {
-	int unitType = lua_tostring(L, -1)[0];
+	int unitType = lua_tostring(L, -3)[0];
 	int x = (int)lua_tointeger(L, -2);
-	int y = (int)lua_tointeger(L, -3);
+	int y = (int)lua_tointeger(L, -1);
 	lua_pushinteger(L, dynamicData->createUnit(unitType, { x, y }));
 	return 1;
 }
 static int unitAt(lua_State *L) {
-	int x = (int)lua_tointeger(L, -1);
-	int y = (int)lua_tointeger(L, -2);
+	int x = (int)lua_tointeger(L, -2);
+	int y = (int)lua_tointeger(L, -1);
 	lua_pushinteger(L, dynamicData->unitAt({ x, y }));
 	return 1;
 }

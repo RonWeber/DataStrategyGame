@@ -22,13 +22,15 @@ void UI::update() {
 		case unit:
 			if (gridY == (gfx.SCREEN_HEIGHT / 32 - 1) && gridX < dynamicData->units[unitSelected].abilities.size()) {
 				abilitySelected = dynamicData->units[unitSelected].abilities[gridX];
-				if (lua.CallFunctionAvailable(abilitySelected, unitSelected)) {
-					if (game->abilityTypes.at(abilitySelected).selectionAbility) {
+				auto thisAbility = game->abilityTypes.at(abilitySelected);
+				auto fnNames = thisAbility.functionNames;
+				if (lua.CallFunctionAvailable(fnNames[LuaFunction::Available], unitSelected)) {
+					if (thisAbility.selectionAbility) {
 						abilitySelectionPosition = gridX;
 						selectionLevel = ability;
 					}
 					else
-						lua.CallFunction(abilitySelected, unitSelected);
+						lua.CallFunction(fnNames[LuaFunction::Action], unitSelected);
 				}
 			}
 			break;
