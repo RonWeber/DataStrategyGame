@@ -37,16 +37,10 @@ TEST_CASE("Test constructor of UnitType") {
       \"maxHP\": 10,\
       \"maxMoves\": 2,\
       \"maxAP\": 1,\
-      \"extraData\": [\
-        {\
-          \"key\": \"Bear?\",\
-          \"value\": 1\
-        },\
-        {\
-          \"key\": \"magicResistance\",\
-          \"value\": 12\
-        }\
-      ],\
+      \"extraData\": {\
+        \"Bear?\" : 1,\
+		\"magicResistance\" : 12\
+	   },\
       \"abilities\": [\
         \"selfPunch\"\
       ],\
