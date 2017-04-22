@@ -37,10 +37,6 @@ void LoadMap(string fileName) {
 		}
 	}
 	
-	/*dynamicData->createUnit('b', { 4, 5 });
-	dynamicData->createUnit('b', { 8, 5 });
-	dynamicData->createUnit('c', { 6, 7 });*/
-
 	while (1) {
 		gfx.InitFrame();
 		if (gfx.quit) break;
