@@ -5,6 +5,7 @@
 #include "GameDynamicData.hpp"
 #include "Unit.hpp"
 #include "Game.hpp"
+#include "SaveFile.hpp"
 std::unique_ptr<UI> ui;
 
 void UI::update() {

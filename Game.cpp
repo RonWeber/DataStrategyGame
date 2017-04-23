@@ -6,6 +6,7 @@
 std::unique_ptr<Game> game;
 
 Game::Game(string globalFileName) {
+	fileName = globalFileName;
 	//initialize data
 	std::ifstream file(globalFileName);
     
