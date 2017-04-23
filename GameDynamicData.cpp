@@ -4,11 +4,12 @@
 
 std::unique_ptr<GameDynamicData> dynamicData;
 
-
 GameDynamicData::GameDynamicData(int height, int width) {
 	positions.resize(width);
+	terrain.resize(width);
 	for(int x = 0; x < width; x++) {
 		positions[x].resize(height, NO_UNIT);
+		terrain[x].resize(height, '\0');
 	}
 }
 
@@ -49,6 +50,10 @@ int GameDynamicData::createUnit(char unitType, coord coord) {
 	units.insert({u.id, u});
 	positions[u.coordinate.x][u.coordinate.y] = u.id;
 	return u.id;
+}
+
+void GameDynamicData::setTerrain(int x, int y, char terrainType) {
+	terrain[x][y] = terrainType;
 }
 
 TerrainID GameDynamicData::getTerrain(int x, int y) {

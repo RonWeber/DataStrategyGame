@@ -121,6 +121,16 @@ void UI::drawBackground() {
 	glDisable(GL_BLEND);
 }
 
+void UI::drawTerrain() {
+	for (unsigned int x = 0; x < dynamicData->terrain.size(); x++) {
+		for (unsigned int y = 0; y < dynamicData->terrain[x].size(); y++) {
+			TerrainID id = dynamicData->terrain[x][y];
+			if (game->terrainTypes.count(id) > 0)
+				game->terrainTypes.at(id).image->draw_at({x,y});
+		}
+	}
+}
+
 
 void UI::drawUnits() {
 	for(unitID uID: dynamicData->getAllUnits()) {

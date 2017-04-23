@@ -2,6 +2,7 @@
 
 #include "UnitType.hpp"
 #include "AbilityType.hpp"
+#include "TerrainType.hpp"
 #include "Unit.hpp"
 #include "UI.hpp"
 
@@ -10,6 +11,7 @@ public:
     Game(string globalFileName);
     std::map<char, UnitType> unitTypes;
     std::map<string, AbilityType> abilityTypes;
+	std::map<TerrainID, TerrainType> terrainTypes;
     bool displayRNG;
     int mapHeight, mapWidth;
 	unitID highestUnitID = 0;

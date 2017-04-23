@@ -20,3 +20,5 @@ using ifstream = std::ifstream;
 typedef struct {
 	int x, y;
 } coord;
+
+typedef char TerrainID;

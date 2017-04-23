@@ -6,6 +6,7 @@
 #include "Window.hpp"
 #include "UI.hpp"
 
+void gameLoop();
 
 void LoadMap(string fileName) {
     //Parse the map file.
@@ -28,7 +29,7 @@ void LoadMap(string fileName) {
 		string line;
 		std::getline(mapFile, line);
 		if (line.size() < width) {
-			throw std::runtime_error("A line in the map was not long enough.");
+			throw std::runtime_error("A line in the unit section of the map was not long enough.");
 		}
 		for (int col = 0; col < width; col++) {
 			if (game->unitTypes.count(line[col]) > 0) { //This is a defined unit.
@@ -36,11 +37,28 @@ void LoadMap(string fileName) {
 			}
 		}
 	}
+	string ignoredLine;
+	mapFile.ignore(2, '\n');
+	for(int row = 0; row < height; row++) {
+		string line;
+		std::getline(mapFile, line);
+		if (line.size() < width) {
+			throw std::runtime_error("A line in the terrain section of the map was not long enough.");
+		}
+		for (int col = 0; col < width; col++) {
+			dynamicData->setTerrain(col, row, line[col]);
+		}
+	}	
 	
+	gameLoop();
+}
+
+void gameLoop() {
 	while (1) {
 		gfx.InitFrame();
 		if (gfx.quit) break;
 		ui->update();
+		ui->drawTerrain();
 		ui->drawBackground();
 		ui->drawUnits();
 		ui->drawForeground();

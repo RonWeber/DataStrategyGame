@@ -17,7 +17,10 @@ Game::Game(string globalFileName) {
 	for (auto file : json["luaFiles"]) {
 		lua.loadFile(file);
 	}
-	//TODO: Implement terrain
+	for (auto terrain : json["terrainData"]) {
+		TerrainType newType = TerrainType(terrain);
+		terrainTypes.insert({newType.id, newType});
+	}
 	for (auto ability : json["abilityData"]) {
 		AbilityType newType = AbilityType(ability);
 		abilityTypes.insert({ newType.id, newType });

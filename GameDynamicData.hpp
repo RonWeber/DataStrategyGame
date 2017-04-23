@@ -3,8 +3,6 @@
 #include "Unit.hpp"
 #include "GlobalIncludes.hpp"
 
-typedef char TerrainID;
-
 class GameDynamicData {
 public:
 	GameDynamicData(int height, int width);
@@ -18,6 +16,7 @@ public:
     void addAbility(unitID unitID, string abilityType);
     void removeAbility(unitID unitID, string abilityType);
     unitID createUnit(char unitType, coord coord);
+	void setTerrain(int x, int y, char terrainType);
     TerrainID getTerrain(int x, int y);
 	std::vector<unitID> getAllUnits();
 	unitID unitAt(coord coord);
