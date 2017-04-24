@@ -22,7 +22,7 @@
 			"selection": false,
 			"availableFn": "selfPunchAvailable",
 			"actionFn": "selfPunchAction",
-			"helperataFn": "selfPunchHelperData"
+			"helperDataFn": "selfPunchHelperData"
 		},
 		{
 			"id": "teleport",
