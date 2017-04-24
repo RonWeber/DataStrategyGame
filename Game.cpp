@@ -5,13 +5,15 @@
 
 std::unique_ptr<Game> game;
 
-Game::Game(string globalFileName) {
+Game::Game(string globalFileName, int mapHeight, int mapWidth) {
 	fileName = globalFileName;
+	this->mapHeight = mapHeight;
+	this->mapWidth = mapWidth;
+	
 	//initialize data
 	std::ifstream file(globalFileName);
     
 	json json;
-
 
 	file >> json;
 	displayRNG = json["displayRNG"];

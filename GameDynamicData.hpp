@@ -8,6 +8,7 @@ public:
 	GameDynamicData(int height, int width);
     std::map<unitID, Unit> units;
 	std::vector<std::vector<TerrainID>> terrain;
+	unitID highestUnitID = 0;	
 
     int getValue(unitID unitID, string key);
     void setValue(unitID unitID, string key, int newValue);
@@ -16,6 +17,8 @@ public:
     void addAbility(unitID unitID, string abilityType);
     void removeAbility(unitID unitID, string abilityType);
     unitID createUnit(char unitType, coord coord);
+	void addExistingUnit(Unit u);
+	
 	void setTerrain(int x, int y, char terrainType);
     TerrainID getTerrain(int x, int y);
 	std::vector<unitID> getAllUnits();

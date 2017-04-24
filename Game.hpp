@@ -8,14 +8,13 @@
 
 class Game {
 public:
-    Game(string globalFileName);
+    Game(string globalFileName, int mapHeight, int mapWidth);
 	
     std::map<char, UnitType> unitTypes;
     std::map<string, AbilityType> abilityTypes;
 	std::map<TerrainID, TerrainType> terrainTypes;
     bool displayRNG;
     int mapHeight, mapWidth;
-	unitID highestUnitID = 0;
 	string fileName;
 private:
 };

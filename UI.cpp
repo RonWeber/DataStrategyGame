@@ -22,8 +22,8 @@ void UI::update() {
 			}
 			break;
 		case unit:
-			if (gridY == (gfx.SCREEN_HEIGHT / 32 - 1) && gridX < dynamicData->units[unitSelected].abilities.size()) {
-				abilitySelected = dynamicData->units[unitSelected].abilities[gridX];
+			if (gridY == (gfx.SCREEN_HEIGHT / 32 - 1) && gridX < dynamicData->units.at(unitSelected).abilities.size()) {
+				abilitySelected = dynamicData->units.at(unitSelected).abilities[gridX];
 				auto thisAbility = game->abilityTypes.at(abilitySelected);
 				auto fnNames = thisAbility.functionNames;
 				if (lua.CallFunctionAvailable(fnNames[LuaFunction::Available], unitSelected)) {
@@ -148,7 +148,7 @@ void UI::drawForeground() {
 	case ability:
 		drawSquare({ abilitySelectionPosition , gfx.SCREEN_HEIGHT / 32 - 1 }, .2, .2, .2);
 	case unit:
-		auto abilities = dynamicData->units[unitSelected].abilities;
+		auto abilities = dynamicData->units.at(unitSelected).abilities;
 		for (int i = 0; i < abilities.size(); i++) {
 			game->abilityTypes.at(abilities[i]).image->draw_at({ i, gfx.SCREEN_HEIGHT / 32 - 1 });
 		}

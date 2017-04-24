@@ -1,6 +1,7 @@
 #include "GlobalIncludes.hpp"
 #include "UnitType.hpp"
 #include "Game.hpp"
+#include "GameDynamicData.hpp"
 
 UnitType::UnitType(json jsonSection) {
 	id = jsonSection["id"].get<string>().at(0);
@@ -23,12 +24,6 @@ UnitType::UnitType(json jsonSection) {
 
 
 Unit UnitType::makeUnit(coord initialCoord) {
-	Unit result = Unit();
-	result.id = ++game->highestUnitID;
-	result.unitTypeID = id;
-	result.data_keys = extraData;
-	result.abilities = abilities;
-	result.coordinate = initialCoord;
-
+	Unit result = Unit(++dynamicData->highestUnitID, extraData, initialCoord, id, abilities);
 	return result;
 }

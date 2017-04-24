@@ -3,8 +3,7 @@
 #include "Map.hpp"
 #include "Game.hpp"
 #include "GameDynamicData.hpp"
-#include "Window.hpp"
-#include "UI.hpp"
+
 
 void gameLoop();
 
@@ -18,12 +17,13 @@ void LoadMap(string fileName) {
     std::getline(mapFile, jsonFileName);
 	
     std::cout << "Map loaded("<< widthStr <<","<< heightStr <<").  JSON file at " << jsonFileName << "\n";
-    game = std::unique_ptr<Game>(new Game(jsonFileName)); //Load the game.
 
 	width = std::stoi(widthStr);
 	height = std::stoi(heightStr);
+
+	game = std::unique_ptr<Game>(new Game(jsonFileName, height, width)); //Load the game.
+
 	dynamicData = std::unique_ptr<GameDynamicData>(new GameDynamicData(height, width));
-	ui = std::unique_ptr<UI>(new UI());
 
 	for(int row = 0; row < height; row++) {
 		string line;
@@ -49,20 +49,5 @@ void LoadMap(string fileName) {
 			dynamicData->setTerrain(col, row, line[col]);
 		}
 	}	
-	
-	gameLoop();
 }
 
-void gameLoop() {
-	while (1) {
-		gfx.InitFrame();
-		if (gfx.quit) break;
-		ui->update();
-		ui->drawTerrain();
-		ui->drawBackground();
-		ui->drawUnits();
-		ui->drawForeground();
-
-		gfx.EndFrame();
-	}
-}
