@@ -16,6 +16,7 @@ public:
     bool displayRNG;
     int mapHeight, mapWidth;
 	string fileName;
+	bool withinBounds(coord pos);
 private:
 };
 

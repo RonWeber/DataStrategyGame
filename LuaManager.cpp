@@ -129,6 +129,28 @@ bool LuaManager::CallFunctionAvailable(string fn, unitID unit) {
 	return lua_toboolean(L, 0);
 }
 
+std::unique_ptr<std::vector<coord>> LuaManager::CallFunctionAllowedLocations(string fn, unitID unit) {
+	lua_getglobal(L, fn.c_str());
+	lua_pushinteger(L, unit);
+	if (lua_pcall(L, 1, 1, NULL) != 0) {
+		std::cerr << "error running function " << fn << ": " << lua_tostring(L, -1) << std::endl;
+		//Throw?
+	}
+	auto vals = std::unique_ptr<std::vector<coord>>(new std::vector<coord>);
+	lua_pushnil(L);
+	while (lua_next(L, -2) != 0) {
+		int x = lua_tonumber(L, -1);
+		lua_pop(L, 1);
+		lua_next(L, -2);
+		int y = lua_tonumber(L, -1);
+		lua_pop(L, 1);
+		vals->push_back({ x, y });
+	}
+
+	lua_pop(L, 1);
+	return vals;
+}
+
 LuaManager::~LuaManager() {
 	lua_close(L);
 }

@@ -35,3 +35,7 @@ Game::Game(string globalFileName, int mapHeight, int mapWidth) {
 	}
 	std::cout << "Units loaded.\n";
 }
+
+bool Game::withinBounds(coord pos) {
+	return (pos.x >= 0 && pos.x < mapWidth && pos.y >= 0 && pos.y < mapHeight);
+}

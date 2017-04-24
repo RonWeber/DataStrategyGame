@@ -23,13 +23,38 @@ void Image::draw_at(coord pos) {
 	int y = pos.y;
 	glBegin(GL_QUADS);
 	glTexCoord2f(0, 1);
-	glVertex2f(32*x, 32 * y + 32);
+	glVertex2f(32 * x - ui->scrollOffsetX, 32 * y + 32 - ui->scrollOffsetY);
 	glTexCoord2f(1, 1);
-	glVertex2f(32 * x + 32, 32 * y + 32);
+	glVertex2f(32 * x + 32 - ui->scrollOffsetX, 32 * y + 32 - ui->scrollOffsetY);
 	glTexCoord2f(1, 0);
-	glVertex2f(32 * x + 32, 32 * y);
+	glVertex2f(32 * x + 32 - ui->scrollOffsetX, 32 * y - ui->scrollOffsetY);
 	glTexCoord2f(0, 0);
-	glVertex2f(32 * x, 32 * y);
+	glVertex2f(32 * x - ui->scrollOffsetX, 32 * y - ui->scrollOffsetY);
+	glEnd();
+
+	glDisable(GL_TEXTURE_2D);
+	glDisable(GL_BLEND);
+}
+void Image::draw_absolute(coord pos) {
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, img);
+
+	glColor3f(1.0f, 1.0f, 1.0f);
+	int x = pos.x;
+	int y = pos.y;
+	glBegin(GL_QUADS);
+	glTexCoord2f(0, 1);
+	glVertex2f(32 * x, 32 * y + 32 );
+	glTexCoord2f(1, 1);
+	glVertex2f(32 * x + 32 , 32 * y + 32 );
+	glTexCoord2f(1, 0);
+	glVertex2f(32 * x + 32 , 32 * y );
+	glTexCoord2f(0, 0);
+	glVertex2f(32 * x , 32 * y );
 	glEnd();
 
 	glDisable(GL_TEXTURE_2D);
