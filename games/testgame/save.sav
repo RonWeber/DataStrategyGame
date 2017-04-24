@@ -1,4 +1,5 @@
 {
+    "currentPlayer": 0,
     "gameFileName": "game.json",
     "highestUnitID": 24,
     "terrain": [

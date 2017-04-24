@@ -3,7 +3,7 @@
 #include "Map.hpp"
 #include "Game.hpp"
 #include "GameDynamicData.hpp"
-
+#include "LuaManager.hpp"
 
 void gameLoop();
 
@@ -48,6 +48,8 @@ void LoadMap(string fileName) {
 		for (int col = 0; col < width; col++) {
 			dynamicData->setTerrain(col, row, line[col]);
 		}
-	}	
+	}
+	dynamicData->startTurn();
+	
 }
 

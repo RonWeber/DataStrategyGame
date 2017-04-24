@@ -15,6 +15,7 @@ public:
     char unitTypeID;
     std::vector<string> abilities;
 	sideID owner;
+	int hp, movesRemaining, actionsRemaining;
 	
     json toJSON();
 };

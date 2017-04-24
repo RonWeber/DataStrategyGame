@@ -28,6 +28,9 @@ Unit::Unit(json saveFileSection) {
 		abilities.push_back(ability);
 	}
 	this->owner = saveFileSection["owner"];
+	hp = saveFileSection["hp"];
+	movesRemaining = saveFileSection["movesRemaining"];
+	actionsRemaining = saveFileSection["actionsRemaining"];
 }
 
 json Unit::toJSON() {
@@ -46,5 +49,8 @@ json Unit::toJSON() {
 	result["type"] = typeString;
 	result["abilities"] = abilities;
 	result["owner"] = owner;
+	result["hp"] = hp;
+	result["movesRemaining"] = movesRemaining;
+	result["actionsRemaining"] = actionsRemaining;
 	return result;
 }

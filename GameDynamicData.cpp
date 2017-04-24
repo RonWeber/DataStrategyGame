@@ -1,6 +1,7 @@
 #include "GlobalIncludes.hpp"
 #include "GameDynamicData.hpp"
 #include "Game.hpp"
+#include "LuaManager.hpp"
 
 std::unique_ptr<GameDynamicData> dynamicData;
 
@@ -49,6 +50,12 @@ int GameDynamicData::createUnit(char unitType, coord coord) {
 	return u.id;
 }
 
+void GameDynamicData::deleteUnit(unitID id) {
+	Unit &deadManWalking = units.at(id);
+	positions[deadManWalking.coordinate.x][deadManWalking.coordinate.y] = NO_UNIT;
+	units.erase(id);
+}
+
 void GameDynamicData::addExistingUnit(Unit u) {
 	units.insert({u.id, u});
 	positions[u.coordinate.x][u.coordinate.y] = u.id;
@@ -75,10 +82,44 @@ std::vector<unitID> GameDynamicData::getAllUnits() {
 	return result;
 }
 
-
 unitID GameDynamicData::unitAt(coord coord) {
 	if (game->withinBounds(coord)) {
 		return positions[coord.x][coord.y];
 	}
 	else return NO_UNIT;
+}
+
+void GameDynamicData::startTurn() {
+	for (auto unit : this->getAllUnits()) {
+		Unit &u = units.at(unit);		
+		for (auto ability : u.abilities) {
+			AbilityType &type =  game->abilityTypes.at(ability);
+			if (type.functionNames.count(LuaFunction::TurnStart) > 0) {
+				lua.CallFunction(type.functionNames.at(LuaFunction::TurnStart), unit);
+			}
+		}
+	}
+}
+
+void GameDynamicData::endTurn() {
+	//TODO: All kinds of exciting end turn stuff.
+	for (auto unit : this->getAllUnits()) {
+		Unit &u = units.at(unit);
+		bool deadThisTurn = u.hp < 0;
+		for (auto ability : u.abilities) {
+			AbilityType &type =  game->abilityTypes.at(ability);
+			if (type.functionNames.count(LuaFunction::TurnEnd) > 0) {
+				lua.CallFunction(type.functionNames.at(LuaFunction::TurnEnd), unit);
+			}
+			if (deadThisTurn && type.functionNames.count(LuaFunction::UnitDied) > 0) {
+				lua.CallFunction(type.functionNames.at(LuaFunction::UnitDied), unit);
+			}
+		}
+		if (deadThisTurn) {
+			deleteUnit(unit);
+		}
+	}
+
+	currentPlayer = (currentPlayer == 0) ? 1 : 0;
+	startTurn(); //The next turn.
 }

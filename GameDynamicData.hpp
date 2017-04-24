@@ -18,12 +18,16 @@ public:
     void addAbility(unitID unitID, string abilityType);
     void removeAbility(unitID unitID, string abilityType);
     unitID createUnit(char unitType, coord coord);
+	void deleteUnit(unitID id);
 	void addExistingUnit(Unit u);
 	
 	void setTerrain(int x, int y, char terrainType);
     TerrainID getTerrain(int x, int y);
 	std::vector<unitID> getAllUnits();
 	unitID unitAt(coord coord);
+
+	void startTurn();
+	void endTurn();
 
     json toJson();
 private:

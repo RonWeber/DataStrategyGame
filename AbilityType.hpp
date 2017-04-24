@@ -13,7 +13,6 @@ public:
     std::map<LuaFunction, string> functionNames;
 	std::shared_ptr<Image> image;
 
-    void useAbility(LuaFunction ability);
 private:
 	void conditionalAdd(json jsonSection, LuaFunction function, string jsonName);
 };

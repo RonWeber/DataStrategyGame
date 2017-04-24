@@ -10,11 +10,12 @@ void Save(string fileName) {
 	json saveFileJson;
 	saveFileJson["gameFileName"] = game->fileName;
 	saveFileJson["worldHeight"] = game->mapHeight;
-	saveFileJson["worldWidth"] = game->mapWidth;	
+	saveFileJson["worldWidth"] = game->mapWidth;
 	//Everything else from Game is part of the file, and will be reloaded when the game is reloaded.  No need to save absolutely everything.
 
 	//TODO: Also save terrain.
 	saveFileJson["highestUnitID"] = dynamicData->highestUnitID;
+	saveFileJson["currentPlayer"] = dynamicData->currentPlayer;
 
 	std::vector<json> unitJsons;
 	for (auto unitID : dynamicData->getAllUnits()) {
@@ -54,8 +55,10 @@ void LoadSave(string fileName) {
 	int mapHeight = saveFileJson["worldHeight"];
 	int mapWidth = saveFileJson["worldWidth"];
 	game = std::unique_ptr<Game>(new Game(gameFileName, mapHeight, mapWidth));
+	
 	dynamicData = std::unique_ptr<GameDynamicData>(new GameDynamicData(mapHeight, mapWidth));
 	dynamicData->highestUnitID = saveFileJson["highestUnitID"];
+	dynamicData->currentPlayer = saveFileJson["currentPlayer"];
 	json unitSection = saveFileJson["units"];
 	for (auto unitJsonObject : unitSection) {
 		Unit u = Unit(unitJsonObject);

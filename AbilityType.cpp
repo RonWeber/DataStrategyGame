@@ -28,7 +28,3 @@ AbilityType::AbilityType(json json) {
 	conditionalAdd(json, TurnStart, "turnStartFn");
 	conditionalAdd(json, TurnEnd, "turnEndFn");
 }
-
-
-void AbilityType::useAbility(LuaFunction ability) {
-}

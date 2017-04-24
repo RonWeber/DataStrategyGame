@@ -25,5 +25,8 @@ UnitType::UnitType(json jsonSection) {
 
 Unit UnitType::makeUnit(coord initialCoord) {
 	Unit result = Unit(++dynamicData->highestUnitID, extraData, initialCoord, id, abilities, side);
+	result.hp = maxHP;
+	result.movesRemaining = movesPerTurn;
+	result.actionsRemaining = actionsPerTurn;
 	return result;
 }
