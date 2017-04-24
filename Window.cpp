@@ -1,5 +1,6 @@
 #include "GlobalIncludes.hpp"
 #include "Window.hpp"
+#include "SaveFile.hpp"
 
 /*Much of the code in this file was originally from Lazy Foo' Productions
 (http://lazyfoo.net/)*/
@@ -207,6 +208,11 @@ void Window::InitFrame() {
 		}
 		if (e.type == SDL_KEYDOWN) {
 			keydown = e.key.keysym.scancode;
+			//TODO: This is a temporary hack to test saving.  Add a real save UI.
+			//Note: Nothing is more permanent than a temporary hack.
+			if (e.key.keysym.sym == SDLK_s) {
+				Save("save.sav");
+			}
 		}
 	}
 	if (keyboard[SDL_SCANCODE_ESCAPE]) {

@@ -8,6 +8,7 @@
 #include "SaveFile.hpp"
 std::unique_ptr<UI> ui;
 
+bool savedBefore = false;
 void UI::update() {
 	gridX = (gfx.mouseX - scrollOffsetX) / 32;
 	gridY = (gfx.mouseY - scrollOffsetY) / 32;
