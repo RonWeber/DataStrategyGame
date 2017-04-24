@@ -13,11 +13,10 @@
 void gameLoop();
 
 int main(int argc, char* argv[]) {
-	
 	chdir("games/testgame/");
+	
     LoadMap("testgamemap.txt");
 	//LoadSave("save.sav");
-	ui = std::unique_ptr<UI>(new UI());
 
 	gameLoop();
 	
@@ -26,6 +25,8 @@ int main(int argc, char* argv[]) {
 
 
 void gameLoop() {
+	ui = std::unique_ptr<UI>(new UI());
+	
 	while (1) {
 		gfx.InitFrame();
 		if (gfx.quit) break;
