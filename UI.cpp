@@ -9,6 +9,7 @@
 std::unique_ptr<UI> ui;
 
 bool savedBefore = false;
+bool selectedUnitIsOurs();
 
 UI::UI() {
 	scrollOffsetX = (gfx->SCREEN_WIDTH - (game->mapWidth * 32)) / 2;
@@ -38,7 +39,7 @@ void UI::update() {
 			}
 			break;
 		case unit:
-			if ((gfx->mouseY / 32) == (gfx->SCREEN_HEIGHT / 32 - 1) && (gfx->mouseX / 32) < dynamicData->units.at(unitSelected).abilities.size()) {
+			if (selectedUnitIsOurs() && (gfx->mouseY / 32) == (gfx->SCREEN_HEIGHT / 32 - 1) && (gfx->mouseX / 32) < dynamicData->units.at(unitSelected).abilities.size()) {
 				abilitySelected = dynamicData->units.at(unitSelected).abilities[(gfx->mouseX / 32)];
 				auto thisAbility = game->abilityTypes.at(abilitySelected);
 				auto fnNames = thisAbility.functionNames;
@@ -218,16 +219,20 @@ void UI::drawForeground() {
 		drawSquare({ abilitySelectionPosition , gfx->SCREEN_HEIGHT / 32 - 1 }, .2, .2, .2);
 	case unit:
 		drawSquare(dynamicData->getPos(unitSelected), 1.f, 1.f, 1.f, 0.2f);//draw second highlighter square
-		auto abilities = dynamicData->units.at(unitSelected).abilities;
-		for (int i = 0; i < abilities.size(); i++) {
-			game->abilityTypes.at(abilities[i]).image->draw_absolute({ i, gfx->SCREEN_HEIGHT / 32 - 1 });
-		}
-		for (unitID uID : dynamicData->getAllUnits()) {
-			Unit u = dynamicData->units.at(uID);
+		if (selectedUnitIsOurs()) {
+			auto abilities = dynamicData->units.at(unitSelected).abilities;
+			for (int i = 0; i < abilities.size(); i++) {
+				game->abilityTypes.at(abilities[i]).image->draw_absolute({ i, gfx->SCREEN_HEIGHT / 32 - 1 });
+			}
 		}
 		break;
 	}
 	//draw tooltips
+}
+
+bool UI::selectedUnitIsOurs() {
+	Unit &u = dynamicData->units.at(unitSelected);
+	return u.owner == dynamicData->currentPlayer;
 }
 
 #pragma warning( pop ) 

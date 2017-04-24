@@ -17,6 +17,7 @@ private:
 	void drawGrid(double x, double y, double width, double height);
 	void drawSquare(coord pos, float r, float g, float b);
 	void drawSquare(coord pos, float r, float g, float b, float a);
+	bool selectedUnitIsOurs();
 	int gridX, gridY;
 	enum selectionType { none = 0, unit, ability };
 	selectionType selectionLevel = none;
