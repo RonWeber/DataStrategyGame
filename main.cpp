@@ -15,7 +15,7 @@ void gameLoop();
 int main(int argc, char* argv[]) {
 	chdir("games/testgame/");
 	
-    LoadMap("testgamemap.txt");
+    LoadMap("testgamebigmap.txt");
 	//LoadSave("save.sav");
 
 	gameLoop();
@@ -31,10 +31,7 @@ void gameLoop() {
 		gfx.InitFrame();
 		if (gfx.quit) break;
 		ui->update();
-		ui->drawTerrain();
-		ui->drawBackground();
-		ui->drawUnits();
-		ui->drawForeground();
+		ui->draw();
 
 		gfx.EndFrame();
 	}

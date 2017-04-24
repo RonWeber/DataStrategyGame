@@ -11,6 +11,7 @@ public:
 
 	Sint32 mouseX, mouseY;
 	bool Lclicked, Rclicked;
+	bool scrollL, scrollR, scrollU, scrollD;
 
 	bool quit;
 

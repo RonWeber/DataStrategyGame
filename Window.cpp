@@ -185,7 +185,6 @@ void Window::InitFrame() {
 	frame++;
 	if (frame % 3 == 0) endTime--;
 	//Handle events on queue
-	SDL_Scancode keydown = SDL_SCANCODE_UNKNOWN;
 	while (SDL_PollEvent(&e) != 0)
 	{
 		//User requests quit
@@ -207,12 +206,30 @@ void Window::InitFrame() {
 				Rclicked = (e.button.state == SDL_PRESSED);
 		}
 		if (e.type == SDL_KEYDOWN) {
-			keydown = e.key.keysym.scancode;
+			SDL_Keycode keydown = e.key.keysym.sym;
+			if (keydown == SDLK_UP)
+				scrollU = true;
+			if (keydown == SDLK_DOWN)
+				scrollD = true;
+			if (keydown == SDLK_LEFT)
+				scrollL = true;
+			if (keydown == SDLK_RIGHT)
+				scrollR = true;
 			//TODO: This is a temporary hack to test saving.  Add a real save UI.
 			//Note: Nothing is more permanent than a temporary hack.
-			if (e.key.keysym.sym == SDLK_s) {
+			if (keydown == SDLK_s)
 				Save("save.sav");
-			}
+		}
+		if (e.type == SDL_KEYUP) {
+			SDL_Keycode keydown = e.key.keysym.sym;
+			if (keydown == SDLK_UP)
+				scrollU = false;
+			if (keydown == SDLK_DOWN)
+				scrollD = false;
+			if (keydown == SDLK_LEFT)
+				scrollL = false;
+			if (keydown == SDLK_RIGHT)
+				scrollR = false;
 		}
 	}
 	if (keyboard[SDL_SCANCODE_ESCAPE]) {

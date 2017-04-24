@@ -1,6 +1,5 @@
 #include "catch.hpp"
 #include "GlobalIncludes.hpp"
-#include <unistd.h>
 #include "LuaManager.hpp"
 
 //WARNING: several of these tests require DynamicData and StaticData functionality to work correctly.
