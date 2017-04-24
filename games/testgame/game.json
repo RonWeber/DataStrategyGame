@@ -20,14 +20,14 @@
 			"description": "Punches self to make room",
 			"Image": "ClawPunch.png",
 			"selection": false,
-			"availableFn": "selfPunchAvailable",
+			"availableFn": "alwaysAvailable",
 			"actionFn": "selfPunchAction",
 			"helperDataFn": "selfPunchHelperData"
 		},
 		{
 			"id": "teleport",
 			"description": "Goes to a place",
-			"Image": "ClawPunch.png",
+			"Image": "movement.png",
 			"selection": true,
 			"availableFn": "teleportAvailable",
 			"actionFn": "teleportAction",
@@ -39,7 +39,7 @@
 		{
 			"id": "b",
 			"side": 0,
-			"Image": "tmp2.png",
+			"Image": "unit1.png",
 			"maxHP": 10,
 			"maxMoves": 2,
 			"maxAP": 1,
@@ -56,7 +56,7 @@
 		{
 			"id": "c",
 			"side": 1,
-			"Image": "tmp2.png",
+			"Image": "unit2.png",
 			"maxHP": 5,
 			"maxMoves": 1,
 			"maxAP": 2,

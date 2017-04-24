@@ -217,6 +217,7 @@ void UI::drawForeground() {
 	case ability:
 		drawSquare({ abilitySelectionPosition , gfx.SCREEN_HEIGHT / 32 - 1 }, .2, .2, .2);
 	case unit:
+		drawSquare(dynamicData->getPos(unitSelected), 1.f, 1.f, 1.f, 0.2f);//draw second highlighter square
 		auto abilities = dynamicData->units.at(unitSelected).abilities;
 		for (int i = 0; i < abilities.size(); i++) {
 			game->abilityTypes.at(abilities[i]).image->draw_absolute({ i, gfx.SCREEN_HEIGHT / 32 - 1 });

@@ -1,4 +1,4 @@
-function selfPunchAvailable (unitID)
+function alwaysAvailable (unitID)
   return true
 end
 
