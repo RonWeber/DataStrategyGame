@@ -1,6 +1,7 @@
 #include "GlobalIncludes.hpp"
 #include "Window.hpp"
 #include "SaveFile.hpp"
+#include "GameDynamicData.hpp"
 
 /*Much of the code in this file was originally from Lazy Foo' Productions
 (http://lazyfoo.net/)*/
@@ -219,6 +220,10 @@ void Window::InitFrame() {
 			//Note: Nothing is more permanent than a temporary hack.
 			if (keydown == SDLK_s)
 				Save("save.sav");
+			if (keydown == SDLK_SPACE) {
+				printf("Next turn");
+				dynamicData->endTurn();
+			}
 		}
 		if (e.type == SDL_KEYUP) {
 			SDL_Keycode keydown = e.key.keysym.sym;
