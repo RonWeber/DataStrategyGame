@@ -4,7 +4,7 @@
 #include "UI.hpp"
 
 Image::Image(string filename) {
-	img = gfx.loadTexture(filename);
+	img = gfx->loadTexture(filename);
 }
 
 

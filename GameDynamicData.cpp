@@ -18,7 +18,7 @@ int GameDynamicData::getValue(unitID unitID, string key) {
 }
 
 void GameDynamicData::setValue(unitID unitID, string key, int newValue) {
-	Unit u = units.at(unitID);
+	Unit &u = units.at(unitID);
 	u.data_keys[key] = newValue;
 }
 

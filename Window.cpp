@@ -5,7 +5,7 @@
 /*Much of the code in this file was originally from Lazy Foo' Productions
 (http://lazyfoo.net/)*/
 
-Window gfx;
+std::unique_ptr<Window> gfx;
 bool Window::initWindow()//0 = windowed (default), 1 = 1.5x screen, 2 = fullscreen, 3 = 1.5x fullscreen mode
 {
 

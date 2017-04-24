@@ -7,7 +7,7 @@ class GameDynamicData {
 public:
 	GameDynamicData(int height, int width);
     std::map<unitID, Unit> units;
-	std::vector<std::vector<TerrainID>> terrain;
+	std::vector<std::vector<TerrainID>> terrain;	
 	unitID highestUnitID = 0;	
 
     int getValue(unitID unitID, string key);
@@ -27,6 +27,7 @@ public:
     json toJson();
 private:
 	std::vector<std::vector<unitID>> positions;
+
 };
 
 extern std::unique_ptr<GameDynamicData> dynamicData;

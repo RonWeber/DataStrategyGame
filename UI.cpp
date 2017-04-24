@@ -11,8 +11,8 @@ std::unique_ptr<UI> ui;
 bool savedBefore = false;
 
 UI::UI() {
-	scrollOffsetX = (gfx.SCREEN_WIDTH - (game->mapWidth * 32)) / 2;
-	scrollOffsetY = (gfx.SCREEN_HEIGHT - (game->mapHeight * 32)) / 2;
+	scrollOffsetX = (gfx->SCREEN_WIDTH - (game->mapWidth * 32)) / 2;
+	scrollOffsetY = (gfx->SCREEN_HEIGHT - (game->mapHeight * 32)) / 2;
 }
 
 void UI::draw() {
@@ -24,10 +24,10 @@ void UI::draw() {
 
 void UI::update() {
 	scroll();
-	gridX = (gfx.mouseX + scrollOffsetX) / 32;
-	gridY = (gfx.mouseY + scrollOffsetY) / 32;
+	gridX = (gfx->mouseX + scrollOffsetX) / 32;
+	gridY = (gfx->mouseY + scrollOffsetY) / 32;
 
-	if (gfx.Lclicked) {
+	if (gfx->Lclicked) {
 		switch (selectionLevel) {
 		case none:
 			if (game->withinBounds({ gridX, gridY })){
@@ -38,13 +38,13 @@ void UI::update() {
 			}
 			break;
 		case unit:
-			if ((gfx.mouseY / 32) == (gfx.SCREEN_HEIGHT / 32 - 1) && (gfx.mouseX / 32) < dynamicData->units.at(unitSelected).abilities.size()) {
-				abilitySelected = dynamicData->units.at(unitSelected).abilities[(gfx.mouseX / 32)];
+			if ((gfx->mouseY / 32) == (gfx->SCREEN_HEIGHT / 32 - 1) && (gfx->mouseX / 32) < dynamicData->units.at(unitSelected).abilities.size()) {
+				abilitySelected = dynamicData->units.at(unitSelected).abilities[(gfx->mouseX / 32)];
 				auto thisAbility = game->abilityTypes.at(abilitySelected);
 				auto fnNames = thisAbility.functionNames;
 				if (lua.CallFunctionAvailable(fnNames[LuaFunction::Available], unitSelected)) {
 					if (thisAbility.selectionAbility) {
-						abilitySelectionPosition = (gfx.mouseX / 32);
+						abilitySelectionPosition = (gfx->mouseX / 32);
 						selectionLevel = ability;
 						allowedLocations = lua.CallFunctionAllowedLocations(fnNames[LuaFunction::AllowedLocations], unitSelected);
 					}
@@ -68,7 +68,7 @@ void UI::update() {
 		}
 	}
 
-	if (gfx.Rclicked) {
+	if (gfx->Rclicked) {
 		switch (selectionLevel) {
 		case none:
 			break;
@@ -83,27 +83,27 @@ void UI::update() {
 }
 void UI::scroll() {
 	const int spd = 8;
-	if (gfx.scrollU)
+	if (gfx->scrollU)
 		scrollOffsetY -= spd;
-	if (gfx.scrollD)
+	if (gfx->scrollD)
 		scrollOffsetY += spd;
-	if (gfx.scrollL)
+	if (gfx->scrollL)
 		scrollOffsetX -= spd;
-	if (gfx.scrollR)
+	if (gfx->scrollR)
 		scrollOffsetX += spd;
 
 	const int maxOffset = 128;
-	if (game->mapWidth * 32 > gfx.SCREEN_WIDTH - maxOffset * 2) {
+	if (game->mapWidth * 32 > gfx->SCREEN_WIDTH - maxOffset * 2) {
 		if (scrollOffsetX < -maxOffset)
 			scrollOffsetX = -maxOffset;
-		if (scrollOffsetX + gfx.SCREEN_WIDTH > (game->mapWidth * 32) + maxOffset)
-			scrollOffsetX = -gfx.SCREEN_WIDTH + (game->mapWidth * 32) + maxOffset;
+		if (scrollOffsetX + gfx->SCREEN_WIDTH > (game->mapWidth * 32) + maxOffset)
+			scrollOffsetX = -gfx->SCREEN_WIDTH + (game->mapWidth * 32) + maxOffset;
 	}
-	if (game->mapHeight * 32 > gfx.SCREEN_HEIGHT - maxOffset * 2) {
+	if (game->mapHeight * 32 > gfx->SCREEN_HEIGHT - maxOffset * 2) {
 		if (scrollOffsetY < -maxOffset)
 			scrollOffsetY = -maxOffset;
-		if (scrollOffsetY + gfx.SCREEN_HEIGHT >(game->mapHeight * 32) + maxOffset)
-			scrollOffsetY = -gfx.SCREEN_HEIGHT + (game->mapHeight * 32) + maxOffset;
+		if (scrollOffsetY + gfx->SCREEN_HEIGHT >(game->mapHeight * 32) + maxOffset)
+			scrollOffsetY = -gfx->SCREEN_HEIGHT + (game->mapHeight * 32) + maxOffset;
 	}
 }
 #pragma warning( push )
@@ -215,12 +215,12 @@ void UI::drawForeground() {
 	switch (selectionLevel) {
 	case none: break;
 	case ability:
-		drawSquare({ abilitySelectionPosition , gfx.SCREEN_HEIGHT / 32 - 1 }, .2, .2, .2);
+		drawSquare({ abilitySelectionPosition , gfx->SCREEN_HEIGHT / 32 - 1 }, .2, .2, .2);
 	case unit:
 		drawSquare(dynamicData->getPos(unitSelected), 1.f, 1.f, 1.f, 0.2f);//draw second highlighter square
 		auto abilities = dynamicData->units.at(unitSelected).abilities;
 		for (int i = 0; i < abilities.size(); i++) {
-			game->abilityTypes.at(abilities[i]).image->draw_absolute({ i, gfx.SCREEN_HEIGHT / 32 - 1 });
+			game->abilityTypes.at(abilities[i]).image->draw_absolute({ i, gfx->SCREEN_HEIGHT / 32 - 1 });
 		}
 		for (unitID uID : dynamicData->getAllUnits()) {
 			Unit u = dynamicData->units.at(uID);

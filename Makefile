@@ -7,16 +7,16 @@ MAIN_ONLY = main.o
 TEST_OBJ = test_main.o StaticDataTest.o LuaManagerTests.o
 
 dataGame : $(OBJ) $(MAIN_ONLY)
-	g++ -o $@ $^ $(FLAGS) $(LFLAGS)
+	$(CXX) -o $@ $^ $(FLAGS) $(LFLAGS)
 
 %.hpp.gch: %.hpp
 	$(CXX) $(FLAGS) -c  $<
 
 clean:
-	rm *.o *.gch *.gcda *.gcno dataGame tests
+	rm -f *.o *.gch *.gcda *.gcno dataGame tests
 
 tests: $(OBJ) $(TEST_OBJ)
-	g++ -o $@ $^ $(FLAGS) $(LFLAGS)
+	$(CXX) -o $@ $^ $(FLAGS) $(LFLAGS)
 
 all: dataGame tests
 

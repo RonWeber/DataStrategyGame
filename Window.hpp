@@ -40,4 +40,4 @@ private:
 	unsigned int endTime;
 };
 
-extern Window gfx; //Defined in Window.cpp, opened in Main.cpp
+extern std::unique_ptr<Window> gfx; //Defined in Window.cpp, opened in Main.cpp
