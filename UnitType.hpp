@@ -3,7 +3,7 @@
 #include "AbilityType.hpp"
 #include "Unit.hpp"
 #include "Image.hpp"
-
+#include "GameDynamicData.hpp"
 
 class UnitType {
 public:
@@ -16,7 +16,7 @@ public:
     std::vector<string> abilities;
     string name;
     string description;
-	int side;
+	sideID side;
 
     Unit makeUnit(coord initialCoord);
 };

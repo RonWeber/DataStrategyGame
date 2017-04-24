@@ -1,13 +1,13 @@
-#include "GlobalIncludes.hpp"
 #include "Unit.hpp"
 
 Unit::Unit(unitID id, std::map<string, int> data_keys, coord coordinate,
-		   char unitTypeID, std::vector<string> abilities) {
+		   char unitTypeID, std::vector<string> abilities, sideID side) {
 	this->id = id;
 	this->data_keys = data_keys;
 	this->coordinate = coordinate;
 	this->unitTypeID = unitTypeID;
 	this->abilities = abilities;
+	this->owner = side;
 }
 
 /**
@@ -27,6 +27,7 @@ Unit::Unit(json saveFileSection) {
 	for (auto ability : saveFileSection["abilities"]) {
 		abilities.push_back(ability);
 	}
+	this->owner = saveFileSection["owner"];
 }
 
 json Unit::toJSON() {
@@ -44,5 +45,6 @@ json Unit::toJSON() {
 	string typeString = string(1, unitTypeID);
 	result["type"] = typeString;
 	result["abilities"] = abilities;
+	result["owner"] = owner;
 	return result;
 }

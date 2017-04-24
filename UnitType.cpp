@@ -24,6 +24,6 @@ UnitType::UnitType(json jsonSection) {
 
 
 Unit UnitType::makeUnit(coord initialCoord) {
-	Unit result = Unit(++dynamicData->highestUnitID, extraData, initialCoord, id, abilities);
+	Unit result = Unit(++dynamicData->highestUnitID, extraData, initialCoord, id, abilities, side);
 	return result;
 }

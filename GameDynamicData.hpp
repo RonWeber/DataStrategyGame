@@ -8,7 +8,8 @@ public:
 	GameDynamicData(int height, int width);
     std::map<unitID, Unit> units;
 	std::vector<std::vector<TerrainID>> terrain;	
-	unitID highestUnitID = 0;	
+	unitID highestUnitID = 0;
+	sideID currentPlayer = 0;
 
     int getValue(unitID unitID, string key);
     void setValue(unitID unitID, string key, int newValue);

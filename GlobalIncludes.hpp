@@ -27,3 +27,4 @@ inline bool operator==(const coord& lhs, const coord& rhs)
 }
 
 typedef char TerrainID;
+typedef int sideID;
