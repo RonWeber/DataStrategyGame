@@ -26,6 +26,7 @@ int main(int argc, char* argv[]) {
 	
 	if (chdir(argv[1]) != 0) {
 		std::cerr << "Could not change directory." << std::endl;
+		return 1;
 	}
 
 	std::ifstream fileTypeDetection(argv[2]);
