@@ -29,11 +29,15 @@ int main(int argc, char* argv[]) {
 	if (chdir(argv[1]) != 0) {
 		std::cerr << "Could not change directory." << std::endl;
 	}
-	LoadMap(argv[2]);
 
-	//chdir("games/testgame/");
-    //LoadMap("testgamebigmap.txt");
-	//LoadSave("save.sav");
+	std::ifstream fileTypeDetection(argv[2]);
+	if (isdigit(fileTypeDetection.peek())) {
+		//It started with a number.  It can't be json, so it's probably a map.
+		LoadMap(argv[2]);
+	} else {
+		//It didn't start with a number.  It can't be a map, so it's probably JSON
+		LoadSave(argv[2]);
+	}
 
 	ui = std::unique_ptr<UI>(new UI());
 	gameLoop();
