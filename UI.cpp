@@ -8,8 +8,6 @@
 #include "SaveFile.hpp"
 std::unique_ptr<UI> ui;
 
-bool savedBefore = false;
-
 UI::UI() {
 	scrollOffsetX = -(gfx->SCREEN_WIDTH - (game->mapWidth * 32)) / 2;
 	scrollOffsetY = -(gfx->SCREEN_HEIGHT - (game->mapHeight * 32)) / 2;
