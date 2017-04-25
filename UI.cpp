@@ -11,8 +11,8 @@ std::unique_ptr<UI> ui;
 bool savedBefore = false;
 
 UI::UI() {
-	scrollOffsetX = (gfx->SCREEN_WIDTH - (game->mapWidth * 32)) / 2;
-	scrollOffsetY = (gfx->SCREEN_HEIGHT - (game->mapHeight * 32)) / 2;
+	scrollOffsetX = -(gfx->SCREEN_WIDTH - (game->mapWidth * 32)) / 2;
+	scrollOffsetY = -(gfx->SCREEN_HEIGHT - (game->mapHeight * 32)) / 2;
 }
 
 void UI::draw() {
@@ -42,14 +42,14 @@ void UI::update() {
 				abilitySelected = dynamicData->units.at(unitSelected).abilities[(gfx->mouseX / 32)];
 				auto thisAbility = game->abilityTypes.at(abilitySelected);
 				auto fnNames = thisAbility.functionNames;
-				if (lua.CallFunctionAvailable(fnNames[LuaFunction::Available], unitSelected)) {
+				if (lua->CallFunctionAvailable(fnNames[LuaFunction::Available], unitSelected)) {
 					if (thisAbility.selectionAbility) {
 						abilitySelectionPosition = (gfx->mouseX / 32);
 						selectionLevel = ability;
-						allowedLocations = lua.CallFunctionAllowedLocations(fnNames[LuaFunction::AllowedLocations], unitSelected);
+						allowedLocations = lua->CallFunctionAllowedLocations(fnNames[LuaFunction::AllowedLocations], unitSelected);
 					}
 					else {
-						lua.CallFunction(fnNames[LuaFunction::Action], unitSelected);
+						lua->CallFunction(fnNames[LuaFunction::Action], unitSelected);
 						selectionLevel = none;
 					}
 				}
@@ -62,7 +62,7 @@ void UI::update() {
 				if (locs == c) {
 					auto thisAbility = game->abilityTypes.at(abilitySelected);
 					auto fnNames = thisAbility.functionNames;
-					lua.CallFunction(fnNames[LuaFunction::Action], unitSelected, c);
+					lua->CallFunction(fnNames[LuaFunction::Action], unitSelected, c);
 					selectionLevel = none;
 				}
 			}
@@ -85,23 +85,24 @@ void UI::update() {
 }
 void UI::scroll() {
 	const int spd = 8;
-	if (gfx->scrollU)
-		scrollOffsetY -= spd;
-	if (gfx->scrollD)
-		scrollOffsetY += spd;
-	if (gfx->scrollL)
-		scrollOffsetX -= spd;
-	if (gfx->scrollR)
-		scrollOffsetX += spd;
-
 	const int maxOffset = 128;
 	if (game->mapWidth * 32 > gfx->SCREEN_WIDTH - maxOffset * 2) {
+		if (gfx->scrollL)
+			scrollOffsetX -= spd;
+		if (gfx->scrollR)
+			scrollOffsetX += spd;
+
 		if (scrollOffsetX < -maxOffset)
 			scrollOffsetX = -maxOffset;
 		if (scrollOffsetX + gfx->SCREEN_WIDTH > (game->mapWidth * 32) + maxOffset)
 			scrollOffsetX = -gfx->SCREEN_WIDTH + (game->mapWidth * 32) + maxOffset;
 	}
 	if (game->mapHeight * 32 > gfx->SCREEN_HEIGHT - maxOffset * 2) {
+		if (gfx->scrollU)
+			scrollOffsetY -= spd;
+		if (gfx->scrollD)
+			scrollOffsetY += spd;
+
 		if (scrollOffsetY < -maxOffset)
 			scrollOffsetY = -maxOffset;
 		if (scrollOffsetY + gfx->SCREEN_HEIGHT >(game->mapHeight * 32) + maxOffset)

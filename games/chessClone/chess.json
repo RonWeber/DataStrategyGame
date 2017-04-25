@@ -1,0 +1,221 @@
+{
+  "displayRNG": false,
+  "luaFiles": [
+    "chess.lua"
+  ],
+  "terrainData": [
+    {
+      "id": ".",
+      "Image": "grass.png"
+    },
+    {
+      "id": "x",
+      "Image": "desert.png"
+    }
+  ],
+  "abilityData": [
+    {
+      "id": "rook",
+      "description": "Goes to a place",
+      "Image": "movement.png",
+      "selection": true,
+      "availableFn": "actionAvailable",
+      "actionFn": "move",
+      "allowedLocationsFn": "rook"
+    },
+    {
+      "id": "knight",
+      "description": "Goes to a place",
+      "Image": "movement.png",
+      "selection": true,
+      "availableFn": "actionAvailable",
+      "actionFn": "move",
+      "allowedLocationsFn": "knight"
+    },
+    {
+      "id": "bishop",
+      "description": "Goes to a place",
+      "Image": "movement.png",
+      "selection": true,
+      "availableFn": "actionAvailable",
+      "actionFn": "move",
+      "allowedLocationsFn": "bishop"
+    },
+    {
+      "id": "queen",
+      "description": "Goes to a place",
+      "Image": "movement.png",
+      "selection": true,
+      "availableFn": "actionAvailable",
+      "actionFn": "move",
+      "allowedLocationsFn": "queen"
+    },
+    {
+      "id": "king",
+      "description": "Goes to a place",
+      "Image": "movement.png",
+      "selection": true,
+      "availableFn": "actionAvailable",
+      "actionFn": "move",
+      "allowedLocationsFn": "king"
+    }
+  ],
+  "unitData": [
+    {
+      "id": "R",
+      "side": 0,
+      "Image": "Rw.png",
+      "maxHP": 1,
+      "maxMoves": 0,
+      "maxAP": 0,
+      "extraData": {},
+      "abilities": [
+        "rook"
+      ],
+      "name": "Rook (W)"
+    },
+    {
+      "id": "N",
+      "side": 0,
+      "Image": "Nw.png",
+      "maxHP": 1,
+      "maxMoves": 0,
+      "maxAP": 0,
+      "extraData": {},
+      "abilities": [
+        "knight"
+      ],
+      "name": "Knight (W)"
+    },
+    {
+      "id": "B",
+      "side": 0,
+      "Image": "Bw.png",
+      "maxHP": 1,
+      "maxMoves": 0,
+      "maxAP": 0,
+      "extraData": {},
+      "abilities": [
+        "bishop"
+      ],
+      "name": "Bishop (W)"
+    },
+    {
+      "id": "Q",
+      "side": 0,
+      "Image": "Qw.png",
+      "maxHP": 1,
+      "maxMoves": 0,
+      "maxAP": 0,
+      "extraData": {},
+      "abilities": [
+        "queen"
+      ],
+      "name": "Queen (W)"
+    },
+    {
+      "id": "K",
+      "side": 0,
+      "Image": "Kw.png",
+      "maxHP": 1,
+      "maxMoves": 1,
+      "maxAP": 0,
+      "extraData": {},
+      "abilities": [
+        "king"
+      ],
+      "name": "King (W)"
+    },
+    {
+      "id": "P",
+      "side": 0,
+      "Image": "Pw.png",
+      "maxHP": 0,
+      "maxMoves": 1,
+      "maxAP": 0,
+      "extraData": {},
+      "abilities": [
+        "king"
+      ],
+      "name": "Pawn (W)"
+    },
+    {
+      "id": "r",
+      "side": 1,
+      "Image": "Rb.png",
+      "maxHP": 1,
+      "maxMoves": 0,
+      "maxAP": 0,
+      "extraData": {},
+      "abilities": [
+        "rook"
+      ],
+      "name": "Rook (B)"
+    },
+    {
+      "id": "n",
+      "side": 1,
+      "Image": "Nb.png",
+      "maxHP": 1,
+      "maxMoves": 0,
+      "maxAP": 0,
+      "extraData": {},
+      "abilities": [
+        "knight"
+      ],
+      "name": "Knight (B)"
+    },
+    {
+      "id": "b",
+      "side": 1,
+      "Image": "Bb.png",
+      "maxHP": 1,
+      "maxMoves": 0,
+      "maxAP": 0,
+      "extraData": {},
+      "abilities": [
+        "bishop"
+      ],
+      "name": "Bishop (B)"
+    },
+    {
+      "id": "q",
+      "side": 1,
+      "Image": "Qb.png",
+      "maxHP": 1,
+      "maxMoves": 0,
+      "maxAP": 0,
+      "extraData": {},
+      "abilities": [
+        "queen"
+      ],
+      "name": "Queen (B)"
+    },
+    {
+      "id": "k",
+      "side": 1,
+      "Image": "Kb.png",
+      "maxHP": 1,
+      "maxMoves": 1,
+      "maxAP": 0,
+      "extraData": {},
+      "abilities": [
+        "king"
+      ],
+      "name": "King (B)"
+    },
+    {
+      "id": "p",
+      "side": 1,
+      "Image": "Pb.png",
+      "maxHP": 0,
+      "maxMoves": 1,
+      "maxAP": 0,
+      "extraData": {},
+      "abilities": [
+        "king"
+      ],
+      "name": "Pawn (B)"
+    }
+  ]
+}

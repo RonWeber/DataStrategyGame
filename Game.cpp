@@ -18,7 +18,7 @@ Game::Game(string globalFileName, int mapHeight, int mapWidth) {
 	file >> json;
 	displayRNG = json["displayRNG"];
 	for (auto file : json["luaFiles"]) {
-		lua.loadFile(file);
+		lua->loadFile(file);
 	}
 	for (auto terrain : json["terrainData"]) {
 		TerrainType newType = TerrainType(terrain);

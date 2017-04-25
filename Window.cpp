@@ -161,12 +161,11 @@ Window::Window() {
 	glScaled(2.0 / SCREEN_WIDTH, -2.0 / SCREEN_HEIGHT, 1.0);
 
 	quit = false;
-	keyboard = SDL_GetKeyboardState(NULL);
 
 	frame = 0;
 	endTime = SDL_GetTicks();
 
-	Lclicked = Rclicked = false;
+	Lclicked = Rclicked = scrollL = scrollR = scrollU = scrollD = false;
 
 }
 
@@ -208,6 +207,8 @@ void Window::InitFrame() {
 		}
 		if (e.type == SDL_KEYDOWN) {
 			SDL_Keycode keydown = e.key.keysym.sym;
+			if (keydown == SDLK_ESCAPE)
+				quit = true;
 			if (keydown == SDLK_UP)
 				scrollU = true;
 			if (keydown == SDLK_DOWN)
@@ -236,9 +237,6 @@ void Window::InitFrame() {
 			if (keydown == SDLK_RIGHT)
 				scrollR = false;
 		}
-	}
-	if (keyboard[SDL_SCANCODE_ESCAPE]) {
-		quit = true;
 	}
 
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);

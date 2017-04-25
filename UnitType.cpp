@@ -18,7 +18,6 @@ UnitType::UnitType(json jsonSection) {
 		abilities.push_back(json.get<string>());
 	}
 	name = jsonSection["name"];
-	description = jsonSection["description"];
 }
 
 

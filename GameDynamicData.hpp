@@ -13,6 +13,7 @@ public:
 
     int getValue(unitID unitID, string key);
     void setValue(unitID unitID, string key, int newValue);
+	int getOwner(unitID unitID);
 	void setPos(unitID unitID, coord newPos);
 	coord getPos(unitID unitID);
     void addAbility(unitID unitID, string abilityType);

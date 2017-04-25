@@ -17,13 +17,20 @@ using json = nlohmann::json;
 using string = std::string;
 using ifstream = std::ifstream;
 
-typedef struct {
+struct coord {
 	int x, y;
-} coord;
-inline bool operator==(const coord& lhs, const coord& rhs)
-{
+} ;
+inline bool operator==(const coord& lhs, const coord& rhs) {
 	return lhs.x == rhs.x &&
 		lhs.y == rhs.y;
+}
+namespace std {
+	template <>
+	struct hash<coord> {
+		size_t operator()(const coord& k) const {
+			return ((hash<int>()(k.x))^(hash<int>()(-k.y)));
+		}
+	};
 }
 
 typedef char TerrainID;

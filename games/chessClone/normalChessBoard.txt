@@ -1,0 +1,18 @@
+8 8 chess.json
+rnbkqbnr
+pppppppp
+        
+        
+        
+        
+PPPPPPPP
+RNBKQBNR
+
+.x.x.x.x
+x.x.x.x.
+.x.x.x.x
+x.x.x.x.
+.x.x.x.x
+x.x.x.x.
+.x.x.x.x
+x.x.x.x.

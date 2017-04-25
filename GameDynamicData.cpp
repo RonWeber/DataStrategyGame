@@ -17,6 +17,10 @@ GameDynamicData::GameDynamicData(int height, int width) {
 int GameDynamicData::getValue(unitID unitID, string key) {
 	return units.at(unitID).data_keys[key];
 }
+int GameDynamicData::getOwner(unitID unitID) {
+	return units.at(unitID).owner;
+}
+
 
 void GameDynamicData::setValue(unitID unitID, string key, int newValue) {
 	Unit &u = units.at(unitID);
@@ -99,7 +103,7 @@ void GameDynamicData::startTurn() {
 		for (auto ability : u.abilities) {
 			AbilityType &type =  game->abilityTypes.at(ability);
 			if (type.functionNames.count(LuaFunction::TurnStart) > 0) {
-				lua.CallFunction(type.functionNames.at(LuaFunction::TurnStart), unit);
+				lua->CallFunction(type.functionNames.at(LuaFunction::TurnStart), unit);
 			}
 		}
 	}
@@ -112,7 +116,7 @@ void GameDynamicData::endTurn() {
 		for (auto ability : u.abilities) {
 			AbilityType &type = game->abilityTypes.at(ability);
 			if (type.functionNames.count(LuaFunction::TurnEnd) > 0) {
-				lua.CallFunction(type.functionNames.at(LuaFunction::TurnEnd), unit);
+				lua->CallFunction(type.functionNames.at(LuaFunction::TurnEnd), unit);
 			}
 		}
 	}
@@ -131,7 +135,7 @@ void GameDynamicData::update() {
 			for (auto ability : u.abilities) {
 				AbilityType &type = game->abilityTypes.at(ability);
 				if (deadThisTurn && type.functionNames.count(LuaFunction::UnitDied) > 0) {
-					lua.CallFunction(type.functionNames.at(LuaFunction::UnitDied), unit);
+					lua->CallFunction(type.functionNames.at(LuaFunction::UnitDied), unit);
 				}
 			}
 			if (deadThisTurn) {

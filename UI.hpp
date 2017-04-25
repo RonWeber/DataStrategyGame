@@ -1,5 +1,6 @@
 #pragma once
 #include "Unit.hpp"
+#include <unordered_set>
 
 class UI {
 public:
@@ -24,7 +25,7 @@ private:
 	unitID unitSelected;
 	string abilitySelected;
 	int abilitySelectionPosition;
-	std::unique_ptr<std::vector<coord>> allowedLocations;
+	std::unique_ptr<std::unordered_set<coord>> allowedLocations;
 };
 
 extern std::unique_ptr<UI> ui;

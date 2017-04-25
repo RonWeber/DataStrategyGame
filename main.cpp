@@ -4,6 +4,7 @@
 #include "Window.hpp"
 #include "UI.hpp"
 #include "GameDynamicData.hpp"
+#include "LuaManager.hpp"
 
 #ifdef _WIN32
 #include <direct.h>
@@ -15,12 +16,16 @@ void gameLoop();
 
 int main(int argc, char* argv[]) {
 	gfx = std::unique_ptr<Window>(new Window());
+	lua = std::unique_ptr<LuaManager>(new LuaManager());
 
-	chdir("games/testgame/");
-	
-    LoadMap("testgamebigmap.txt");
+	chdir("games/chessClone/");
+	LoadMap("normalChessBoard.txt");
+
+	//chdir("games/testgame/");
+    //LoadMap("testgamebigmap.txt");
 	//LoadSave("save.sav");
 
+	ui = std::unique_ptr<UI>(new UI());
 	gameLoop();
 	
 	return 0;
@@ -28,7 +33,6 @@ int main(int argc, char* argv[]) {
 
 
 void gameLoop() {
-	ui = std::unique_ptr<UI>(new UI());
 	
 	while (1) {
 		gfx->InitFrame();

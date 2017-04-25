@@ -15,7 +15,6 @@ public:
     std::map<string, int> extraData;
     std::vector<string> abilities;
     string name;
-    string description;
 	sideID side;
 
     Unit makeUnit(coord initialCoord);
