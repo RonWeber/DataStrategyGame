@@ -28,7 +28,7 @@ void LoadMap(string fileName) {
 	for(int row = 0; row < height; row++) {
 		string line;
 		std::getline(mapFile, line);
-		if (line.size() < width) {
+		if ((int)line.size() < width) {
 			throw std::runtime_error("A line in the unit section of the map was not long enough.");
 		}
 		for (int col = 0; col < width; col++) {
@@ -42,7 +42,7 @@ void LoadMap(string fileName) {
 	for(int row = 0; row < height; row++) {
 		string line;
 		std::getline(mapFile, line);
-		if (line.size() < width) {
+		if ((int)line.size() < width) {
 			throw std::runtime_error("A line in the terrain section of the map was not long enough.");
 		}
 		for (int col = 0; col < width; col++) {

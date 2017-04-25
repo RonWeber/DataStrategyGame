@@ -19,7 +19,13 @@ void UI::draw() {
 	ui->drawUnits();
 	ui->drawForeground();
 }
-
+#ifdef WIN32
+#pragma warning( push )
+#pragma warning( disable : 4244)
+#else
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wsign-compare"
+#endif
 void UI::update() {
 	scroll();
 	gridX = (gfx->mouseX + scrollOffsetX) / 32;
@@ -107,8 +113,7 @@ void UI::scroll() {
 			scrollOffsetY = -gfx->SCREEN_HEIGHT + (game->mapHeight * 32) + maxOffset;
 	}
 }
-#pragma warning( push )
-#pragma warning( disable : 4244)
+
 void UI::drawSquare(coord pos, float r, float g, float b) {
 	if (game->withinBounds(pos)) {
 		glBegin(GL_TRIANGLE_STRIP);
@@ -234,5 +239,8 @@ bool UI::selectedUnitIsOurs() {
 	Unit &u = dynamicData->units.at(unitSelected);
 	return u.owner == dynamicData->currentPlayer;
 }
-
+#ifdef WIN32
 #pragma warning( pop ) 
+#else
+#pragma GCC diagnostic pop
+#endif
