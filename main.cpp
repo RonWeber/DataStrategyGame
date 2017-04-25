@@ -9,10 +9,8 @@
 
 #ifdef _WIN32
 #include <direct.h>
-#include <stdlib.h>
 #elif __unix__
 #include <unistd.h>
-#include <libgen.h>
 #endif
 
 void gameLoop();
