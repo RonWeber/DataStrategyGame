@@ -69,14 +69,20 @@ void GameDynamicData::addExistingUnit(Unit u) {
 	positions[u.coordinate.x][u.coordinate.y] = u.id;
 }
 
+bool GameDynamicData::withinBounds(coord coord) {
+	int positionsWidth = positions.size();
+	int positionsHeight = positions[0].size();
+	return (coord.x >= 0 && coord.x < positionsWidth && coord.y >= 0 && coord.y < positionsHeight);
+}
+
 void GameDynamicData::setTerrain(int x, int y, char terrainType) {
-	if (game->withinBounds({ x, y })) {
+	if (withinBounds({ x, y })) {
 		terrain[x][y] = terrainType;
 	}
 }
 
 TerrainID GameDynamicData::getTerrain(int x, int y) {
-	if (game->withinBounds({ x, y })) {
+	if (withinBounds({ x, y })) {
 		return terrain[x][y];
 	}
 	else return NO_UNIT;//not a unit, but this shouldn't happen anyway
@@ -91,7 +97,7 @@ std::vector<unitID> GameDynamicData::getAllUnits() {
 }
 
 unitID GameDynamicData::unitAt(coord coord) {
-	if (game->withinBounds(coord)) {
+	if (withinBounds(coord)) {
 		return positions[coord.x][coord.y];
 	}
 	else return NO_UNIT;

@@ -4,7 +4,7 @@ LFLAGS = -lSDL2 -lSDL2_image -lSDL2_net -lGL -llua5.1-c++ -lgcov
 HEADERS = AbilityType.hpp.gch GameDynamicData.hpp.gch Game.hpp.gch  SaveFile.hpp.gch Unit.hpp.gch UnitType.hpp.gch include/json.hpp.gch GlobalIncludes.hpp.gch UI.hpp.gch GlobalIncludes.hpp.gch LuaManager.hpp.gch Window.hpp.gch Image.hpp.gch
 OBJ = AbilityType.o Game.o GameDynamicData.o SaveFile.o Unit.o UnitType.o Map.o UI.o LuaManager.o Window.o Image.o TerrainType.o
 MAIN_ONLY = main.o
-TEST_OBJ = test_main.o StaticDataTest.o LuaManagerTests.o
+TEST_OBJ = test_main.o StaticDataTest.o LuaManagerTests.o DynamicDataTest.o
 
 dataGame : $(OBJ) $(MAIN_ONLY)
 	$(CXX) -o $@ $^ $(FLAGS) $(LFLAGS)
