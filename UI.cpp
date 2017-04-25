@@ -9,7 +9,6 @@
 std::unique_ptr<UI> ui;
 
 bool savedBefore = false;
-bool selectedUnitIsOurs();
 
 UI::UI() {
 	scrollOffsetX = (gfx->SCREEN_WIDTH - (game->mapWidth * 32)) / 2;
@@ -49,8 +48,10 @@ void UI::update() {
 						selectionLevel = ability;
 						allowedLocations = lua.CallFunctionAllowedLocations(fnNames[LuaFunction::AllowedLocations], unitSelected);
 					}
-					else
+					else {
 						lua.CallFunction(fnNames[LuaFunction::Action], unitSelected);
+						selectionLevel = none;
+					}
 				}
 			}
 			break;
@@ -62,7 +63,7 @@ void UI::update() {
 					auto thisAbility = game->abilityTypes.at(abilitySelected);
 					auto fnNames = thisAbility.functionNames;
 					lua.CallFunction(fnNames[LuaFunction::Action], unitSelected, c);
-					selectionLevel = unit;
+					selectionLevel = none;
 				}
 			}
 			break;

@@ -8,7 +8,7 @@ std::unique_ptr<GameDynamicData> dynamicData;
 GameDynamicData::GameDynamicData(int height, int width) {
 	positions.resize(width);
 	terrain.resize(width);
-	for(int x = 0; x < width; x++) {
+	for (int x = 0; x < width; x++) {
 		positions[x].resize(height, NO_UNIT);
 		terrain[x].resize(height, '\0');
 	}
@@ -24,6 +24,9 @@ void GameDynamicData::setValue(unitID unitID, string key, int newValue) {
 }
 
 void GameDynamicData::setPos(unitID unitID, coord newPos) {
+	if (positions[newPos.x][newPos.y] != NO_UNIT){
+		setValue(positions[newPos.x][newPos.y], "hp", 0);
+	}
 	Unit &u = units.at(unitID);
 	positions[u.coordinate.x][u.coordinate.y] = NO_UNIT;
 	u.coordinate = newPos;
@@ -52,7 +55,8 @@ int GameDynamicData::createUnit(char unitType, coord coord) {
 
 void GameDynamicData::deleteUnit(unitID id) {
 	Unit &deadManWalking = units.at(id);
-	positions[deadManWalking.coordinate.x][deadManWalking.coordinate.y] = NO_UNIT;
+	if (positions[deadManWalking.coordinate.x][deadManWalking.coordinate.y] == id)
+		positions[deadManWalking.coordinate.x][deadManWalking.coordinate.y] = NO_UNIT;
 	units.erase(id);
 }
 
@@ -105,21 +109,35 @@ void GameDynamicData::endTurn() {
 	//TODO: All kinds of exciting end turn stuff.
 	for (auto unit : this->getAllUnits()) {
 		Unit &u = units.at(unit);
-		bool deadThisTurn = u.hp < 0;
 		for (auto ability : u.abilities) {
-			AbilityType &type =  game->abilityTypes.at(ability);
+			AbilityType &type = game->abilityTypes.at(ability);
 			if (type.functionNames.count(LuaFunction::TurnEnd) > 0) {
 				lua.CallFunction(type.functionNames.at(LuaFunction::TurnEnd), unit);
 			}
-			if (deadThisTurn && type.functionNames.count(LuaFunction::UnitDied) > 0) {
-				lua.CallFunction(type.functionNames.at(LuaFunction::UnitDied), unit);
-			}
-		}
-		if (deadThisTurn) {
-			deleteUnit(unit);
 		}
 	}
 
 	currentPlayer = (currentPlayer == 0) ? 1 : 0;
 	startTurn(); //The next turn.
+}
+
+void GameDynamicData::update() {
+	bool anydead;
+	do {
+		anydead = false;
+		for (auto unit : this->getAllUnits()) {
+			Unit &u = units.at(unit);
+			bool deadThisTurn = getValue(u.id, "hp") <= 0;
+			for (auto ability : u.abilities) {
+				AbilityType &type = game->abilityTypes.at(ability);
+				if (deadThisTurn && type.functionNames.count(LuaFunction::UnitDied) > 0) {
+					lua.CallFunction(type.functionNames.at(LuaFunction::UnitDied), unit);
+				}
+			}
+			if (deadThisTurn) {
+				deleteUnit(unit);
+				anydead = true;
+			}
+		}
+	} while (anydead);
 }

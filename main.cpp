@@ -3,6 +3,7 @@
 #include "SaveFile.hpp"
 #include "Window.hpp"
 #include "UI.hpp"
+#include "GameDynamicData.hpp"
 
 #ifdef _WIN32
 #include <direct.h>
@@ -33,6 +34,7 @@ void gameLoop() {
 		gfx->InitFrame();
 		if (gfx->quit) break;
 		ui->update();
+		dynamicData->update();
 		ui->draw();
 
 		gfx->EndFrame();

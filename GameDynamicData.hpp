@@ -27,6 +27,7 @@ public:
 	unitID unitAt(coord coord);
 
 	void startTurn();
+	void update();
 	void endTurn();
 
     json toJson();
