@@ -17,6 +17,24 @@ Game::Game(string globalFileName, int mapHeight, int mapWidth) {
 
 	file >> json;
 	displayRNG = json["displayRNG"];
+
+	if (json.find("actionIcon") != json.end()) {
+		actionIcon = std::shared_ptr<Image>(new Image(json["actionIcon"].get<string>()));
+	} 	
+	if (json.find("movementIcon") != json.end()) {
+		movementIcon = std::shared_ptr<Image>(new Image(json["movementIcon"].get<string>()));
+	} 		
+	if (json.find("actionIconSeperation") != json.end()) {
+		actionIconSeperation = json["actionIconSeperation"];
+	} else {
+		actionIconSeperation = 8;
+	}
+	if (json.find("movementIconSeperation") != json.end()) {
+		movementIconSeperation = json["movementIconSeperation"];
+	} else {
+		movementIconSeperation = 8;
+	}
+	
 	for (auto file : json["luaFiles"]) {
 		lua->loadFile(file);
 	}

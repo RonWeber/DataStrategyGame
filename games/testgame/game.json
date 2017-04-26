@@ -1,5 +1,7 @@
 {
 	"displayRNG": false,
+	"actionIcon": "ClawPunch.png",
+	"movementIcon" : "unit2.png",
 	"luaFiles": [
 		"testGame.lua",
 		"testGame2.lua"
