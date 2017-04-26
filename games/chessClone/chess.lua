@@ -150,7 +150,7 @@ end
 function kingDead (unitID)
   list = getAllUnits()
   mySide = getOwner(unitID)
-  for u in list do
+  for i, u in ipairs(list) do
     if getOwner(u) == mySide then
       setValue(u, "hp", 0)
     end

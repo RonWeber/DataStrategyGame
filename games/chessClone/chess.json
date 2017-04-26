@@ -58,7 +58,7 @@
       "availableFn": "actionAvailable",
       "actionFn": "move",
       "allowedLocationsFn": "king",
-      "unitDieadFn": "kingDead"
+      "unitDiedFn": "kingDead"
     },
     {
       "id": "pawnDown",
