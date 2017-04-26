@@ -1,8 +1,20 @@
+function findMyKing (unitID)
+  list = getAllUnits()
+  mySide = getOwner(unitID)
+  for i, u in ipairs(list) do
+    if getOwner(u) == mySide and hasAbility(u, "king") then
+      return u
+    end
+  end
+  return NO_UNIT
+end
+
 function actionAvailable (unitID)
-  return true
+  return getValue(findMyKing(unitID), "movesRemaining") > 0
 end
 
 function move (unitID, x, y)
+  setValue(findMyKing(unitID), "movesRemaining", 0)
   setPos(unitID, x, y)
 end
 
@@ -89,7 +101,7 @@ function extendOut(xi, yi, xInc, yInc, side)
 end
 
 function markMove (unitID, x, y)
-  setPos(unitID, x, y)
+  move(unitID, x, y)
   setValue(unitID, "moved", 1)
 end
 function markInit (unitID)

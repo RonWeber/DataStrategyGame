@@ -5,27 +5,20 @@
 
 std::unique_ptr<LuaManager> lua;
 
-
 //Functions lua code calls
 static int getValue(lua_State *L) {
-	lua_isnumber(L, -2);
-	lua_isstring(L, -1);
 	int unitID = (int)lua_tointeger(L, -2);
 	const char* key = lua_tostring(L, -1);
 	lua_pushinteger(L, dynamicData->getValue(unitID, key));
 	return 1;
 }
 static int getOwner(lua_State *L) {
-	lua_isnumber(L, -1);
 	int unitID = (int)lua_tointeger(L, -1);
 	lua_pushinteger(L, dynamicData->getOwner(unitID));
 	return 1;
 }
 
 static int setValue(lua_State *L) {
-	lua_isnumber(L, -3);
-	lua_isstring(L, -2);
-	lua_isnumber(L, -1);
 	int unitID = (int)lua_tointeger(L, -3);
 	const char* key = lua_tostring(L, -2);
 	int value = (int)lua_tointeger(L, -1);
@@ -34,7 +27,6 @@ static int setValue(lua_State *L) {
 }
 
 static int getPos(lua_State *L) {
-	lua_isnumber(L, -1);
 	int unitID = (int)lua_tointeger(L, -1);
 	coord tmp = dynamicData->getPos(unitID);
 	lua_pushinteger(L, tmp.x);
@@ -43,9 +35,6 @@ static int getPos(lua_State *L) {
 }
 
 static int setPos(lua_State *L) {
-	lua_isnumber(L, -3);
-	lua_isnumber(L, -2);
-	lua_isnumber(L, -1);
 	int unitID = (int)lua_tointeger(L, -3);
 	int x = (int)lua_tointeger(L, -2);
 	int y = (int)lua_tointeger(L, -1);
@@ -53,25 +42,24 @@ static int setPos(lua_State *L) {
 	return 0;
 }
 static int addAbility(lua_State *L) {
-	lua_isnumber(L, -2);
-	lua_isstring(L, -1);
 	int unitID = (int)lua_tointeger(L, -2);
 	const char* ability = lua_tostring(L, -1);
 	dynamicData->addAbility(unitID, ability);
 	return 0;
 }
+static int hasAbility(lua_State *L) {
+	int unitID = (int)lua_tointeger(L, -2);
+	const char* ability = lua_tostring(L, -1);
+	lua_pushboolean(L, dynamicData->hasAbility(unitID, ability));
+	return 1;
+}
 static int removeAbility(lua_State *L) {
-	lua_isnumber(L, -2);
-	lua_isstring(L, -1);
 	int unitID = (int)lua_tointeger(L, -2);
 	const char* ability = lua_tostring(L, -1);
 	dynamicData->removeAbility(unitID, ability);
 	return 0;
 }
 static int createUnit(lua_State *L) {
-	lua_isstring(L, -3);
-	lua_isnumber(L, -2);
-	lua_isnumber(L, -1);
 	int unitType = lua_tostring(L, -3)[0];
 	int x = (int)lua_tointeger(L, -2);
 	int y = (int)lua_tointeger(L, -1);
@@ -79,16 +67,12 @@ static int createUnit(lua_State *L) {
 	return 1;
 }
 static int unitAt(lua_State *L) {
-	lua_isnumber(L, -2);
-	lua_isnumber(L, -1);
 	int x = (int)lua_tointeger(L, -2);
 	int y = (int)lua_tointeger(L, -1);
 	lua_pushinteger(L, dynamicData->unitAt({ x, y }));
 	return 1;
 }
 static int withinBounds(lua_State *L) {
-	lua_isnumber(L, -2);
-	lua_isnumber(L, -1);
 	int x = (int)lua_tointeger(L, -2);
 	int y = (int)lua_tointeger(L, -1);
 	lua_pushboolean(L, game->withinBounds({ x, y }));
@@ -132,6 +116,8 @@ LuaManager::LuaManager() {
 
 	lua_pushcfunction(L, addAbility);
 	lua_setglobal(L, "addAbility");
+	lua_pushcfunction(L, hasAbility);
+	lua_setglobal(L, "hasAbility");
 	lua_pushcfunction(L, removeAbility);
 	lua_setglobal(L, "removeAbility");
 

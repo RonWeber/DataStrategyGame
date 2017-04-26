@@ -55,6 +55,11 @@ void GameDynamicData::addAbility(unitID unitID, string abilityType) {
 	units.at(unitID).abilities.push_back(abilityType);
 }
 
+bool GameDynamicData::hasAbility(unitID unitID, string abilityType) {
+	Unit* unit = &units.at(unitID);
+	return (std::find(unit->abilities.begin(), unit->abilities.end(), abilityType) != unit->abilities.end());
+}
+
 void GameDynamicData::removeAbility(unitID unitID, string abilityType) {
 	Unit* unit = &units.at(unitID);
 	auto abilityIt = std::find(unit->abilities.begin(), unit->abilities.end(), abilityType);

@@ -17,6 +17,7 @@ public:
 	void setPos(unitID unitID, coord newPos);
 	coord getPos(unitID unitID);
     void addAbility(unitID unitID, string abilityType);
+	bool hasAbility(unitID unitID, string abilityType);
     void removeAbility(unitID unitID, string abilityType);
     unitID createUnit(char unitType, coord coord);
 	void deleteUnit(unitID id);
