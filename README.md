@@ -8,9 +8,10 @@ The program is invoked with two command line arguments, the first is the directo
 
 ## Building the program
 
-Under linux, the program can be built with the included makefile, by simply running make.  It has the following build dependencies (under Ubuntu): 
-g++
-liblua5.1-0-dev
-libsdl2-dev
-libsdl2-image-dev
-libglew-dev
+Under linux, the program can be built with the included makefile, by simply running make.  It has the following build dependencies (under Ubuntu):  
+
+    g++
+    liblua5.1-0-dev
+    libsdl2-dev
+    libsdl2-image-dev
+    libglew-dev
