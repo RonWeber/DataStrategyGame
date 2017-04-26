@@ -28,12 +28,12 @@ Game::Game(string globalFileName, int mapHeight, int mapWidth) {
 		AbilityType newType = AbilityType(ability);
 		abilityTypes.insert({ newType.id, newType });
 	}
-	std::cout << "Abilities loaded.\n";
+	std::cout << "Abilities loaded.\n" << std::endl;
 	for (auto unitType : json["unitData"]) {
 		UnitType newType = UnitType(unitType);
 		unitTypes.insert({newType.id, newType});
 	}
-	std::cout << "Units loaded.\n";
+	std::cout << "Units loaded.\n" << std::endl;
 }
 
 bool Game::withinBounds(coord pos) {

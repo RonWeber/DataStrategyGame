@@ -16,7 +16,7 @@ void LoadMap(string fileName) {
     std::getline(mapFile, heightStr, ' ');
     std::getline(mapFile, jsonFileName);
 	
-    std::cout << "Map loaded("<< widthStr <<","<< heightStr <<").  JSON file at " << jsonFileName << "\n";
+    std::cout << "Map loaded("<< widthStr <<","<< heightStr <<").  JSON file at " << jsonFileName << "\n" << std::endl;
 
 	width = std::stoi(widthStr);
 	height = std::stoi(heightStr);
