@@ -57,7 +57,28 @@
       "selection": true,
       "availableFn": "actionAvailable",
       "actionFn": "move",
-      "allowedLocationsFn": "king"
+      "allowedLocationsFn": "king",
+      "unitDieadFn": "kingDead"
+    },
+    {
+      "id": "pawnDown",
+      "description": "Goes to a place",
+      "Image": "movement.png",
+      "selection": true,
+      "availableFn": "actionAvailable",
+      "actionFn": "markMove",
+      "allowedLocationsFn": "pawnDown",
+      "unitCreatedFn": "markInit"
+    },
+    {
+      "id": "pawnUp",
+      "description": "Goes to a place",
+      "Image": "movement.png",
+      "selection": true,
+      "availableFn": "actionAvailable",
+      "actionFn": "markMove",
+      "allowedLocationsFn": "pawnUp",
+      "unitCreatedFn": "markInit"
     }
   ],
   "unitData": [
@@ -130,12 +151,12 @@
       "id": "P",
       "side": 0,
       "Image": "Pw.png",
-      "maxHP": 0,
+      "maxHP": 1,
       "maxMoves": 1,
       "maxAP": 0,
       "extraData": {},
       "abilities": [
-        "king"
+        "pawnUp"
       ],
       "name": "Pawn (W)"
     },
@@ -208,12 +229,12 @@
       "id": "p",
       "side": 1,
       "Image": "Pb.png",
-      "maxHP": 0,
+      "maxHP": 1,
       "maxMoves": 1,
       "maxAP": 0,
       "extraData": {},
       "abilities": [
-        "king"
+        "pawnDown"
       ],
       "name": "Pawn (B)"
     }

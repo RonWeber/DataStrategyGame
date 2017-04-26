@@ -87,3 +87,72 @@ function extendOut(xi, yi, xInc, yInc, side)
   end
   return pos
 end
+
+function markMove (unitID, x, y)
+  setPos(unitID, x, y)
+  setValue(unitID, "moved", 1)
+end
+function markInit (unitID)
+  setValue(unitID, "moved", 0)
+end
+
+function pawnDown (unitID)
+  x, y = getPos(unitID)
+  pos = {}
+  if unitAt(x, y+1) == NO_UNIT then
+    pos[#pos+1] = x
+    pos[#pos+1] = y+1
+    if getValue(unitID, "moved") == 0 and unitAt(x, y+2) == NO_UNIT then
+      pos[#pos+1] = x
+      pos[#pos+1] = y+2
+    end
+  end
+  mySide = getOwner(unitID)
+  u = unitAt(x+1, y+1)
+  if u ~= NO_UNIT and getOwner(u)~=mySide then
+    pos[#pos+1] = x+1
+    pos[#pos+1] = y+1
+  end
+  u = unitAt(x-1, y+1)
+  if u ~= NO_UNIT and getOwner(u)~=mySide then
+    pos[#pos+1] = x-1
+    pos[#pos+1] = y+1
+  end
+  
+  return pos
+end
+function pawnUp (unitID)
+  x, y = getPos(unitID)
+  pos = {}
+  if unitAt(x, y-1) == NO_UNIT then
+    pos[#pos+1] = x
+    pos[#pos+1] = y-1
+    if getValue(unitID, "moved") == 0 and unitAt(x, y+2) == NO_UNIT then
+      pos[#pos+1] = x
+      pos[#pos+1] = y-2
+    end
+  end
+  mySide = getOwner(unitID)
+  u = unitAt(x+1, y-1)
+  if u ~= NO_UNIT and getOwner(u)~=mySide then
+    pos[#pos+1] = x+1
+    pos[#pos+1] = y-1
+  end
+  u = unitAt(x-1, y-1)
+  if u ~= NO_UNIT and getOwner(u)~=mySide then
+    pos[#pos+1] = x-1
+    pos[#pos+1] = y-1
+  end
+  
+  return pos
+end
+
+function kingDead (unitID)
+  list = getAllUnits()
+  mySide = getOwner(unitID)
+  for u in list do
+    if getOwner(u) == mySide then
+      setValue(u, "hp", 0)
+    end
+  end
+end

@@ -6,6 +6,15 @@
 
 std::unique_ptr<GameDynamicData> dynamicData;
 
+void luaHelper(Unit &u, LuaFunction fnId) {
+	for (auto ability : u.abilities) {
+		AbilityType &type = game->abilityTypes.at(ability);
+		if (type.functionNames.count(fnId) > 0) {
+			lua->CallFunction(type.functionNames.at(fnId), u.id);
+		}
+	}
+}
+
 GameDynamicData::GameDynamicData(int height, int width) {
 	positions.resize(width);
 	terrain.resize(width);
@@ -55,6 +64,7 @@ void GameDynamicData::removeAbility(unitID unitID, string abilityType) {
 int GameDynamicData::createUnit(char unitType, coord coord) {
 	Unit u = game->unitTypes.at(unitType).makeUnit(coord);
 	addExistingUnit(u);
+	luaHelper(u, UnitCreated);
 	return u.id;
 }
 
@@ -106,13 +116,8 @@ unitID GameDynamicData::unitAt(coord coord) {
 
 void GameDynamicData::startTurn() {
 	for (auto unit : this->getAllUnits()) {
-		Unit &u = units.at(unit);		
-		for (auto ability : u.abilities) {
-			AbilityType &type =  game->abilityTypes.at(ability);
-			if (type.functionNames.count(LuaFunction::TurnStart) > 0) {
-				lua->CallFunction(type.functionNames.at(LuaFunction::TurnStart), unit);
-			}
-		}
+		Unit &u = units.at(unit);
+		luaHelper(u, TurnStart);
 	}
 }
 
@@ -120,12 +125,7 @@ void GameDynamicData::endTurn() {
 	//TODO: All kinds of exciting end turn stuff.
 	for (auto unit : this->getAllUnits()) {
 		Unit &u = units.at(unit);
-		for (auto ability : u.abilities) {
-			AbilityType &type = game->abilityTypes.at(ability);
-			if (type.functionNames.count(LuaFunction::TurnEnd) > 0) {
-				lua->CallFunction(type.functionNames.at(LuaFunction::TurnEnd), unit);
-			}
-		}
+		luaHelper(u, TurnEnd);
 	}
 
 	currentPlayer = (currentPlayer == 0) ? 1 : 0;
@@ -140,13 +140,8 @@ void GameDynamicData::update() {
 		for (auto unit : this->getAllUnits()) {
 			Unit &u = units.at(unit);
 			bool deadThisTurn = getValue(u.id, "hp") <= 0;
-			for (auto ability : u.abilities) {
-				AbilityType &type = game->abilityTypes.at(ability);
-				if (deadThisTurn && type.functionNames.count(LuaFunction::UnitDied) > 0) {
-					lua->CallFunction(type.functionNames.at(LuaFunction::UnitDied), unit);
-				}
-			}
 			if (deadThisTurn) {
+				luaHelper(u, UnitDied);
 				deleteUnit(unit);
 				anyNeedReaped = true;
 				anyDiedAtAll = true;
