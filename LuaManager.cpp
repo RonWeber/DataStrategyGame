@@ -97,7 +97,7 @@ static int withinBounds(lua_State *L) {
 static int getAllUnits(lua_State *L) {
 	auto list = dynamicData->getAllUnits();
 	lua_createtable(L,list.size(),0);
-	int i = 1;
+	int i = 0;
 	for (auto u : list) {
 		i++;
 		lua_pushnumber(L, i);
@@ -115,6 +115,8 @@ static int getAllUnits(lua_State *L) {
 //LuaManager itself
 LuaManager::LuaManager() {
 	L = luaL_newstate();
+
+	luaL_openlibs(L);
 
 	lua_pushcfunction(L, getValue);
 	lua_setglobal(L, "getValue");
