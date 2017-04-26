@@ -76,3 +76,22 @@ TEST_CASE("Testing the terrain methods of dynamic data") {
 		}
 	}
 }
+
+TEST_CASE("Check the to and from json of units (for saving)") {
+	std::map<string, int> data_keys;
+	data_keys["Thing"] = 50;
+	data_keys["Other thing"] = 200;
+	std::vector<string> abilities;
+	abilities.push_back("Magyyyk");
+	abilities.push_back("Walking");
+	Unit old(5, data_keys, {1, 3}, 's', abilities, 1);
+	json j = old.toJSON();
+	Unit newUnit(j);
+	REQUIRE(old.id == newUnit.id);
+	REQUIRE(old.data_keys == newUnit.data_keys);
+	REQUIRE(old.coordinate == newUnit.coordinate);
+	REQUIRE(old.unitTypeID == newUnit.unitTypeID);
+	REQUIRE(old.abilities == newUnit.abilities);
+	REQUIRE(old.owner == newUnit.owner);		
+}
+	
