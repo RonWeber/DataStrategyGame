@@ -117,6 +117,9 @@ unitID GameDynamicData::unitAt(coord coord) {
 void GameDynamicData::startTurn() {
 	for (auto unit : this->getAllUnits()) {
 		Unit &u = units.at(unit);
+		UnitType &type = game->unitTypes.at(u.unitTypeID);
+		u.data_keys["movesRemaining"] = type.movesPerTurn;
+		u.data_keys["actionsRemaining"] = type.actionsPerTurn;
 		luaHelper(u, TurnStart);
 	}
 }
