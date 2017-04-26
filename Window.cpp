@@ -222,7 +222,7 @@ void Window::InitFrame() {
 			if (keydown == SDLK_s)
 				Save("save.sav");
 			if (keydown == SDLK_SPACE) {
-				printf("Next turn");
+				printf("Next turn\n");
 				dynamicData->endTurn();
 			}
 		}

@@ -1294,8 +1294,11 @@
                 "y": 1
             },
             "data": {
+                "actionsRemaining": 1,
                 "bear?": 1,
-                "magicResistance": 12
+                "hp": 10,
+                "magicResistance": 12,
+                "movesRemaining": 2
             },
             "id": 1,
             "owner": 0,
@@ -1310,8 +1313,11 @@
                 "y": 1
             },
             "data": {
+                "actionsRemaining": 1,
                 "bear?": 1,
-                "magicResistance": 12
+                "hp": 10,
+                "magicResistance": 12,
+                "movesRemaining": 2
             },
             "id": 2,
             "owner": 0,
@@ -1326,8 +1332,11 @@
                 "y": 2
             },
             "data": {
+                "actionsRemaining": 1,
                 "bear?": 1,
-                "magicResistance": 12
+                "hp": 10,
+                "magicResistance": 12,
+                "movesRemaining": 2
             },
             "id": 3,
             "owner": 0,
@@ -1342,8 +1351,11 @@
                 "y": 2
             },
             "data": {
+                "actionsRemaining": 1,
                 "bear?": 1,
-                "magicResistance": 12
+                "hp": 10,
+                "magicResistance": 12,
+                "movesRemaining": 2
             },
             "id": 4,
             "owner": 0,
@@ -1358,8 +1370,11 @@
                 "y": 6
             },
             "data": {
+                "actionsRemaining": 1,
                 "bear?": 1,
-                "magicResistance": 12
+                "hp": 10,
+                "magicResistance": 12,
+                "movesRemaining": 2
             },
             "id": 5,
             "owner": 0,
@@ -1374,8 +1389,11 @@
                 "y": 6
             },
             "data": {
+                "actionsRemaining": 1,
                 "bear?": 1,
-                "magicResistance": 12
+                "hp": 10,
+                "magicResistance": 12,
+                "movesRemaining": 2
             },
             "id": 6,
             "owner": 0,
@@ -1391,8 +1409,11 @@
                 "y": 9
             },
             "data": {
+                "actionsRemaining": 2,
                 "bear?": 0,
-                "magicResistance": 25
+                "hp": 5,
+                "magicResistance": 25,
+                "movesRemaining": 1
             },
             "id": 7,
             "owner": 1,
@@ -1408,8 +1429,11 @@
                 "y": 9
             },
             "data": {
+                "actionsRemaining": 2,
                 "bear?": 0,
-                "magicResistance": 25
+                "hp": 5,
+                "magicResistance": 25,
+                "movesRemaining": 1
             },
             "id": 8,
             "owner": 1,
@@ -1425,8 +1449,11 @@
                 "y": 11
             },
             "data": {
+                "actionsRemaining": 2,
                 "bear?": 0,
-                "magicResistance": 25
+                "hp": 5,
+                "magicResistance": 25,
+                "movesRemaining": 1
             },
             "id": 9,
             "owner": 1,
@@ -1442,8 +1469,11 @@
                 "y": 11
             },
             "data": {
+                "actionsRemaining": 2,
                 "bear?": 0,
-                "magicResistance": 25
+                "hp": 5,
+                "magicResistance": 25,
+                "movesRemaining": 1
             },
             "id": 10,
             "owner": 1,
@@ -1459,8 +1489,11 @@
                 "y": 13
             },
             "data": {
+                "actionsRemaining": 2,
                 "bear?": 0,
-                "magicResistance": 25
+                "hp": 5,
+                "magicResistance": 25,
+                "movesRemaining": 1
             },
             "id": 11,
             "owner": 1,
@@ -1476,8 +1509,11 @@
                 "y": 13
             },
             "data": {
+                "actionsRemaining": 2,
                 "bear?": 0,
-                "magicResistance": 25
+                "hp": 5,
+                "magicResistance": 25,
+                "movesRemaining": 1
             },
             "id": 12,
             "owner": 1,
@@ -1492,8 +1528,11 @@
                 "y": 16
             },
             "data": {
+                "actionsRemaining": 1,
                 "bear?": 1,
-                "magicResistance": 12
+                "hp": 10,
+                "magicResistance": 12,
+                "movesRemaining": 2
             },
             "id": 13,
             "owner": 0,
@@ -1508,8 +1547,11 @@
                 "y": 16
             },
             "data": {
+                "actionsRemaining": 1,
                 "bear?": 1,
-                "magicResistance": 12
+                "hp": 10,
+                "magicResistance": 12,
+                "movesRemaining": 2
             },
             "id": 14,
             "owner": 0,
@@ -1524,8 +1566,11 @@
                 "y": 17
             },
             "data": {
+                "actionsRemaining": 1,
                 "bear?": 1,
-                "magicResistance": 12
+                "hp": 10,
+                "magicResistance": 12,
+                "movesRemaining": 2
             },
             "id": 15,
             "owner": 0,
@@ -1540,8 +1585,11 @@
                 "y": 17
             },
             "data": {
+                "actionsRemaining": 1,
                 "bear?": 1,
-                "magicResistance": 12
+                "hp": 10,
+                "magicResistance": 12,
+                "movesRemaining": 2
             },
             "id": 16,
             "owner": 0,
@@ -1556,8 +1604,11 @@
                 "y": 21
             },
             "data": {
+                "actionsRemaining": 1,
                 "bear?": 1,
-                "magicResistance": 12
+                "hp": 10,
+                "magicResistance": 12,
+                "movesRemaining": 2
             },
             "id": 17,
             "owner": 0,
@@ -1572,8 +1623,11 @@
                 "y": 21
             },
             "data": {
+                "actionsRemaining": 1,
                 "bear?": 1,
-                "magicResistance": 12
+                "hp": 10,
+                "magicResistance": 12,
+                "movesRemaining": 2
             },
             "id": 18,
             "owner": 0,
@@ -1589,8 +1643,11 @@
                 "y": 24
             },
             "data": {
+                "actionsRemaining": 2,
                 "bear?": 0,
-                "magicResistance": 25
+                "hp": 5,
+                "magicResistance": 25,
+                "movesRemaining": 1
             },
             "id": 19,
             "owner": 1,
@@ -1606,8 +1663,11 @@
                 "y": 24
             },
             "data": {
+                "actionsRemaining": 2,
                 "bear?": 0,
-                "magicResistance": 25
+                "hp": 5,
+                "magicResistance": 25,
+                "movesRemaining": 1
             },
             "id": 20,
             "owner": 1,
@@ -1623,8 +1683,11 @@
                 "y": 26
             },
             "data": {
+                "actionsRemaining": 2,
                 "bear?": 0,
-                "magicResistance": 25
+                "hp": 5,
+                "magicResistance": 25,
+                "movesRemaining": 1
             },
             "id": 21,
             "owner": 1,
@@ -1640,8 +1703,11 @@
                 "y": 26
             },
             "data": {
+                "actionsRemaining": 2,
                 "bear?": 0,
-                "magicResistance": 25
+                "hp": 5,
+                "magicResistance": 25,
+                "movesRemaining": 1
             },
             "id": 22,
             "owner": 1,
@@ -1657,8 +1723,11 @@
                 "y": 28
             },
             "data": {
+                "actionsRemaining": 2,
                 "bear?": 0,
-                "magicResistance": 25
+                "hp": 5,
+                "magicResistance": 25,
+                "movesRemaining": 1
             },
             "id": 23,
             "owner": 1,
@@ -1674,8 +1743,11 @@
                 "y": 28
             },
             "data": {
+                "actionsRemaining": 2,
                 "bear?": 0,
-                "magicResistance": 25
+                "hp": 5,
+                "magicResistance": 25,
+                "movesRemaining": 1
             },
             "id": 24,
             "owner": 1,

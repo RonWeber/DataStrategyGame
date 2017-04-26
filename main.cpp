@@ -5,6 +5,7 @@
 #include "UI.hpp"
 #include "GameDynamicData.hpp"
 #include "LuaManager.hpp"
+#include <iostream>
 
 #ifdef _WIN32
 #include <direct.h>
@@ -18,12 +19,24 @@ int main(int argc, char* argv[]) {
 	gfx = std::unique_ptr<Window>(new Window());
 	lua = std::unique_ptr<LuaManager>(new LuaManager());
 
-	chdir("games/chessClone/");
-	LoadMap("normalChessBoard.txt");
+	if (argc < 3) {
+		std::cerr << "Command line arguments: the directory of the game, then the save or map file" << std::endl;
+		return 1;
+	}
+	
+	if (chdir(argv[1]) != 0) {
+		std::cerr << "Could not change directory." << std::endl;
+		return 1;
+	}
 
-	//chdir("games/testgame/");
-    //LoadMap("testgamebigmap.txt");
-	//LoadSave("save.sav");
+	std::ifstream fileTypeDetection(argv[2]);
+	if (isdigit(fileTypeDetection.peek())) {
+		//It started with a number.  It can't be json, so it's probably a map.
+		LoadMap(argv[2]);
+	} else {
+		//It didn't start with a number.  It can't be a map, so it's probably JSON
+		LoadSave(argv[2]);
+	}
 
 	ui = std::unique_ptr<UI>(new UI());
 	gameLoop();

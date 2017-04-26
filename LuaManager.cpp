@@ -149,7 +149,7 @@ LuaManager::LuaManager() {
 
 void LuaManager::loadFile(string filename) {
 	//load the library file then execute it to register the functions
-	if (luaL_loadfile(L, filename.c_str()) || lua_pcall(L, 0, 0, NULL))
+	if (luaL_loadfile(L, filename.c_str()) || lua_pcall(L, 0, 0, 0))
 	{
 		std::cerr << "cannot run configuration file: %s" << lua_tostring(L, -1) << std::endl;
 		//Throw?
@@ -159,7 +159,7 @@ void LuaManager::loadFile(string filename) {
 void LuaManager::CallFunction(string fn, unitID unit) {
 	lua_getglobal(L, fn.c_str());
 	lua_pushinteger(L, unit);
-	if (lua_pcall(L, 1, 0, NULL) != 0) {
+	if (lua_pcall(L, 1, 0, 0) != 0) {
 		std::cerr << "error running function " << fn << ": " << lua_tostring(L, -1) << std::endl;
 		//Throw?
 	}
@@ -169,7 +169,7 @@ void LuaManager::CallFunction(string fn, unitID unit, coord pos) {
 	lua_pushinteger(L, unit);
 	lua_pushinteger(L, pos.x);
 	lua_pushinteger(L, pos.y);
-	if (lua_pcall(L, 3, 0, NULL) != 0){
+	if (lua_pcall(L, 3, 0, 0) != 0){
 		std::cerr << "error running function " << fn << ": " << lua_tostring(L, -1) << std::endl;
 		//Throw?
 	}
@@ -178,7 +178,7 @@ void LuaManager::CallFunction(string fn, unitID unit, coord pos) {
 bool LuaManager::CallFunctionAvailable(string fn, unitID unit) {
 	lua_getglobal(L, fn.c_str());
 	lua_pushinteger(L, unit);
-	if (lua_pcall(L, 1, 1, NULL) != 0){
+	if (lua_pcall(L, 1, 1, 0) != 0){
 		std::cerr << "error running function " << fn << ": " << lua_tostring(L, -1) << std::endl;
 		//Throw?
 	}
@@ -191,7 +191,7 @@ bool LuaManager::CallFunctionAvailable(string fn, unitID unit) {
 std::unique_ptr<std::unordered_set<coord>> LuaManager::CallFunctionAllowedLocations(string fn, unitID unit) {
 	lua_getglobal(L, fn.c_str());
 	lua_pushinteger(L, unit);
-	if (lua_pcall(L, 1, 1, NULL) != 0) {
+	if (lua_pcall(L, 1, 1, 0) != 0) {
 		std::cerr << "error running function " << fn << ": " << lua_tostring(L, -1) << std::endl;
 		//Throw?
 	}

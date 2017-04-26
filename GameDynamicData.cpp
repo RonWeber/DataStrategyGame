@@ -2,6 +2,7 @@
 #include "GameDynamicData.hpp"
 #include "Game.hpp"
 #include "LuaManager.hpp"
+#include "UI.hpp"
 
 std::unique_ptr<GameDynamicData> dynamicData;
 
@@ -79,14 +80,20 @@ void GameDynamicData::addExistingUnit(Unit u) {
 	positions[u.coordinate.x][u.coordinate.y] = u.id;
 }
 
+bool GameDynamicData::withinBounds(coord coord) {
+	int positionsWidth = positions.size();
+	int positionsHeight = positions[0].size();
+	return (coord.x >= 0 && coord.x < positionsWidth && coord.y >= 0 && coord.y < positionsHeight);
+}
+
 void GameDynamicData::setTerrain(int x, int y, char terrainType) {
-	if (game->withinBounds({ x, y })) {
+	if (withinBounds({ x, y })) {
 		terrain[x][y] = terrainType;
 	}
 }
 
 TerrainID GameDynamicData::getTerrain(int x, int y) {
-	if (game->withinBounds({ x, y })) {
+	if (withinBounds({ x, y })) {
 		return terrain[x][y];
 	}
 	else return NO_UNIT;//not a unit, but this shouldn't happen anyway
@@ -101,7 +108,7 @@ std::vector<unitID> GameDynamicData::getAllUnits() {
 }
 
 unitID GameDynamicData::unitAt(coord coord) {
-	if (game->withinBounds(coord)) {
+	if (withinBounds(coord)) {
 		return positions[coord.x][coord.y];
 	}
 	else return NO_UNIT;
@@ -126,17 +133,31 @@ void GameDynamicData::endTurn() {
 }
 
 void GameDynamicData::update() {
-	bool anydead;
+	bool anyNeedReaped;
+	bool anyDiedAtAll = false;
 	do {
-		anydead = false;
+		anyNeedReaped = false;
 		for (auto unit : this->getAllUnits()) {
 			Unit &u = units.at(unit);
 			bool deadThisTurn = getValue(u.id, "hp") <= 0;
 			if (deadThisTurn) {
 				luaHelper(u, UnitDied);
 				deleteUnit(unit);
-				anydead = true;
+				anyNeedReaped = true;
+				anyDiedAtAll = true;
 			}
 		}
-	} while (anydead);
+	} while (anyNeedReaped);
+
+	if (anyDiedAtAll) {
+		bool p0alive = false;
+		bool p1alive = false;		
+		for (auto &entry : dynamicData->units) {
+			if (entry.second.owner == 0) p0alive = true;
+			if (entry.second.owner == 1) p1alive = true;
+		}
+		if (!p0alive) ui->playerWins(1);
+		if (!p1alive) ui->playerWins(0);		
+	}
+
 }

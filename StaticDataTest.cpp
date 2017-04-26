@@ -2,6 +2,8 @@
 #include "GlobalIncludes.hpp"
 #include "Game.hpp"
 #include "AbilityType.hpp"
+#include "Window.hpp"
+#include "LuaManager.hpp"
 
 #ifdef _WIN32
 #include <direct.h>
@@ -29,8 +31,7 @@ TEST_CASE("Test constructor of ability.") {
 	CHECK(type.functionNames.at(HelperData) == "selfPunchHelperData");
 }
 
-TEST_CASE("Test constructor of UnitType") {
-	json test = "{\
+const json testUnitType = "{\
       \"id\": \"b\",\
       \"side\": 0,\
       \"Image\": \"games/testgame/ClawPunch.png\",\
@@ -47,22 +48,42 @@ TEST_CASE("Test constructor of UnitType") {
       \"name\": \"Bear\",\
       \"description\": \"Its a bear.\"\
     }"_json;
-	UnitType ut(test);
+TEST_CASE("Test constructor of UnitType") {
+	UnitType ut(testUnitType);
 	CHECK(ut.id == 'b');
 	CHECK(ut.maxHP == 10);
 	CHECK(ut.movesPerTurn == 2);
 	CHECK(ut.actionsPerTurn == 1);
 	REQUIRE(ut.extraData.size() == 2);
 	CHECK(ut.extraData["Bear?"] == 1);
-	CHECK(ut.extraData["magicResistance"] == 12);
+	CHECK(ut.extraData["magicResistance"] == 12);	
 	REQUIRE(ut.abilities.size() == 1);
 	CHECK(ut.abilities[0] == "selfPunch");
 	CHECK(ut.name == "Bear");
-	CHECK(ut.description == "Its a bear.");
 	CHECK(ut.side == 0);
 }
 
+TEST_CASE("Test the ability of UnitType to make a unit") {
+	dynamicData = std::unique_ptr<GameDynamicData>(new GameDynamicData(10, 10));
+	dynamicData->highestUnitID = 55;
+	UnitType ut(testUnitType);
+	Unit u = ut.makeUnit({5, 4});
+	CHECK(u.id == 56);
+	REQUIRE(u.data_keys.size() == 5);
+	CHECK(u.data_keys["Bear?"] == 1);
+	CHECK(u.data_keys["magicResistance"] == 12);
+	CHECK(u.data_keys["hp"] == 10);
+	CHECK(u.data_keys["movesRemaining"] == 2);
+	CHECK(u.data_keys["actionsRemaining"] == 1);	
+	CHECK(u.unitTypeID == ut.id);
+	REQUIRE(u.abilities.size() == 1);
+	CHECK(u.abilities[0] == "selfPunch");
+	CHECK(u.owner == 0);
+}
+
 TEST_CASE("A game is loaded from the predetermined file.") {
+	gfx = std::unique_ptr<Window>(new Window());
+	lua = std::unique_ptr<LuaManager>(new LuaManager());
 	(void)chdir("games/testgame/");	
 	Game testGame("game.json", 20, 15);
 	(void)chdir("../..");		

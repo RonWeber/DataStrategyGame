@@ -34,7 +34,7 @@ public:
     json toJson();
 private:
 	std::vector<std::vector<unitID>> positions;
-
+	bool withinBounds(coord coords);
 };
 
 extern std::unique_ptr<GameDynamicData> dynamicData;
