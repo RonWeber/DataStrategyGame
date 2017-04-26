@@ -1,3 +1,4 @@
+#include <iostream>
 #include "GlobalIncludes.hpp"
 #include "UI.hpp"
 #include "Window.hpp"
@@ -244,3 +245,7 @@ bool UI::selectedUnitIsOurs() {
 #else
 #pragma GCC diagnostic pop
 #endif
+
+void UI::playerWins(sideID player) {
+	std::cout << "BTW player " << player << " won." << std::endl;
+}

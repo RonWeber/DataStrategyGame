@@ -9,6 +9,7 @@ public:
 	void update();
 	int scrollOffsetX = 0;
 	int scrollOffsetY = 0;
+	void playerWins(sideID player);
 private:
 	void scroll();
 	void drawBackground();

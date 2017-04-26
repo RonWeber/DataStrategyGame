@@ -2,6 +2,7 @@
 #include "GameDynamicData.hpp"
 #include "Game.hpp"
 #include "LuaManager.hpp"
+#include "UI.hpp"
 
 std::unique_ptr<GameDynamicData> dynamicData;
 
@@ -132,9 +133,10 @@ void GameDynamicData::endTurn() {
 }
 
 void GameDynamicData::update() {
-	bool anydead;
+	bool anyNeedReaped;
+	bool anyDiedAtAll = false;
 	do {
-		anydead = false;
+		anyNeedReaped = false;
 		for (auto unit : this->getAllUnits()) {
 			Unit &u = units.at(unit);
 			bool deadThisTurn = getValue(u.id, "hp") <= 0;
@@ -146,8 +148,21 @@ void GameDynamicData::update() {
 			}
 			if (deadThisTurn) {
 				deleteUnit(unit);
-				anydead = true;
+				anyNeedReaped = true;
+				anyDiedAtAll = true;
 			}
 		}
-	} while (anydead);
+	} while (anyNeedReaped);
+
+	if (anyDiedAtAll) {
+		bool p0alive = false;
+		bool p1alive = false;		
+		for (auto &entry : dynamicData->units) {
+			if (entry.second.owner == 0) p0alive = true;
+			if (entry.second.owner == 1) p1alive = true;
+		}
+		if (!p0alive) ui->playerWins(1);
+		if (!p1alive) ui->playerWins(0);		
+	}
+
 }
