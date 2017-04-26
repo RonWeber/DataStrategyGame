@@ -94,6 +94,18 @@ static int withinBounds(lua_State *L) {
 	lua_pushboolean(L, game->withinBounds({ x, y }));
 	return 1;
 }
+static int getAllUnits(lua_State *L) {
+	auto list = dynamicData->getAllUnits();
+	lua_createtable(L,list.size(),0);
+	int i = 1;
+	for (auto u : list) {
+		i++;
+		lua_pushnumber(L, i);
+		lua_pushnumber(L, u);
+		lua_settable(L, -3);
+	}
+	return 1;
+}
 
 //To be implemented
 //TerrainID getTerrain(int x, int y);
@@ -127,7 +139,9 @@ LuaManager::LuaManager() {
 	lua_setglobal(L, "unitAt");
 
 	lua_pushcfunction(L, withinBounds);
-	lua_setglobal(L, "withinBounds"); 
+	lua_setglobal(L, "withinBounds");
+	lua_pushcfunction(L, getAllUnits);
+	lua_setglobal(L, "getAllUnits");
 	
 	lua_pushinteger(L, NO_UNIT);
 	lua_setglobal(L, "NO_UNIT");
@@ -192,7 +206,8 @@ std::unique_ptr<std::unordered_set<coord>> LuaManager::CallFunctionAllowedLocati
 		lua_isnumber(L, -1);
 		int y = lua_tonumber(L, -1);
 		lua_pop(L, 1);
-		vals->insert({ x, y });
+		if (game->withinBounds({ x, y }))
+			vals->insert({ x, y });
 	}
 
 	lua_pop(L, 1);
