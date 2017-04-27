@@ -131,6 +131,7 @@ glEnd();
 void UI::drawSquare(coord pos, float r, float g, float b, float a) {
 	if (game->withinBounds(pos)) {
 		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glBegin(GL_TRIANGLE_STRIP);
 		glColor4f(r, g, b, a);
 		glVertex2f(pos.x * gridSize - scrollOffsetX, pos.y * gridSize - scrollOffsetY);
@@ -156,7 +157,7 @@ void UI::drawBackground() {
 	case ability:
 		auto allLocs = allowedLocations.get();
 		for (coord locs : *allLocs) {
-			drawSquare(locs, 1, 1, 1, .5);
+			drawSquare(locs, .5f, .5f, 1.f, .5);
 		}
 		drawSquare({ gridX, gridY }, .4f, .4f, .4f);
 		drawSquare(dynamicData->getPos(unitSelected), .6f, .6f, .6f);

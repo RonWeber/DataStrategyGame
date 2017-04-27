@@ -8,11 +8,11 @@
   "terrainData": [
     {
       "id": ".",
-      "Image": "grass.png"
+      "Image": "lightSquare.png"
     },
     {
       "id": "x",
-      "Image": "desert.png"
+      "Image": "darkSquare.png"
     }
   ],
   "abilityData": [
