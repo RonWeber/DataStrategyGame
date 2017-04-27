@@ -26,6 +26,14 @@ static int setValue(lua_State *L) {
 	return 0;
 }
 
+static int addValue(lua_State *L) {
+	int unitID = (int)lua_tointeger(L, -3);
+	const char* key = lua_tostring(L, -2);
+	int value = (int)lua_tointeger(L, -1);
+	dynamicData->setValue(unitID, key, dynamicData->getValue(unitID, key)+value);
+	return 0;
+}
+
 static int getPos(lua_State *L) {
 	int unitID = (int)lua_tointeger(L, -1);
 	coord tmp = dynamicData->getPos(unitID);
@@ -108,6 +116,8 @@ LuaManager::LuaManager() {
 	lua_setglobal(L, "getOwner");
 	lua_pushcfunction(L, setValue);
 	lua_setglobal(L, "setValue");
+	lua_pushcfunction(L, addValue);
+	lua_setglobal(L, "addValue");
 
 	lua_pushcfunction(L, getPos);
 	lua_setglobal(L, "getPos");

@@ -141,7 +141,7 @@
       "side": 0,
       "Image": "Kw.png",
       "maxHP": 1,
-      "maxMoves": 1,
+      "maxMoves": 2,
       "maxAP": 0,
       "extraData": {},
       "abilities": [
@@ -219,7 +219,7 @@
       "side": 1,
       "Image": "Kb.png",
       "maxHP": 1,
-      "maxMoves": 1,
+      "maxMoves": 2,
       "maxAP": 0,
       "extraData": {},
       "abilities": [
