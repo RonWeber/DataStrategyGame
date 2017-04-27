@@ -1,0 +1,633 @@
+{
+    "currentPlayer": 1,
+    "gameFileName": "chess.json",
+    "highestUnitID": 32,
+    "terrain": [
+        [
+            ".",
+            "x",
+            ".",
+            "x",
+            ".",
+            "x",
+            ".",
+            "x"
+        ],
+        [
+            "x",
+            ".",
+            "x",
+            ".",
+            "x",
+            ".",
+            "x",
+            "."
+        ],
+        [
+            ".",
+            "x",
+            ".",
+            "x",
+            ".",
+            "x",
+            ".",
+            "x"
+        ],
+        [
+            "x",
+            ".",
+            "x",
+            ".",
+            "x",
+            ".",
+            "x",
+            "."
+        ],
+        [
+            ".",
+            "x",
+            ".",
+            "x",
+            ".",
+            "x",
+            ".",
+            "x"
+        ],
+        [
+            "x",
+            ".",
+            "x",
+            ".",
+            "x",
+            ".",
+            "x",
+            "."
+        ],
+        [
+            ".",
+            "x",
+            ".",
+            "x",
+            ".",
+            "x",
+            ".",
+            "x"
+        ],
+        [
+            "x",
+            ".",
+            "x",
+            ".",
+            "x",
+            ".",
+            "x",
+            "."
+        ]
+    ],
+    "units": [
+        {
+            "abilities": [
+                "rook"
+            ],
+            "coordinate": {
+                "x": 0,
+                "y": 0
+            },
+            "data": {
+                "actionsRemaining": 0,
+                "hp": 1,
+                "movesRemaining": 0
+            },
+            "id": 1,
+            "owner": 1,
+            "type": "r"
+        },
+        {
+            "abilities": [
+                "knight"
+            ],
+            "coordinate": {
+                "x": 1,
+                "y": 0
+            },
+            "data": {
+                "actionsRemaining": 0,
+                "hp": 1,
+                "movesRemaining": 0
+            },
+            "id": 2,
+            "owner": 1,
+            "type": "n"
+        },
+        {
+            "abilities": [
+                "bishop"
+            ],
+            "coordinate": {
+                "x": 2,
+                "y": 0
+            },
+            "data": {
+                "actionsRemaining": 0,
+                "hp": 1,
+                "movesRemaining": 0
+            },
+            "id": 3,
+            "owner": 1,
+            "type": "b"
+        },
+        {
+            "abilities": [
+                "king"
+            ],
+            "coordinate": {
+                "x": 3,
+                "y": 0
+            },
+            "data": {
+                "actionsRemaining": 0,
+                "hp": 1,
+                "movesRemaining": 2
+            },
+            "id": 4,
+            "owner": 1,
+            "type": "k"
+        },
+        {
+            "abilities": [
+                "queen"
+            ],
+            "coordinate": {
+                "x": 4,
+                "y": 0
+            },
+            "data": {
+                "actionsRemaining": 0,
+                "hp": 1,
+                "movesRemaining": 0
+            },
+            "id": 5,
+            "owner": 1,
+            "type": "q"
+        },
+        {
+            "abilities": [
+                "bishop"
+            ],
+            "coordinate": {
+                "x": 5,
+                "y": 0
+            },
+            "data": {
+                "actionsRemaining": 0,
+                "hp": 1,
+                "movesRemaining": 0
+            },
+            "id": 6,
+            "owner": 1,
+            "type": "b"
+        },
+        {
+            "abilities": [
+                "knight"
+            ],
+            "coordinate": {
+                "x": 6,
+                "y": 0
+            },
+            "data": {
+                "actionsRemaining": 0,
+                "hp": 1,
+                "movesRemaining": 0
+            },
+            "id": 7,
+            "owner": 1,
+            "type": "n"
+        },
+        {
+            "abilities": [
+                "rook"
+            ],
+            "coordinate": {
+                "x": 7,
+                "y": 0
+            },
+            "data": {
+                "actionsRemaining": 0,
+                "hp": 1,
+                "movesRemaining": 0
+            },
+            "id": 8,
+            "owner": 1,
+            "type": "r"
+        },
+        {
+            "abilities": [
+                "pawnDown"
+            ],
+            "coordinate": {
+                "x": 0,
+                "y": 1
+            },
+            "data": {
+                "actionsRemaining": 0,
+                "hp": 1,
+                "moved": 0,
+                "movesRemaining": 0
+            },
+            "id": 9,
+            "owner": 1,
+            "type": "p"
+        },
+        {
+            "abilities": [
+                "pawnDown"
+            ],
+            "coordinate": {
+                "x": 1,
+                "y": 1
+            },
+            "data": {
+                "actionsRemaining": 0,
+                "hp": 1,
+                "moved": 0,
+                "movesRemaining": 0
+            },
+            "id": 10,
+            "owner": 1,
+            "type": "p"
+        },
+        {
+            "abilities": [
+                "pawnDown"
+            ],
+            "coordinate": {
+                "x": 2,
+                "y": 1
+            },
+            "data": {
+                "actionsRemaining": 0,
+                "hp": 1,
+                "moved": 0,
+                "movesRemaining": 0
+            },
+            "id": 11,
+            "owner": 1,
+            "type": "p"
+        },
+        {
+            "abilities": [
+                "pawnDown"
+            ],
+            "coordinate": {
+                "x": 4,
+                "y": 1
+            },
+            "data": {
+                "actionsRemaining": 0,
+                "hp": 1,
+                "moved": 0,
+                "movesRemaining": 0
+            },
+            "id": 13,
+            "owner": 1,
+            "type": "p"
+        },
+        {
+            "abilities": [
+                "pawnDown"
+            ],
+            "coordinate": {
+                "x": 5,
+                "y": 3
+            },
+            "data": {
+                "actionsRemaining": 0,
+                "hp": 1,
+                "moved": 1,
+                "movesRemaining": 0
+            },
+            "id": 14,
+            "owner": 1,
+            "type": "p"
+        },
+        {
+            "abilities": [
+                "pawnDown"
+            ],
+            "coordinate": {
+                "x": 6,
+                "y": 1
+            },
+            "data": {
+                "actionsRemaining": 0,
+                "hp": 1,
+                "moved": 0,
+                "movesRemaining": 0
+            },
+            "id": 15,
+            "owner": 1,
+            "type": "p"
+        },
+        {
+            "abilities": [
+                "pawnDown"
+            ],
+            "coordinate": {
+                "x": 7,
+                "y": 1
+            },
+            "data": {
+                "actionsRemaining": 0,
+                "hp": 1,
+                "moved": 0,
+                "movesRemaining": 0
+            },
+            "id": 16,
+            "owner": 1,
+            "type": "p"
+        },
+        {
+            "abilities": [
+                "pawnUp"
+            ],
+            "coordinate": {
+                "x": 0,
+                "y": 6
+            },
+            "data": {
+                "actionsRemaining": 0,
+                "hp": 1,
+                "moved": 0,
+                "movesRemaining": 0
+            },
+            "id": 17,
+            "owner": 0,
+            "type": "P"
+        },
+        {
+            "abilities": [
+                "pawnUp"
+            ],
+            "coordinate": {
+                "x": 1,
+                "y": 6
+            },
+            "data": {
+                "actionsRemaining": 0,
+                "hp": 1,
+                "moved": 0,
+                "movesRemaining": 0
+            },
+            "id": 18,
+            "owner": 0,
+            "type": "P"
+        },
+        {
+            "abilities": [
+                "pawnUp"
+            ],
+            "coordinate": {
+                "x": 3,
+                "y": 3
+            },
+            "data": {
+                "actionsRemaining": 0,
+                "hp": 1,
+                "moved": 1,
+                "movesRemaining": 0
+            },
+            "id": 19,
+            "owner": 0,
+            "type": "P"
+        },
+        {
+            "abilities": [
+                "pawnUp"
+            ],
+            "coordinate": {
+                "x": 3,
+                "y": 4
+            },
+            "data": {
+                "actionsRemaining": 0,
+                "hp": 1,
+                "moved": 1,
+                "movesRemaining": 0
+            },
+            "id": 20,
+            "owner": 0,
+            "type": "P"
+        },
+        {
+            "abilities": [
+                "pawnUp"
+            ],
+            "coordinate": {
+                "x": 4,
+                "y": 6
+            },
+            "data": {
+                "actionsRemaining": 0,
+                "hp": 1,
+                "moved": 0,
+                "movesRemaining": 0
+            },
+            "id": 21,
+            "owner": 0,
+            "type": "P"
+        },
+        {
+            "abilities": [
+                "pawnUp"
+            ],
+            "coordinate": {
+                "x": 5,
+                "y": 6
+            },
+            "data": {
+                "actionsRemaining": 0,
+                "hp": 1,
+                "moved": 0,
+                "movesRemaining": 0
+            },
+            "id": 22,
+            "owner": 0,
+            "type": "P"
+        },
+        {
+            "abilities": [
+                "pawnUp"
+            ],
+            "coordinate": {
+                "x": 6,
+                "y": 6
+            },
+            "data": {
+                "actionsRemaining": 0,
+                "hp": 1,
+                "moved": 0,
+                "movesRemaining": 0
+            },
+            "id": 23,
+            "owner": 0,
+            "type": "P"
+        },
+        {
+            "abilities": [
+                "pawnUp"
+            ],
+            "coordinate": {
+                "x": 7,
+                "y": 6
+            },
+            "data": {
+                "actionsRemaining": 0,
+                "hp": 1,
+                "moved": 0,
+                "movesRemaining": 0
+            },
+            "id": 24,
+            "owner": 0,
+            "type": "P"
+        },
+        {
+            "abilities": [
+                "rook"
+            ],
+            "coordinate": {
+                "x": 0,
+                "y": 7
+            },
+            "data": {
+                "actionsRemaining": 0,
+                "hp": 1,
+                "movesRemaining": 0
+            },
+            "id": 25,
+            "owner": 0,
+            "type": "R"
+        },
+        {
+            "abilities": [
+                "knight"
+            ],
+            "coordinate": {
+                "x": 1,
+                "y": 7
+            },
+            "data": {
+                "actionsRemaining": 0,
+                "hp": 1,
+                "movesRemaining": 0
+            },
+            "id": 26,
+            "owner": 0,
+            "type": "N"
+        },
+        {
+            "abilities": [
+                "bishop"
+            ],
+            "coordinate": {
+                "x": 2,
+                "y": 7
+            },
+            "data": {
+                "actionsRemaining": 0,
+                "hp": 1,
+                "movesRemaining": 0
+            },
+            "id": 27,
+            "owner": 0,
+            "type": "B"
+        },
+        {
+            "abilities": [
+                "king"
+            ],
+            "coordinate": {
+                "x": 3,
+                "y": 7
+            },
+            "data": {
+                "actionsRemaining": 0,
+                "hp": 1,
+                "movesRemaining": 2
+            },
+            "id": 28,
+            "owner": 0,
+            "type": "K"
+        },
+        {
+            "abilities": [
+                "queen"
+            ],
+            "coordinate": {
+                "x": 4,
+                "y": 7
+            },
+            "data": {
+                "actionsRemaining": 0,
+                "hp": 1,
+                "movesRemaining": 0
+            },
+            "id": 29,
+            "owner": 0,
+            "type": "Q"
+        },
+        {
+            "abilities": [
+                "bishop"
+            ],
+            "coordinate": {
+                "x": 5,
+                "y": 7
+            },
+            "data": {
+                "actionsRemaining": 0,
+                "hp": 1,
+                "movesRemaining": 0
+            },
+            "id": 30,
+            "owner": 0,
+            "type": "B"
+        },
+        {
+            "abilities": [
+                "knight"
+            ],
+            "coordinate": {
+                "x": 6,
+                "y": 7
+            },
+            "data": {
+                "actionsRemaining": 0,
+                "hp": 1,
+                "movesRemaining": 0
+            },
+            "id": 31,
+            "owner": 0,
+            "type": "N"
+        },
+        {
+            "abilities": [
+                "rook"
+            ],
+            "coordinate": {
+                "x": 7,
+                "y": 7
+            },
+            "data": {
+                "actionsRemaining": 0,
+                "hp": 1,
+                "movesRemaining": 0
+            },
+            "id": 32,
+            "owner": 0,
+            "type": "R"
+        }
+    ],
+    "worldHeight": 8,
+    "worldWidth": 8
+}
