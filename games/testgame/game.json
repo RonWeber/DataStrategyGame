@@ -1,6 +1,7 @@
 {
 	"displayRNG": false,
 	"actionIcon": "ClawPunch.png",
+  "gridSize": 32,
 	"movementIcon" : "unit2.png",
 	"luaFiles": [
 		"testGame.lua",
