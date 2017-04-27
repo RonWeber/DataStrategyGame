@@ -10,7 +10,8 @@ public:
 	std::vector<std::vector<TerrainID>> terrain;	
 	unitID highestUnitID = 0;
 	sideID currentPlayer = 0;
-
+	
+	bool isAlive(unitID unitID);
     int getValue(unitID unitID, string key);
     void setValue(unitID unitID, string key, int newValue);
 	int getOwner(unitID unitID);

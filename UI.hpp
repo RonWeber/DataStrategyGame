@@ -18,6 +18,7 @@ private:
 	void drawUnitsHUD();
 	void drawTerrain();
 	void drawForeground();
+	void checkIllegalSelection();
 	void drawGrid(double x, double y, double width, double height);
 	void drawSquare(coord pos, float r, float g, float b);
 	void drawSquare(coord pos, float r, float g, float b, float a);

@@ -24,6 +24,9 @@ GameDynamicData::GameDynamicData(int height, int width) {
 	}
 }
 
+bool GameDynamicData::isAlive(unitID unitID) {
+	return units.count(unitID)>0;
+}
 int GameDynamicData::getValue(unitID unitID, string key) {
 	return units.at(unitID).data_keys[key];
 }

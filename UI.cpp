@@ -14,6 +14,7 @@ UI::UI() {
 	scrollOffsetY = -(gfx->SCREEN_HEIGHT - (game->mapHeight * gridSize)) / 2;
 }
 void UI::draw() {
+	checkIllegalSelection();
 	drawTerrain();
 	drawBackground();
 	drawUnits();
@@ -29,6 +30,12 @@ void UI::draw() {
 #endif
 void UI::clearSelection() {
 	selectionLevel = none;
+}
+void UI::checkIllegalSelection() {
+	if (unitSelected != NO_UNIT && !dynamicData->isAlive(unitSelected)) {
+		unitSelected = NO_UNIT;
+		selectionLevel = none;
+	}
 }
 void UI::update() {
 	scroll();
