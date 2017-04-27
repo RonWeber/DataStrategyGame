@@ -99,7 +99,7 @@
       "maxMoves": 1,
       "maxAP": 1,
       "extraData": {
-        "speed": 4,
+        "speed": 3,
         "damage": 3,
         "range": 4
       },
@@ -117,7 +117,7 @@
       "maxMoves": 1,
       "maxAP": 1,
       "extraData": {
-        "speed": 4,
+        "speed": 3,
         "damage": 3,
         "range": 4
       },
@@ -135,7 +135,7 @@
       "maxMoves": 1,
       "maxAP": 1,
       "extraData": {
-        "speed": 3,
+        "speed": 6,
         "damage": 4,
         "range": 1
       },
@@ -150,10 +150,10 @@
       "side": 1,
       "Image": "unit2a.png",
       "maxHP": 10,
-      "maxMoves": 2,
+      "maxMoves": 1,
       "maxAP": 2,
       "extraData": {
-        "speed": 3,
+        "speed": 6,
         "damage": 4,
         "range": 1
       },

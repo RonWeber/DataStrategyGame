@@ -157,7 +157,7 @@ void UI::drawBackground() {
 	case ability:
 		auto allLocs = allowedLocations.get();
 		for (coord locs : *allLocs) {
-			drawSquare(locs, .5f, .5f, 1.f, .5);
+			drawSquare(locs, .5f, .5f, 1.f, .7);
 		}
 		drawSquare({ gridX, gridY }, .4f, .4f, .4f);
 		drawSquare(dynamicData->getPos(unitSelected), .6f, .6f, .6f);
