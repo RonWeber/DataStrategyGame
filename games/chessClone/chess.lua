@@ -14,7 +14,7 @@ function actionAvailable (unitID)
 end
 
 function move (unitID, x, y)
-  setValue(findMyKing(unitID), "movesRemaining", 0)
+  addValue(findMyKing(unitID), "movesRemaining", -1)
   setPos(unitID, x, y)
 end
 
