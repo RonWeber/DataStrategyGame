@@ -1,7 +1,7 @@
 {
   "displayRNG": false,
   "movementIcon": "MovementPoint.png",
-  "gridSize": 96,
+  "gridSize": 80,
   "luaFiles": [
     "chess.lua"
   ],

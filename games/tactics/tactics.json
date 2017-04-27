@@ -151,7 +151,7 @@
       "Image": "unit2a.png",
       "maxHP": 10,
       "maxMoves": 1,
-      "maxAP": 2,
+      "maxAP": 1,
       "extraData": {
         "speed": 6,
         "damage": 4,

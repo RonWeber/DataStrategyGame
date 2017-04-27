@@ -28,14 +28,24 @@ function attackBase (unitID, x, y)
   end
 end
 
+function push(list, val)
+  list[#list+1] = val
+end
+function pop(list)
+  if (#list == 0) then return nil end
+  val = list[#list]
+  list[#list] = nil
+  return val
+end
+
 function moveLocs (unitID)
   x, y = getPos(unitID)
   pos = {}
-  return moveRecurse(pos, x, y, getValue(unitID, "speed"))
-end
-
-function moveRecurse(pos, xi, yi, speed)
-  if (speed > 0) then
+  xstack = {x}
+  ystack = {y}
+  spdstack = {getValue(unitID, "speed")}
+  while #xstack > 0 do
+    speed, xi, yi = pop(spdstack), pop(xstack), pop(ystack)
     xInc = {1, -1, 0, 0}
     yInc = {0, 0, 1, -1}
     for i = 1, #xInc do
@@ -44,7 +54,11 @@ function moveRecurse(pos, xi, yi, speed)
       if tileOpen(x, y) and notIn(pos, x, y) then
         pos[#pos+1] = x
         pos[#pos+1] = y
-        pos = moveRecurse(pos, x, y, speed-1)
+        if (speed > 1) then
+          push(spdstack, speed-1)
+          push(xstack, x)
+          push(ystack, y)
+        end
       end
     end
   end
