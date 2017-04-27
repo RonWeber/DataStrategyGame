@@ -2,13 +2,14 @@
 #include "Image.hpp"
 #include "Window.hpp"
 #include "UI.hpp"
+#include "Game.hpp"
 
 Image::Image(string filename, bool forceResize) {
 	auto data = gfx->loadTexture(filename);
 	img = data.tex;
 	if (forceResize) {
-		width = 32;
-		height = 32;
+		width = gridSize;
+		height = gridSize;
 	}
 	else {
 		width = data.width;
@@ -35,13 +36,13 @@ void Image::draw_at(coord pos, float offsetX, float offsetY) {
 	int y = pos.y;
 	glBegin(GL_QUADS);
 	glTexCoord2f(0, 1);
-	glVertex2f(32 * x - ui->scrollOffsetX + offsetX, 32 * y + height - ui->scrollOffsetY + offsetY);
+	glVertex2f(gridSize * x - ui->scrollOffsetX + offsetX, gridSize * y + height - ui->scrollOffsetY + offsetY);
 	glTexCoord2f(1, 1);
-	glVertex2f(32 * x + width - ui->scrollOffsetX + offsetX, 32 * y + height - ui->scrollOffsetY + offsetY);
+	glVertex2f(gridSize * x + width - ui->scrollOffsetX + offsetX, gridSize * y + height - ui->scrollOffsetY + offsetY);
 	glTexCoord2f(1, 0);
-	glVertex2f(32 * x + width - ui->scrollOffsetX + offsetX, 32 * y - ui->scrollOffsetY + offsetY);
+	glVertex2f(gridSize * x + width - ui->scrollOffsetX + offsetX, gridSize * y - ui->scrollOffsetY + offsetY);
 	glTexCoord2f(0, 0);
-	glVertex2f(32 * x - ui->scrollOffsetX + offsetX, 32 * y - ui->scrollOffsetY + offsetY);
+	glVertex2f(gridSize * x - ui->scrollOffsetX + offsetX, gridSize * y - ui->scrollOffsetY + offsetY);
 	glEnd();
 
 	glDisable(GL_TEXTURE_2D);
@@ -60,13 +61,13 @@ void Image::draw_absolute(coord pos) {
 	int y = pos.y;
 	glBegin(GL_QUADS);
 	glTexCoord2f(0, 1);
-	glVertex2f(32 * x, 32 * y + height);
+	glVertex2f(gridSize * x, gridSize * y + height);
 	glTexCoord2f(1, 1);
-	glVertex2f(32 * x + width, 32 * y + height);
+	glVertex2f(gridSize * x + width, gridSize * y + height);
 	glTexCoord2f(1, 0);
-	glVertex2f(32 * x + width, 32 * y );
+	glVertex2f(gridSize * x + width, gridSize * y );
 	glTexCoord2f(0, 0);
-	glVertex2f(32 * x , 32 * y );
+	glVertex2f(gridSize * x , gridSize * y );
 	glEnd();
 
 	glDisable(GL_TEXTURE_2D);

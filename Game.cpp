@@ -4,6 +4,7 @@
 #include <iostream>
 
 std::unique_ptr<Game> game;
+int gridSize;
 
 Game::Game(string globalFileName, int mapHeight, int mapWidth) {
 	fileName = globalFileName;
@@ -16,7 +17,7 @@ Game::Game(string globalFileName, int mapHeight, int mapWidth) {
 	json json;
 
 	file >> json;
-	displayRNG = json["displayRNG"];
+	gridSize = json["gridSize"];
 
 	if (json.find("actionIcon") != json.end()) {
 		actionIcon = std::shared_ptr<Image>(new Image(json["actionIcon"].get<string>(), false));
@@ -35,6 +36,7 @@ Game::Game(string globalFileName, int mapHeight, int mapWidth) {
 		movementIconSeperation = 8;
 	}
 	
+
 	for (auto file : json["luaFiles"]) {
 		lua->loadFile(file);
 	}

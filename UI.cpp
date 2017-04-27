@@ -10,8 +10,8 @@
 std::unique_ptr<UI> ui;
 
 UI::UI() {
-	scrollOffsetX = -(gfx->SCREEN_WIDTH - (game->mapWidth * 32)) / 2;
-	scrollOffsetY = -(gfx->SCREEN_HEIGHT - (game->mapHeight * 32)) / 2;
+	scrollOffsetX = -(gfx->SCREEN_WIDTH - (game->mapWidth * gridSize)) / 2;
+	scrollOffsetY = -(gfx->SCREEN_HEIGHT - (game->mapHeight * gridSize)) / 2;
 }
 void UI::draw() {
 	drawTerrain();
@@ -32,8 +32,8 @@ void UI::clearSelection() {
 }
 void UI::update() {
 	scroll();
-	gridX = (gfx->mouseX + scrollOffsetX) / 32;
-	gridY = (gfx->mouseY + scrollOffsetY) / 32;
+	gridX = (gfx->mouseX + scrollOffsetX) / gridSize;
+	gridY = (gfx->mouseY + scrollOffsetY) / gridSize;
 
 	if (gfx->Lclicked) {
 		switch (selectionLevel) {
@@ -46,13 +46,13 @@ void UI::update() {
 			}
 			break;
 		case unit:
-			if (selectedUnitIsOurs() && (gfx->mouseY / 32) == (gfx->SCREEN_HEIGHT / 32 - 1) && (gfx->mouseX / 32) < dynamicData->units.at(unitSelected).abilities.size()) {
-				abilitySelected = dynamicData->units.at(unitSelected).abilities[(gfx->mouseX / 32)];
+			if (selectedUnitIsOurs() && (gfx->mouseY / gridSize) == (gfx->SCREEN_HEIGHT / gridSize - 1) && (gfx->mouseX / gridSize) < dynamicData->units.at(unitSelected).abilities.size()) {
+				abilitySelected = dynamicData->units.at(unitSelected).abilities[(gfx->mouseX / gridSize)];
 				auto thisAbility = game->abilityTypes.at(abilitySelected);
 				auto fnNames = thisAbility.functionNames;
 				if (lua->CallFunctionAvailable(fnNames[LuaFunction::Available], unitSelected)) {
 					if (thisAbility.selectionAbility) {
-						abilitySelectionPosition = (gfx->mouseX / 32);
+						abilitySelectionPosition = (gfx->mouseX / gridSize);
 						selectionLevel = ability;
 						allowedLocations = lua->CallFunctionAllowedLocations(fnNames[LuaFunction::AllowedLocations], unitSelected);
 					}
@@ -94,7 +94,7 @@ void UI::update() {
 void UI::scroll() {
 	const int spd = 8;
 	const int maxOffset = 128;
-	if (game->mapWidth * 32 > gfx->SCREEN_WIDTH - maxOffset * 2) {
+	if (game->mapWidth * gridSize > gfx->SCREEN_WIDTH - maxOffset * 2) {
 		if (gfx->scrollL)
 			scrollOffsetX -= spd;
 		if (gfx->scrollR)
@@ -102,10 +102,10 @@ void UI::scroll() {
 
 		if (scrollOffsetX < -maxOffset)
 			scrollOffsetX = -maxOffset;
-		if (scrollOffsetX + gfx->SCREEN_WIDTH > (game->mapWidth * 32) + maxOffset)
-			scrollOffsetX = -gfx->SCREEN_WIDTH + (game->mapWidth * 32) + maxOffset;
+		if (scrollOffsetX + gfx->SCREEN_WIDTH > (game->mapWidth * gridSize) + maxOffset)
+			scrollOffsetX = -gfx->SCREEN_WIDTH + (game->mapWidth * gridSize) + maxOffset;
 	}
-	if (game->mapHeight * 32 > gfx->SCREEN_HEIGHT - maxOffset * 2) {
+	if (game->mapHeight * gridSize > gfx->SCREEN_HEIGHT - maxOffset * 2) {
 		if (gfx->scrollU)
 			scrollOffsetY -= spd;
 		if (gfx->scrollD)
@@ -113,8 +113,8 @@ void UI::scroll() {
 
 		if (scrollOffsetY < -maxOffset)
 			scrollOffsetY = -maxOffset;
-		if (scrollOffsetY + gfx->SCREEN_HEIGHT >(game->mapHeight * 32) + maxOffset)
-			scrollOffsetY = -gfx->SCREEN_HEIGHT + (game->mapHeight * 32) + maxOffset;
+		if (scrollOffsetY + gfx->SCREEN_HEIGHT >(game->mapHeight * gridSize) + maxOffset)
+			scrollOffsetY = -gfx->SCREEN_HEIGHT + (game->mapHeight * gridSize) + maxOffset;
 	}
 }
 
@@ -122,10 +122,10 @@ void UI::drawSquare(coord pos, float r, float g, float b) {
 	if (game->withinBounds(pos)) {
 		glBegin(GL_TRIANGLE_STRIP);
 		glColor3f(r, g, b);
-		glVertex2f(pos.x * 32 - scrollOffsetX, pos.y * 32 - scrollOffsetY);
-		glVertex2f(pos.x * 32 + 32 - scrollOffsetX, pos.y * 32 - scrollOffsetY);
-glVertex2f(pos.x * 32 - scrollOffsetX, pos.y * 32 + 32 - scrollOffsetY);
-glVertex2f(pos.x * 32 + 32 - scrollOffsetX, pos.y * 32 + 32 - scrollOffsetY);
+		glVertex2f(pos.x * gridSize - scrollOffsetX, pos.y * gridSize - scrollOffsetY);
+		glVertex2f(pos.x * gridSize + gridSize - scrollOffsetX, pos.y * gridSize - scrollOffsetY);
+glVertex2f(pos.x * gridSize - scrollOffsetX, pos.y * gridSize + gridSize - scrollOffsetY);
+glVertex2f(pos.x * gridSize + gridSize - scrollOffsetX, pos.y * gridSize + gridSize - scrollOffsetY);
 glEnd();
 	}
 }
@@ -134,17 +134,17 @@ void UI::drawSquare(coord pos, float r, float g, float b, float a) {
 		glEnable(GL_BLEND);
 		glBegin(GL_TRIANGLE_STRIP);
 		glColor4f(r, g, b, a);
-		glVertex2f(pos.x * 32 - scrollOffsetX, pos.y * 32 - scrollOffsetY);
-		glVertex2f(pos.x * 32 + 32 - scrollOffsetX, pos.y * 32 - scrollOffsetY);
-		glVertex2f(pos.x * 32 - scrollOffsetX, pos.y * 32 + 32 - scrollOffsetY);
-		glVertex2f(pos.x * 32 + 32 - scrollOffsetX, pos.y * 32 + 32 - scrollOffsetY);
+		glVertex2f(pos.x * gridSize - scrollOffsetX, pos.y * gridSize - scrollOffsetY);
+		glVertex2f(pos.x * gridSize + gridSize - scrollOffsetX, pos.y * gridSize - scrollOffsetY);
+		glVertex2f(pos.x * gridSize - scrollOffsetX, pos.y * gridSize + gridSize - scrollOffsetY);
+		glVertex2f(pos.x * gridSize + gridSize - scrollOffsetX, pos.y * gridSize + gridSize - scrollOffsetY);
 		glEnd();
 		glDisable(GL_BLEND);
 	}
 }
 
 void UI::drawBackground() {
-	drawGrid(-scrollOffsetX, -scrollOffsetY, game->mapWidth * 32, game->mapHeight * 32);
+	drawGrid(-scrollOffsetX, -scrollOffsetY, game->mapWidth * gridSize, game->mapHeight * gridSize);
 
 	//draw square selection
 	switch (selectionLevel) {
@@ -170,7 +170,7 @@ void UI::drawGrid(double xStart, double yStart, double width, double height) {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 	const double lineSize = 4;
-	for (double x = xStart; x < xStart + width; x += 32) {
+	for (double x = xStart; x < xStart + width; x += gridSize) {
 		glBegin(GL_TRIANGLE_STRIP);
 		glColor3f(0.0f, 0.0f, 0.0f);
 		glVertex2f(x - lineSize, yStart);
@@ -184,7 +184,7 @@ void UI::drawGrid(double xStart, double yStart, double width, double height) {
 		glVertex2f(x + lineSize, yStart + height);
 		glEnd();
 	}
-	for (double y = yStart; y < yStart + height; y += 32) {
+	for (double y = yStart; y < yStart + height; y += gridSize) {
 		glBegin(GL_TRIANGLE_STRIP);
 		glColor3f(0.0f, 0.0f, 0.0f);
 		glVertex2f(xStart, y - lineSize);
@@ -226,13 +226,13 @@ void UI::drawUnitsHUD() {
 			int xx = 0;
 			if (game->movementIcon) {
 				for (int i = 0; i < u.data_keys["movesRemaining"]; i++) {
-					game->movementIcon->draw_at(u.coordinate, xx, 16);
+					game->movementIcon->draw_at(u.coordinate, xx, gridSize - game->movementIcon->height);
 					xx += game->movementIconSeperation;
 				}
 			}
 			if (game->actionIcon) {
 				for (int i = 0; i < u.data_keys["actionsRemaining"]; i++) {
-					game->actionIcon->draw_at(u.coordinate, xx, 16);
+					game->actionIcon->draw_at(u.coordinate, xx, gridSize - game->actionIcon->height);
 					xx += (float)game->actionIconSeperation;
 				}
 			}
@@ -244,13 +244,13 @@ void UI::drawForeground() {
 	switch (selectionLevel) {
 	case none: break;
 	case ability:
-		drawSquare({ abilitySelectionPosition , gfx->SCREEN_HEIGHT / 32 - 1 }, .2, .2, .2);
+		drawSquare({ abilitySelectionPosition , gfx->SCREEN_HEIGHT / gridSize - 1 }, .2, .2, .2);
 	case unit:
 		drawSquare(dynamicData->getPos(unitSelected), 1.f, 1.f, 1.f, 0.2f);//draw second highlighter square
 		if (selectedUnitIsOurs()) {
 			auto abilities = dynamicData->units.at(unitSelected).abilities;
 			for (int i = 0; i < abilities.size(); i++) {
-				game->abilityTypes.at(abilities[i]).image->draw_absolute({ i, gfx->SCREEN_HEIGHT / 32 - 1 });
+				game->abilityTypes.at(abilities[i]).image->draw_absolute({ i, gfx->SCREEN_HEIGHT / gridSize - 1 });
 			}
 		}
 		break;
@@ -262,7 +262,7 @@ bool UI::selectedUnitIsOurs() {
 	Unit &u = dynamicData->units.at(unitSelected);
 	return u.owner == dynamicData->currentPlayer;
 }
-#ifdef WIN32
+#ifdef WINgridSize
 #pragma warning( pop ) 
 #else
 #pragma GCC diagnostic pop
