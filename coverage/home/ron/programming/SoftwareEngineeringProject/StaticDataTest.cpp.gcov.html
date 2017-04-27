@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - lcov_output - /home/ron/programming/SoftwareEngineeringProject/StaticDataTest.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../index.html">top level</a> - <a href="index.html">home/ron/programming/SoftwareEngineeringProject</a> - StaticDataTest.cpp<span style="font-size: 80%;"> (source / <a href="StaticDataTest.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">lcov_output</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">50</td>
+            <td class="headerCovTableEntry">50</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2017-04-27 16:09:16</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;catch.hpp&quot;</a>
+<span class="lineNum">       2 </span>            : #include &quot;GlobalIncludes.hpp&quot;
+<span class="lineNum">       3 </span>            : #include &quot;Game.hpp&quot;
+<span class="lineNum">       4 </span>            : #include &quot;AbilityType.hpp&quot;
+<span class="lineNum">       5 </span>            : #include &quot;Window.hpp&quot;
+<span class="lineNum">       6 </span>            : #include &quot;LuaManager.hpp&quot;
+<span class="lineNum">       7 </span>            : 
+<span class="lineNum">       8 </span>            : #ifdef _WIN32
+<span class="lineNum">       9 </span>            : #include &lt;direct.h&gt;
+<span class="lineNum">      10 </span>            : #elif __unix__
+<span class="lineNum">      11 </span>            : #include &lt;unistd.h&gt;
+<a name="12"><span class="lineNum">      12 </span>            : #endif</a>
+<span class="lineNum">      13 </span>            : 
+<span class="lineNum">      14 </span><span class="lineCov">          2 : TEST_CASE(&quot;Test constructor of ability.&quot;) {</span>
+<span class="lineNum">      15 </span><span class="lineCov">          2 :         json test = &quot;{\</span>
+<span class="lineNum">      16 </span>            :       \&quot;id\&quot;: \&quot;selfPunch\&quot;,\
+<span class="lineNum">      17 </span>            :       \&quot;description\&quot;: \&quot;Punches self to make room\&quot;,\
+<span class="lineNum">      18 </span>            :       \&quot;Image\&quot;: \&quot;games/testgame/ClawPunch.png\&quot;,\
+<span class="lineNum">      19 </span>            :       \&quot;selection\&quot;: false,\
+<span class="lineNum">      20 </span>            :       \&quot;availableFn\&quot;: \&quot;selfPunchAvailable\&quot;,\
+<span class="lineNum">      21 </span>            :       \&quot;actionFn\&quot;: \&quot;selfPunchAction\&quot;,\
+<span class="lineNum">      22 </span>            :       \&quot;helperDataFn\&quot;: \&quot;selfPunchHelperData\&quot;\
+<span class="lineNum">      23 </span>            :     }&quot;_json;
+<span class="lineNum">      24 </span><span class="lineCov">          2 :         AbilityType type = AbilityType(test);</span>
+<span class="lineNum">      25 </span><span class="lineCov">          5 :         CHECK(type.id == &quot;selfPunch&quot;);</span>
+<span class="lineNum">      26 </span><span class="lineCov">          5 :         CHECK(type.Name == &quot;Punches self to make room&quot;);</span>
+<span class="lineNum">      27 </span><span class="lineCov">          5 :         CHECK(type.selectionAbility == false);</span>
+<span class="lineNum">      28 </span><span class="lineCov">          6 :         REQUIRE(type.functionNames.size() == 3);</span>
+<span class="lineNum">      29 </span><span class="lineCov">          5 :         CHECK(type.functionNames.at(Available) == &quot;selfPunchAvailable&quot;);</span>
+<span class="lineNum">      30 </span><span class="lineCov">          5 :         CHECK(type.functionNames.at(Action) == &quot;selfPunchAction&quot;);</span>
+<span class="lineNum">      31 </span><span class="lineCov">          5 :         CHECK(type.functionNames.at(HelperData) == &quot;selfPunchHelperData&quot;);</span>
+<span class="lineNum">      32 </span><span class="lineCov">          1 : }</span>
+<span class="lineNum">      33 </span>            : 
+<span class="lineNum">      34 </span><span class="lineCov">          1 : const json testUnitType = &quot;{\</span>
+<span class="lineNum">      35 </span>            :       \&quot;id\&quot;: \&quot;b\&quot;,\
+<span class="lineNum">      36 </span>            :       \&quot;side\&quot;: 0,\
+<span class="lineNum">      37 </span>            :       \&quot;Image\&quot;: \&quot;games/testgame/ClawPunch.png\&quot;,\
+<span class="lineNum">      38 </span>            :       \&quot;maxHP\&quot;: 10,\
+<span class="lineNum">      39 </span>            :       \&quot;maxMoves\&quot;: 2,\
+<span class="lineNum">      40 </span>            :       \&quot;maxAP\&quot;: 1,\
+<span class="lineNum">      41 </span>            :       \&quot;extraData\&quot;: {\
+<span class="lineNum">      42 </span>            :         \&quot;Bear?\&quot; : 1,\
+<span class="lineNum">      43 </span>            :                 \&quot;magicResistance\&quot; : 12\
+<span class="lineNum">      44 </span>            :            },\
+<span class="lineNum">      45 </span>            :       \&quot;abilities\&quot;: [\
+<span class="lineNum">      46 </span>            :         \&quot;selfPunch\&quot;\
+<span class="lineNum">      47 </span>            :       ],\
+<span class="lineNum">      48 </span>            :       \&quot;name\&quot;: \&quot;Bear\&quot;,\
+<span class="lineNum">      49 </span>            :       \&quot;description\&quot;: \&quot;Its a bear.\&quot;\
+<span class="lineNum">      50 </span>            :     }&quot;_json;
+<span class="lineNum">      51 </span><span class="lineCov">          2 : TEST_CASE(&quot;Test constructor of UnitType&quot;) {</span>
+<span class="lineNum">      52 </span><span class="lineCov">          2 :         UnitType ut(testUnitType);</span>
+<span class="lineNum">      53 </span><span class="lineCov">          5 :         CHECK(ut.id == 'b');</span>
+<span class="lineNum">      54 </span><span class="lineCov">          5 :         CHECK(ut.maxHP == 10);</span>
+<span class="lineNum">      55 </span><span class="lineCov">          5 :         CHECK(ut.movesPerTurn == 2);</span>
+<span class="lineNum">      56 </span><span class="lineCov">          5 :         CHECK(ut.actionsPerTurn == 1);</span>
+<span class="lineNum">      57 </span><span class="lineCov">          6 :         REQUIRE(ut.extraData.size() == 2);</span>
+<span class="lineNum">      58 </span><span class="lineCov">          8 :         CHECK(ut.extraData[&quot;Bear?&quot;] == 1);</span>
+<span class="lineNum">      59 </span><span class="lineCov">          8 :         CHECK(ut.extraData[&quot;magicResistance&quot;] == 12); </span>
+<span class="lineNum">      60 </span><span class="lineCov">          6 :         REQUIRE(ut.abilities.size() == 1);</span>
+<span class="lineNum">      61 </span><span class="lineCov">          5 :         CHECK(ut.abilities[0] == &quot;selfPunch&quot;);</span>
+<span class="lineNum">      62 </span><span class="lineCov">          5 :         CHECK(ut.name == &quot;Bear&quot;);</span>
+<span class="lineNum">      63 </span><span class="lineCov">          5 :         CHECK(ut.side == 0);</span>
+<span class="lineNum">      64 </span><span class="lineCov">          1 : }</span>
+<span class="lineNum">      65 </span>            : 
+<span class="lineNum">      66 </span><span class="lineCov">          2 : TEST_CASE(&quot;Test the ability of UnitType to make a unit&quot;) {</span>
+<span class="lineNum">      67 </span><span class="lineCov">          3 :         dynamicData = std::unique_ptr&lt;GameDynamicData&gt;(new GameDynamicData(10, 10));</span>
+<span class="lineNum">      68 </span><span class="lineCov">          1 :         dynamicData-&gt;highestUnitID = 55;</span>
+<span class="lineNum">      69 </span><span class="lineCov">          2 :         UnitType ut(testUnitType);</span>
+<span class="lineNum">      70 </span><span class="lineCov">          2 :         Unit u = ut.makeUnit({5, 4});</span>
+<span class="lineNum">      71 </span><span class="lineCov">          5 :         CHECK(u.id == 56);</span>
+<span class="lineNum">      72 </span><span class="lineCov">          6 :         REQUIRE(u.data_keys.size() == 5);</span>
+<span class="lineNum">      73 </span><span class="lineCov">          8 :         CHECK(u.data_keys[&quot;Bear?&quot;] == 1);</span>
+<span class="lineNum">      74 </span><span class="lineCov">          8 :         CHECK(u.data_keys[&quot;magicResistance&quot;] == 12);</span>
+<span class="lineNum">      75 </span><span class="lineCov">          8 :         CHECK(u.data_keys[&quot;hp&quot;] == 10);</span>
+<span class="lineNum">      76 </span><span class="lineCov">          8 :         CHECK(u.data_keys[&quot;movesRemaining&quot;] == 2);</span>
+<span class="lineNum">      77 </span><span class="lineCov">          8 :         CHECK(u.data_keys[&quot;actionsRemaining&quot;] == 1);  </span>
+<span class="lineNum">      78 </span><span class="lineCov">          5 :         CHECK(u.unitTypeID == ut.id);</span>
+<span class="lineNum">      79 </span><span class="lineCov">          6 :         REQUIRE(u.abilities.size() == 1);</span>
+<span class="lineNum">      80 </span><span class="lineCov">          5 :         CHECK(u.abilities[0] == &quot;selfPunch&quot;);</span>
+<span class="lineNum">      81 </span><span class="lineCov">          5 :         CHECK(u.owner == 0);</span>
+<span class="lineNum">      82 </span><span class="lineCov">          1 : }</span>
+<span class="lineNum">      83 </span>            : 
+<span class="lineNum">      84 </span><span class="lineCov">          2 : TEST_CASE(&quot;A game is loaded from the predetermined file.&quot;) {</span>
+<span class="lineNum">      85 </span><span class="lineCov">          3 :         gfx = std::unique_ptr&lt;Window&gt;(new Window());</span>
+<span class="lineNum">      86 </span><span class="lineCov">          3 :         lua = std::unique_ptr&lt;LuaManager&gt;(new LuaManager());</span>
+<span class="lineNum">      87 </span><span class="lineCov">          1 :         (void)chdir(&quot;games/testgame/&quot;);       </span>
+<a name="88"><span class="lineNum">      88 </span><span class="lineCov">          4 :         Game testGame(&quot;game.json&quot;, 20, 15);</span></a>
+<span class="lineNum">      89 </span><span class="lineCov">          1 :         (void)chdir(&quot;../..&quot;);         </span>
+<span class="lineNum">      90 </span><span class="lineCov">          4 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.12</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

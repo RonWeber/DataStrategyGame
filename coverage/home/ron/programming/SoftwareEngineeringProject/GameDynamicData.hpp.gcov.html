@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - lcov_output - /home/ron/programming/SoftwareEngineeringProject/GameDynamicData.hpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../index.html">top level</a> - <a href="index.html">home/ron/programming/SoftwareEngineeringProject</a> - GameDynamicData.hpp<span style="font-size: 80%;"> (source / <a href="GameDynamicData.hpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">lcov_output</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2017-04-27 16:09:16</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #pragma once</a>
+<span class="lineNum">       2 </span>            : 
+<span class="lineNum">       3 </span>            : #include &quot;Unit.hpp&quot;
+<a name="4"><span class="lineNum">       4 </span>            : #include &quot;GlobalIncludes.hpp&quot;</a>
+<span class="lineNum">       5 </span>            : 
+<span class="lineNum">       6 </span><span class="lineCov">          8 : class GameDynamicData {</span>
+<span class="lineNum">       7 </span>            : public:
+<span class="lineNum">       8 </span>            :         GameDynamicData(int height, int width);
+<span class="lineNum">       9 </span>            :     std::map&lt;unitID, Unit&gt; units;
+<span class="lineNum">      10 </span>            :         std::vector&lt;std::vector&lt;TerrainID&gt;&gt; terrain;        
+<span class="lineNum">      11 </span>            :         unitID highestUnitID = 0;
+<span class="lineNum">      12 </span>            :         sideID currentPlayer = 0;
+<span class="lineNum">      13 </span>            :         
+<span class="lineNum">      14 </span>            :         bool isAlive(unitID unitID);
+<span class="lineNum">      15 </span>            :     int getValue(unitID unitID, string key);
+<span class="lineNum">      16 </span>            :     void setValue(unitID unitID, string key, int newValue);
+<span class="lineNum">      17 </span>            :         int getOwner(unitID unitID);
+<span class="lineNum">      18 </span>            :         void setPos(unitID unitID, coord newPos);
+<span class="lineNum">      19 </span>            :         coord getPos(unitID unitID);
+<span class="lineNum">      20 </span>            :     void addAbility(unitID unitID, string abilityType);
+<span class="lineNum">      21 </span>            :         bool hasAbility(unitID unitID, string abilityType);
+<span class="lineNum">      22 </span>            :     void removeAbility(unitID unitID, string abilityType);
+<span class="lineNum">      23 </span>            :     unitID createUnit(char unitType, coord coord);
+<span class="lineNum">      24 </span>            :         void deleteUnit(unitID id);
+<span class="lineNum">      25 </span>            :         void addExistingUnit(Unit u);
+<span class="lineNum">      26 </span>            :         
+<span class="lineNum">      27 </span>            :         void setTerrain(int x, int y, char terrainType);
+<span class="lineNum">      28 </span>            :     TerrainID getTerrain(int x, int y);
+<span class="lineNum">      29 </span>            :         std::vector&lt;unitID&gt; getAllUnits();
+<span class="lineNum">      30 </span>            :         unitID unitAt(coord coord);
+<span class="lineNum">      31 </span>            : 
+<span class="lineNum">      32 </span>            :         void startTurn();
+<span class="lineNum">      33 </span>            :         void update();
+<span class="lineNum">      34 </span>            :         void endTurn();
+<span class="lineNum">      35 </span>            : 
+<span class="lineNum">      36 </span>            :     json toJson();
+<span class="lineNum">      37 </span>            : private:
+<span class="lineNum">      38 </span>            :         std::vector&lt;std::vector&lt;unitID&gt;&gt; positions;
+<span class="lineNum">      39 </span>            :         bool withinBounds(coord coords);
+<span class="lineNum">      40 </span>            : };
+<span class="lineNum">      41 </span>            : 
+<span class="lineNum">      42 </span>            : extern std::unique_ptr&lt;GameDynamicData&gt; dynamicData;
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.12</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

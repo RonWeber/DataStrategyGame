@@ -1,0 +1,337 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - lcov_output - /home/ron/programming/SoftwareEngineeringProject/Window.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../index.html">top level</a> - <a href="index.html">home/ron/programming/SoftwareEngineeringProject</a> - Window.cpp<span style="font-size: 80%;"> (source / <a href="Window.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">lcov_output</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">65</td>
+            <td class="headerCovTableEntry">137</td>
+            <td class="headerCovTableEntryLo">47.4 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2017-04-27 16:09:16</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntryMed">77.8 %</td>
+          </tr>
+          <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;GlobalIncludes.hpp&quot;</a>
+<span class="lineNum">       2 </span>            : #include &quot;Window.hpp&quot;
+<span class="lineNum">       3 </span>            : #include &quot;SaveFile.hpp&quot;
+<span class="lineNum">       4 </span>            : #include &quot;GameDynamicData.hpp&quot;
+<span class="lineNum">       5 </span>            : 
+<span class="lineNum">       6 </span>            : /*Much of the code in this file was originally from Lazy Foo' Productions
+<span class="lineNum">       7 </span>            : (http://lazyfoo.net/)*/
+<a name="8"><span class="lineNum">       8 </span>            : </a>
+<span class="lineNum">       9 </span><span class="lineCov">          1 : std::unique_ptr&lt;Window&gt; gfx;</span>
+<span class="lineNum">      10 </span><span class="lineCov">          2 : bool Window::initWindow()//0 = windowed (default), 1 = 1.5x screen, 2 = fullscreen, 3 = 1.5x fullscreen mode</span>
+<span class="lineNum">      11 </span>            : {
+<span class="lineNum">      12 </span>            : 
+<span class="lineNum">      13 </span>            :         //Initialization flag
+<span class="lineNum">      14 </span><span class="lineCov">          2 :         bool success = true;</span>
+<span class="lineNum">      15 </span>            :         
+<span class="lineNum">      16 </span>            :         //Initialize SDL
+<span class="lineNum">      17 </span><span class="lineCov">          2 :         if (SDL_Init(SDL_INIT_VIDEO) &lt; 0)</span>
+<span class="lineNum">      18 </span>            :         {
+<span class="lineNum">      19 </span><span class="lineNoCov">          0 :                 printf(&quot;SDL could not initialize! SDL Error: %s\n&quot;, SDL_GetError());</span>
+<span class="lineNum">      20 </span><span class="lineNoCov">          0 :                 success = false;</span>
+<span class="lineNum">      21 </span>            :         }
+<span class="lineNum">      22 </span>            :         else
+<span class="lineNum">      23 </span>            :         {
+<span class="lineNum">      24 </span><span class="lineCov">          2 :                 SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);</span>
+<span class="lineNum">      25 </span><span class="lineCov">          2 :                 SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 4);</span>
+<span class="lineNum">      26 </span>            :                 //Use OpenGL 2.1
+<span class="lineNum">      27 </span><span class="lineCov">          2 :                 SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);</span>
+<span class="lineNum">      28 </span><span class="lineCov">          2 :                 SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);</span>
+<span class="lineNum">      29 </span>            : 
+<span class="lineNum">      30 </span><span class="lineCov">          2 :                 gWindow = SDL_CreateWindow(&quot;Data Strategy Game&quot;, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);</span>
+<span class="lineNum">      31 </span><span class="lineCov">          2 :                 if (gWindow == NULL)</span>
+<span class="lineNum">      32 </span>            :                 {
+<span class="lineNum">      33 </span><span class="lineNoCov">          0 :                         printf(&quot;Window could not be created! SDL Error: %s\n&quot;, SDL_GetError());</span>
+<span class="lineNum">      34 </span><span class="lineNoCov">          0 :                         success = false;</span>
+<span class="lineNum">      35 </span>            :                 }
+<span class="lineNum">      36 </span>            :                 else
+<span class="lineNum">      37 </span>            :                 {
+<span class="lineNum">      38 </span>            :                         //Create context
+<span class="lineNum">      39 </span><span class="lineCov">          2 :                         gContext = SDL_GL_CreateContext(gWindow);</span>
+<span class="lineNum">      40 </span><span class="lineCov">          2 :                         if (gContext == NULL)</span>
+<span class="lineNum">      41 </span>            :                         {
+<span class="lineNum">      42 </span><span class="lineNoCov">          0 :                                 printf(&quot;OpenGL context could not be created! SDL Error: %s\n&quot;, SDL_GetError());</span>
+<span class="lineNum">      43 </span><span class="lineNoCov">          0 :                                 success = false;</span>
+<span class="lineNum">      44 </span>            :                         }
+<span class="lineNum">      45 </span>            :                         else
+<span class="lineNum">      46 </span>            :                         {
+<span class="lineNum">      47 </span>            :                                 //Use Vsync
+<span class="lineNum">      48 </span><span class="lineCov">          2 :                                 if (SDL_GL_SetSwapInterval(0) &lt; 0)</span>
+<span class="lineNum">      49 </span>            :                                 {
+<span class="lineNum">      50 </span><span class="lineNoCov">          0 :                                         printf(&quot;Warning: Unable to set VSync! SDL Error: %s\n&quot;, SDL_GetError());</span>
+<span class="lineNum">      51 </span>            :                                 }
+<span class="lineNum">      52 </span>            : 
+<span class="lineNum">      53 </span>            :                                 //Initialize PNG loading
+<span class="lineNum">      54 </span><span class="lineCov">          2 :                                 int imgFlags = IMG_INIT_PNG;</span>
+<span class="lineNum">      55 </span><span class="lineCov">          2 :                                 if (!(IMG_Init(imgFlags) &amp; imgFlags))</span>
+<span class="lineNum">      56 </span>            :                                 {
+<span class="lineNum">      57 </span><span class="lineNoCov">          0 :                                         printf(&quot;SDL_image could not initialize! SDL_image Error: %s\n&quot;, IMG_GetError());</span>
+<span class="lineNum">      58 </span><span class="lineNoCov">          0 :                                         success = false;</span>
+<span class="lineNum">      59 </span>            :                                 }
+<span class="lineNum">      60 </span>            :                                 //Initialize OpenGL
+<span class="lineNum">      61 </span><span class="lineCov">          2 :                                 if (!initGL())</span>
+<span class="lineNum">      62 </span>            :                                 {
+<span class="lineNum">      63 </span><span class="lineNoCov">          0 :                                         printf(&quot;Unable to initialize OpenGL!\n&quot;);</span>
+<span class="lineNum">      64 </span><span class="lineNoCov">          0 :                                         success = false;</span>
+<span class="lineNum">      65 </span>            :                                 }
+<span class="lineNum">      66 </span>            : 
+<span class="lineNum">      67 </span>            :                         }
+<span class="lineNum">      68 </span>            :                 }
+<span class="lineNum">      69 </span>            :         }
+<span class="lineNum">      70 </span>            : 
+<span class="lineNum">      71 </span><span class="lineCov">          2 :         return success;</span>
+<span class="lineNum">      72 </span>            : }
+<a name="73"><span class="lineNum">      73 </span>            : </a>
+<span class="lineNum">      74 </span>            : 
+<span class="lineNum">      75 </span><span class="lineCov">          2 : bool Window::initGL()</span>
+<span class="lineNum">      76 </span>            : {
+<span class="lineNum">      77 </span><span class="lineCov">          2 :         GLenum error = GL_NO_ERROR;</span>
+<span class="lineNum">      78 </span>            : 
+<span class="lineNum">      79 </span>            :         //Initialize Projection Matrix
+<span class="lineNum">      80 </span><span class="lineCov">          2 :         glMatrixMode(GL_PROJECTION);</span>
+<span class="lineNum">      81 </span><span class="lineCov">          2 :         glLoadIdentity();</span>
+<span class="lineNum">      82 </span>            : 
+<span class="lineNum">      83 </span>            :         //Check for error
+<span class="lineNum">      84 </span><span class="lineCov">          2 :         error = glGetError();</span>
+<span class="lineNum">      85 </span><span class="lineCov">          2 :         if (error != GL_NO_ERROR)</span>
+<span class="lineNum">      86 </span>            :         {
+<span class="lineNum">      87 </span><span class="lineNoCov">          0 :                 std::cerr &lt;&lt; &quot;Error initializing OpenGL! %s\n&quot; &lt;&lt; error;</span>
+<span class="lineNum">      88 </span><span class="lineNoCov">          0 :                 return false;</span>
+<span class="lineNum">      89 </span>            :         }
+<span class="lineNum">      90 </span>            : 
+<span class="lineNum">      91 </span>            :         //Initialize Modelview Matrix
+<span class="lineNum">      92 </span><span class="lineCov">          2 :         glMatrixMode(GL_MODELVIEW);</span>
+<span class="lineNum">      93 </span><span class="lineCov">          2 :         glLoadIdentity();</span>
+<span class="lineNum">      94 </span>            : 
+<span class="lineNum">      95 </span>            :         //Check for error
+<span class="lineNum">      96 </span><span class="lineCov">          2 :         error = glGetError();</span>
+<span class="lineNum">      97 </span><span class="lineCov">          2 :         if (error != GL_NO_ERROR)</span>
+<span class="lineNum">      98 </span>            :         {
+<span class="lineNum">      99 </span><span class="lineNoCov">          0 :                 std::cerr &lt;&lt; &quot;Error initializing OpenGL! %s\n&quot; &lt;&lt; error;</span>
+<span class="lineNum">     100 </span><span class="lineNoCov">          0 :                 return false;</span>
+<span class="lineNum">     101 </span>            :         }
+<span class="lineNum">     102 </span>            : 
+<span class="lineNum">     103 </span>            :         //Initialize clear color
+<span class="lineNum">     104 </span><span class="lineCov">          2 :         glClearColor(0.f, 0.f, 0.f, 1.f);</span>
+<span class="lineNum">     105 </span>            : 
+<span class="lineNum">     106 </span>            :         //Check for error
+<span class="lineNum">     107 </span><span class="lineCov">          2 :         error = glGetError();</span>
+<span class="lineNum">     108 </span><span class="lineCov">          2 :         if (error != GL_NO_ERROR)</span>
+<span class="lineNum">     109 </span>            :         {
+<span class="lineNum">     110 </span><span class="lineNoCov">          0 :                 std::cerr &lt;&lt; &quot;Error initializing OpenGL! %s\n&quot; &lt;&lt; error;</span>
+<span class="lineNum">     111 </span><span class="lineNoCov">          0 :                 return false;</span>
+<span class="lineNum">     112 </span>            :         }
+<span class="lineNum">     113 </span>            : 
+<span class="lineNum">     114 </span><span class="lineCov">          2 :         glEnable(GL_MULTISAMPLE);</span>
+<span class="lineNum">     115 </span>            : 
+<span class="lineNum">     116 </span><span class="lineCov">          2 :         return true;</span>
+<a name="117"><span class="lineNum">     117 </span>            : }</a>
+<span class="lineNum">     118 </span>            : 
+<span class="lineNum">     119 </span><span class="lineCov">         12 : imgData Window::loadTexture(std::string path)</span>
+<span class="lineNum">     120 </span>            : {
+<span class="lineNum">     121 </span>            :         GLuint TextureID;
+<span class="lineNum">     122 </span><span class="lineCov">         12 :         SDL_Surface* Surface = IMG_Load(path.c_str());</span>
+<span class="lineNum">     123 </span><span class="lineCov">         12 :         if (Surface == NULL)</span>
+<span class="lineNum">     124 </span>            :         {
+<span class="lineNum">     125 </span><span class="lineNoCov">          0 :                 std::cerr &lt;&lt; &quot;Unable to load image! SDL_image Error: &quot; &lt;&lt; IMG_GetError() &lt;&lt; &quot;\n&quot;;</span>
+<span class="lineNum">     126 </span>            :                 //throw?
+<span class="lineNum">     127 </span>            :         }
+<span class="lineNum">     128 </span><span class="lineCov">         12 :         glEnable(GL_TEXTURE_2D);</span>
+<span class="lineNum">     129 </span><span class="lineCov">         12 :         glGenTextures(1, &amp;TextureID);</span>
+<span class="lineNum">     130 </span><span class="lineCov">         12 :         glBindTexture(GL_TEXTURE_2D, TextureID);</span>
+<span class="lineNum">     131 </span>            : 
+<span class="lineNum">     132 </span><span class="lineCov">         12 :         int Mode = GL_RGB;</span>
+<span class="lineNum">     133 </span>            : 
+<span class="lineNum">     134 </span><span class="lineCov">         12 :         if (Surface-&gt;format-&gt;BytesPerPixel == 4) {</span>
+<span class="lineNum">     135 </span><span class="lineCov">          9 :                 Mode = GL_RGBA;</span>
+<span class="lineNum">     136 </span>            :         }
+<span class="lineNum">     137 </span>            : 
+<span class="lineNum">     138 </span><span class="lineCov">         12 :         glTexImage2D(GL_TEXTURE_2D, 0, Mode, Surface-&gt;w, Surface-&gt;h, 0, Mode, GL_UNSIGNED_BYTE, Surface-&gt;pixels);</span>
+<span class="lineNum">     139 </span>            :         
+<span class="lineNum">     140 </span><span class="lineCov">         12 :         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);</span>
+<span class="lineNum">     141 </span><span class="lineCov">         12 :         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);</span>
+<span class="lineNum">     142 </span>            : 
+<span class="lineNum">     143 </span>            :         GLenum err;
+<span class="lineNum">     144 </span><span class="lineCov">         12 :         if ((err = glGetError()) != GL_NO_ERROR) {</span>
+<span class="lineNum">     145 </span><span class="lineNoCov">          0 :                 std::cout &lt;&lt; &quot;openGL error&quot; &lt;&lt; err &lt;&lt; &quot;\n&quot;;</span>
+<span class="lineNum">     146 </span>            :                 //throw?
+<span class="lineNum">     147 </span>            :         }
+<span class="lineNum">     148 </span>            : 
+<span class="lineNum">     149 </span><span class="lineCov">         12 :         glDisable(GL_TEXTURE_2D);</span>
+<span class="lineNum">     150 </span><span class="lineCov">         12 :         SDL_FreeSurface(Surface);</span>
+<span class="lineNum">     151 </span>            : 
+<span class="lineNum">     152 </span><span class="lineCov">         12 :         return { TextureID, Surface-&gt;w, Surface-&gt;h };//increment for next texture</span>
+<span class="lineNum">     153 </span>            : }
+<a name="154"><span class="lineNum">     154 </span>            : </a>
+<span class="lineNum">     155 </span>            : 
+<span class="lineNum">     156 </span><span class="lineCov">          2 : Window::Window() {</span>
+<span class="lineNum">     157 </span><span class="lineCov">          2 :         initWindow();</span>
+<span class="lineNum">     158 </span>            : 
+<span class="lineNum">     159 </span><span class="lineCov">          2 :         glLoadIdentity();</span>
+<span class="lineNum">     160 </span><span class="lineCov">          2 :         glTranslated(-1, 1, 0);</span>
+<span class="lineNum">     161 </span><span class="lineCov">          2 :         glScaled(2.0 / SCREEN_WIDTH, -2.0 / SCREEN_HEIGHT, 1.0);</span>
+<span class="lineNum">     162 </span>            : 
+<span class="lineNum">     163 </span><span class="lineCov">          2 :         quit = false;</span>
+<span class="lineNum">     164 </span>            : 
+<span class="lineNum">     165 </span><span class="lineCov">          2 :         frame = 0;</span>
+<span class="lineNum">     166 </span><span class="lineCov">          2 :         endTime = SDL_GetTicks();</span>
+<span class="lineNum">     167 </span>            : 
+<span class="lineNum">     168 </span><span class="lineCov">          2 :         Lclicked = Rclicked = scrollL = scrollR = scrollU = scrollD = false;</span>
+<span class="lineNum">     169 </span>            : 
+<a name="170"><span class="lineNum">     170 </span><span class="lineCov">          2 : }</span></a>
+<span class="lineNum">     171 </span>            : 
+<span class="lineNum">     172 </span><span class="lineCov">          3 : Window::~Window() {</span>
+<span class="lineNum">     173 </span>            :         //Destroy window    
+<span class="lineNum">     174 </span><span class="lineCov">          2 :         SDL_DestroyWindow(gWindow);</span>
+<span class="lineNum">     175 </span><span class="lineCov">          2 :         gWindow = NULL;</span>
+<span class="lineNum">     176 </span>            : 
+<span class="lineNum">     177 </span>            :         //Quit SDL subsystems
+<span class="lineNum">     178 </span><span class="lineCov">          2 :         IMG_Quit();</span>
+<span class="lineNum">     179 </span><span class="lineCov">          2 :         SDL_Quit();</span>
+<a name="180"><span class="lineNum">     180 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">     181 </span>            : 
+<span class="lineNum">     182 </span><span class="lineNoCov">          0 : void Window::InitFrame() {</span>
+<span class="lineNum">     183 </span>            :         SDL_Event e;
+<span class="lineNum">     184 </span><span class="lineNoCov">          0 :         endTime = endTime + 17;</span>
+<span class="lineNum">     185 </span><span class="lineNoCov">          0 :         frame++;</span>
+<span class="lineNum">     186 </span><span class="lineNoCov">          0 :         if (frame % 3 == 0) endTime--;</span>
+<span class="lineNum">     187 </span>            :         //Handle events on queue
+<span class="lineNum">     188 </span><span class="lineNoCov">          0 :         while (SDL_PollEvent(&amp;e) != 0)</span>
+<span class="lineNum">     189 </span>            :         {
+<span class="lineNum">     190 </span>            :                 //User requests quit
+<span class="lineNum">     191 </span><span class="lineNoCov">          0 :                 if (e.type == SDL_QUIT)</span>
+<span class="lineNum">     192 </span>            :                 {
+<span class="lineNum">     193 </span><span class="lineNoCov">          0 :                         quit = true;</span>
+<span class="lineNum">     194 </span>            :                 }
+<span class="lineNum">     195 </span><span class="lineNoCov">          0 :                 if (e.type == SDL_MOUSEMOTION) {</span>
+<span class="lineNum">     196 </span>            :                         //Get the mouse offsets 
+<span class="lineNum">     197 </span><span class="lineNoCov">          0 :                         mouseX = e.motion.x;</span>
+<span class="lineNum">     198 </span><span class="lineNoCov">          0 :                         mouseY = e.motion.y;</span>
+<span class="lineNum">     199 </span>            :                 }
+<span class="lineNum">     200 </span><span class="lineNoCov">          0 :                 if (e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP) {</span>
+<span class="lineNum">     201 </span><span class="lineNoCov">          0 :                         mouseX = e.button.x;</span>
+<span class="lineNum">     202 </span><span class="lineNoCov">          0 :                         mouseY = e.button.y;</span>
+<span class="lineNum">     203 </span><span class="lineNoCov">          0 :                         if (e.button.button == SDL_BUTTON_LEFT)</span>
+<span class="lineNum">     204 </span><span class="lineNoCov">          0 :                                 Lclicked = (e.button.state == SDL_PRESSED);</span>
+<span class="lineNum">     205 </span><span class="lineNoCov">          0 :                         if (e.button.button == SDL_BUTTON_RIGHT)</span>
+<span class="lineNum">     206 </span><span class="lineNoCov">          0 :                                 Rclicked = (e.button.state == SDL_PRESSED);</span>
+<span class="lineNum">     207 </span>            :                 }
+<span class="lineNum">     208 </span><span class="lineNoCov">          0 :                 if (e.type == SDL_KEYDOWN) {</span>
+<span class="lineNum">     209 </span><span class="lineNoCov">          0 :                         SDL_Keycode keydown = e.key.keysym.sym;</span>
+<span class="lineNum">     210 </span><span class="lineNoCov">          0 :                         if (keydown == SDLK_ESCAPE)</span>
+<span class="lineNum">     211 </span><span class="lineNoCov">          0 :                                 quit = true;</span>
+<span class="lineNum">     212 </span><span class="lineNoCov">          0 :                         if (keydown == SDLK_UP)</span>
+<span class="lineNum">     213 </span><span class="lineNoCov">          0 :                                 scrollU = true;</span>
+<span class="lineNum">     214 </span><span class="lineNoCov">          0 :                         if (keydown == SDLK_DOWN)</span>
+<span class="lineNum">     215 </span><span class="lineNoCov">          0 :                                 scrollD = true;</span>
+<span class="lineNum">     216 </span><span class="lineNoCov">          0 :                         if (keydown == SDLK_LEFT)</span>
+<span class="lineNum">     217 </span><span class="lineNoCov">          0 :                                 scrollL = true;</span>
+<span class="lineNum">     218 </span><span class="lineNoCov">          0 :                         if (keydown == SDLK_RIGHT)</span>
+<span class="lineNum">     219 </span><span class="lineNoCov">          0 :                                 scrollR = true;</span>
+<span class="lineNum">     220 </span>            :                         //TODO: This is a temporary hack to test saving.  Add a real save UI.
+<span class="lineNum">     221 </span>            :                         //Note: Nothing is more permanent than a temporary hack.
+<span class="lineNum">     222 </span><span class="lineNoCov">          0 :                         if (keydown == SDLK_s)</span>
+<span class="lineNum">     223 </span><span class="lineNoCov">          0 :                                 Save(&quot;save.sav&quot;);</span>
+<span class="lineNum">     224 </span><span class="lineNoCov">          0 :                         if (keydown == SDLK_SPACE) {</span>
+<span class="lineNum">     225 </span><span class="lineNoCov">          0 :                                 printf(&quot;Next turn\n&quot;);</span>
+<span class="lineNum">     226 </span><span class="lineNoCov">          0 :                                 dynamicData-&gt;endTurn();</span>
+<span class="lineNum">     227 </span>            :                         }
+<span class="lineNum">     228 </span>            :                 }
+<span class="lineNum">     229 </span><span class="lineNoCov">          0 :                 if (e.type == SDL_KEYUP) {</span>
+<span class="lineNum">     230 </span><span class="lineNoCov">          0 :                         SDL_Keycode keydown = e.key.keysym.sym;</span>
+<span class="lineNum">     231 </span><span class="lineNoCov">          0 :                         if (keydown == SDLK_UP)</span>
+<span class="lineNum">     232 </span><span class="lineNoCov">          0 :                                 scrollU = false;</span>
+<span class="lineNum">     233 </span><span class="lineNoCov">          0 :                         if (keydown == SDLK_DOWN)</span>
+<span class="lineNum">     234 </span><span class="lineNoCov">          0 :                                 scrollD = false;</span>
+<span class="lineNum">     235 </span><span class="lineNoCov">          0 :                         if (keydown == SDLK_LEFT)</span>
+<span class="lineNum">     236 </span><span class="lineNoCov">          0 :                                 scrollL = false;</span>
+<span class="lineNum">     237 </span><span class="lineNoCov">          0 :                         if (keydown == SDLK_RIGHT)</span>
+<span class="lineNum">     238 </span><span class="lineNoCov">          0 :                                 scrollR = false;</span>
+<span class="lineNum">     239 </span>            :                 }
+<span class="lineNum">     240 </span>            :         }
+<span class="lineNum">     241 </span>            : 
+<span class="lineNum">     242 </span><span class="lineNoCov">          0 :         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);</span>
+<span class="lineNum">     243 </span><span class="lineNoCov">          0 :         glClear(GL_COLOR_BUFFER_BIT);</span>
+<a name="244"><span class="lineNum">     244 </span><span class="lineNoCov">          0 : }</span></a>
+<span class="lineNum">     245 </span>            : 
+<span class="lineNum">     246 </span><span class="lineNoCov">          0 : void Window::EndFrame() {</span>
+<span class="lineNum">     247 </span>            :         //Update screen
+<span class="lineNum">     248 </span><span class="lineNoCov">          0 :         SDL_GL_SwapWindow(gWindow);</span>
+<span class="lineNum">     249 </span><span class="lineNoCov">          0 :         if (SDL_GetTicks() &lt; endTime) {</span>
+<span class="lineNum">     250 </span>            :                 //Sleep the remaining frame time
+<span class="lineNum">     251 </span><span class="lineNoCov">          0 :                 SDL_Delay(endTime - SDL_GetTicks());</span>
+<span class="lineNum">     252 </span>            :         }
+<span class="lineNum">     253 </span>            :         else {
+<span class="lineNum">     254 </span>            :                 //std::cout &lt;&lt; SDL_GetTicks()-endTime &lt;&lt; &quot;\n&quot;;
+<span class="lineNum">     255 </span>            :         }
+<span class="lineNum">     256 </span>            : 
+<span class="lineNum">     257 </span>            :         GLenum err;
+<span class="lineNum">     258 </span><span class="lineNoCov">          0 :         if ((err = glGetError()) != GL_NO_ERROR)</span>
+<a name="259"><span class="lineNum">     259 </span><span class="lineNoCov">          0 :                 std::cout &lt;&lt; &quot;GL error!&quot; &lt;&lt; err &lt;&lt; &quot;\n&quot;;</span></a>
+<span class="lineNum">     260 </span>            : 
+<span class="lineNum">     261 </span><span class="lineCov">          3 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.12</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
