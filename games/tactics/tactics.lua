@@ -97,29 +97,30 @@ function spawnAvailable(unitID)
   return getValue(unitID, "actionsRemaining") > 2
 end
 function spawn1 (unitID, x, y)
-  addValue(unitID, "actionsRemaining", -3)
-  addValue(unitID, "stored", -3)
-  createUnit("P", x, y)
+  dospawn(unitID, x, y, "P")
 end
 function spawn1a (unitID, x, y)
-  addValue(unitID, "actionsRemaining", -3)
-  addValue(unitID, "stored", -3)
-  createUnit("p", x, y)
+  dospawn(unitID, x, y, "p")
 end
 function spawn2 (unitID, x, y)
-  addValue(unitID, "actionsRemaining", -3)
-  addValue(unitID, "stored", -3)
-  createUnit("X", x, y)
+  dospawn(unitID, x, y, "X")
 end
 function spawn2a (unitID, x, y)
+  dospawn(unitID, x, y, "x")
+end
+function dospawn(unitID, x, y, unitType)
   addValue(unitID, "actionsRemaining", -3)
   addValue(unitID, "stored", -3)
-  createUnit("x", x, y)
+  u = createUnit(unitType, x, y)
+  setValue(u, "actionsRemaining", 0)
+  setValue(u, "movesRemaining", 0)
 end
+
 function spawnTurn (unitID)
   addValue(unitID, "stored", 2)
   setValue(unitID, "actionsRemaining", getValue(unitID, "stored"))
 end
+  
 function spawnLocs(unitID)
   xi, yi = getPos(unitID)
   range = getValue(unitID, "range")
