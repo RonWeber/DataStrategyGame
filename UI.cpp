@@ -40,7 +40,7 @@ void UI::update() {
 		case none:
 			if (game->withinBounds({ gridX, gridY })){
 				unitSelected = dynamicData->unitAt({ gridX,gridY });
-				if (unitSelected != -1) {
+				if (unitSelected != NO_UNIT) {
 					selectionLevel = unit;
 				}
 			}
@@ -58,7 +58,6 @@ void UI::update() {
 					}
 					else {
 						lua->CallFunction(fnNames[LuaFunction::Action], unitSelected);
-						selectionLevel = none;
 					}
 				}
 			}
@@ -71,7 +70,7 @@ void UI::update() {
 					auto thisAbility = game->abilityTypes.at(abilitySelected);
 					auto fnNames = thisAbility.functionNames;
 					lua->CallFunction(fnNames[LuaFunction::Action], unitSelected, c);
-					selectionLevel = none;
+					selectionLevel = unit;
 				}
 			}
 			break;
@@ -215,28 +214,48 @@ void UI::drawTerrain() {
 
 void UI::drawUnits() {
 	for (unitID uID : dynamicData->getAllUnits()) {
-		Unit u = dynamicData->units.at(uID);
+		Unit &u = dynamicData->units.at(uID);
 		game->unitTypes.at(u.unitTypeID).image->draw_at(u.coordinate);
 	}
 }
 void UI::drawUnitsHUD() {
 	for (unitID uID : dynamicData->getAllUnits()) {
-		Unit u = dynamicData->units.at(uID);
+		Unit &u = dynamicData->units.at(uID);
 		if (u.owner == dynamicData->currentPlayer) {
 			int xx = 0;
 			if (game->movementIcon) {
 				for (int i = 0; i < u.data_keys["movesRemaining"]; i++) {
-					game->movementIcon->draw_at(u.coordinate, xx, gridSize - game->movementIcon->height);
+					game->movementIcon->draw_at(u.coordinate, xx, gridSize - game->movementIcon->height + game->iconOffset);
 					xx += game->movementIconSeperation;
 				}
 			}
 			if (game->actionIcon) {
 				for (int i = 0; i < u.data_keys["actionsRemaining"]; i++) {
-					game->actionIcon->draw_at(u.coordinate, xx, gridSize - game->actionIcon->height);
+					game->actionIcon->draw_at(u.coordinate, xx, gridSize - game->actionIcon->height + game->iconOffset);
 					xx += (float)game->actionIconSeperation;
 				}
 			}
 		}
+	}
+
+	unitID uID = dynamicData->unitAt({ gridX,gridY });
+	if (uID != NO_UNIT) {
+		int i, xx = 0;
+		Unit &u = dynamicData->units.at(uID);
+		UnitType &type = game->unitTypes.at(u.unitTypeID);
+		if (game->hpIcon) {
+			for (i = 0; i < u.data_keys["hp"]; i++) {
+				game->hpIcon->draw_at(u.coordinate, xx, gridSize - game->actionIcon->height + game->iconOffset);
+				xx += (float)game->actionIconSeperation;
+			}
+			if (game->hpEmptyIcon) {
+				for (; i < type.maxHP; i++) {
+					game->hpEmptyIcon->draw_at(u.coordinate, xx, gridSize - game->actionIcon->height + game->iconOffset);
+					xx += (float)game->actionIconSeperation;
+				}
+			}
+		}
+		
 	}
 }
 

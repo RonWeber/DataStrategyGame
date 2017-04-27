@@ -98,6 +98,14 @@ static int getAllUnits(lua_State *L) {
 	}
 	return 1;
 }
+static int getTerrain(lua_State *L) {
+	int x = (int)lua_tointeger(L, -2);
+	int y = (int)lua_tointeger(L, -1);
+	const char t = dynamicData->getTerrain( x, y );
+	const char str[2] = { t, '\0' };
+	lua_pushstring(L, str);
+	return 1;
+}
 
 //To be implemented
 //TerrainID getTerrain(int x, int y);
@@ -140,7 +148,10 @@ LuaManager::LuaManager() {
 	lua_setglobal(L, "withinBounds");
 	lua_pushcfunction(L, getAllUnits);
 	lua_setglobal(L, "getAllUnits");
-	
+
+	lua_pushcfunction(L, getTerrain);
+	lua_setglobal(L, "getTerrain");
+
 	lua_pushinteger(L, NO_UNIT);
 	lua_setglobal(L, "NO_UNIT");
 }

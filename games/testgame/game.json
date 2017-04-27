@@ -1,8 +1,9 @@
 {
 	"displayRNG": false,
-	"actionIcon": "ClawPunch.png",
+	"actionIcon": "ActionPoint.png",
   "gridSize": 32,
-	"movementIcon" : "unit2.png",
+	"movementIcon" : "MovementPoint.png",
+  "iconOffset": 4,
 	"luaFiles": [
 		"testGame.lua",
 		"testGame2.lua"

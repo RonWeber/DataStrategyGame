@@ -15,3 +15,6 @@ Under linux, the program can be built with the included makefile, by simply runn
     libsdl2-dev
     libsdl2-image-dev
     libglew-dev
+
+Credits
+Chess images by jurgenwesterhof (adapted from work of Cburnett)

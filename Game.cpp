@@ -35,6 +35,18 @@ Game::Game(string globalFileName, int mapHeight, int mapWidth) {
 	} else {
 		movementIconSeperation = 8;
 	}
+	if (json.find("iconOffset") != json.end()) {
+		iconOffset = json["iconOffset"];
+	}
+	else {
+		iconOffset = 0;
+	}
+	if (json.find("hpIcon") != json.end()) {
+		hpIcon = std::shared_ptr<Image>(new Image(json["hpIcon"].get<string>(), false));
+	}
+	if (json.find("hpEmptyIcon") != json.end()) {
+		hpEmptyIcon = std::shared_ptr<Image>(new Image(json["hpEmptyIcon"].get<string>(), false));
+	}
 	
 
 	for (auto file : json["luaFiles"]) {

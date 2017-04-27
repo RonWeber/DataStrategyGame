@@ -1,0 +1,203 @@
+{
+  "displayRNG": false,
+  "actionIcon": "ActionPoint.png",
+  "movementIcon": "MovementPoint.png",
+  "gridSize": 64,
+  "iconOffset": 8,
+  "hpIcon": "hp.png",
+  "hpEmptyIcon": "hpEmpty.png",
+  "luaFiles": [
+    "tactics.lua"
+  ],
+  "terrainData": [
+    {
+      "id": ".",
+      "Image": "grass.png"
+    },
+    {
+      "id": "#",
+      "Image": "metal.png"
+    },
+    {
+      "id": "x",
+      "Image": "desert.png"
+    }
+  ],
+  "abilityData": [
+    {
+      "id": "movement",
+      "description": "Goes to a place",
+      "Image": "movement.png",
+      "selection": true,
+      "availableFn": "moveAvailable",
+      "actionFn": "move",
+      "allowedLocationsFn": "moveLocs"
+    },
+    {
+      "id": "attack",
+      "description": "Attack an enemy",
+      "Image": "shoot.png",
+      "selection": true,
+      "availableFn": "actionAvailable",
+      "actionFn": "attack",
+      "allowedLocationsFn": "attackLocs"
+    },
+    {
+      "id": "attackRepeat",
+      "description": "Attack an enemy",
+      "Image": "shoot.png",
+      "selection": true,
+      "availableFn": "actionAvailable",
+      "actionFn": "attackBase",
+      "allowedLocationsFn": "attackLocs"
+    },
+    {
+      "id": "spawn1",
+      "description": "Spawn guys",
+      "Image": "unit1.png",
+      "selection": true,
+      "availableFn": "spawnAvailable",
+      "actionFn": "spawn1",
+      "allowedLocationsFn": "spawnLocs",
+      "turnStartFn": "spawnTurn"
+    },
+    {
+      "id": "spawn2",
+      "description": "Spawn guys",
+      "Image": "unit2.png",
+      "selection": true,
+      "availableFn": "spawnAvailable",
+      "actionFn": "spawn2",
+      "allowedLocationsFn": "spawnLocs"
+    },
+    {
+      "id": "spawn1a",
+      "description": "Spawn guys",
+      "Image": "unit1a.png",
+      "selection": true,
+      "availableFn": "spawnAvailable",
+      "actionFn": "spawn1a",
+      "allowedLocationsFn": "spawnLocs",
+      "turnStartFn": "spawnTurn"
+    },
+    {
+      "id": "spawn2a",
+      "description": "Spawn guys",
+      "Image": "unit2a.png",
+      "selection": true,
+      "availableFn": "spawnAvailable",
+      "actionFn": "spawn2a",
+      "allowedLocationsFn": "spawnLocs"
+    }
+  ],
+  "unitData": [
+    {
+      "id": "P",
+      "side": 0,
+      "Image": "unit1.png",
+      "maxHP": 5,
+      "maxMoves": 1,
+      "maxAP": 1,
+      "extraData": {
+        "speed": 4,
+        "damage": 3,
+        "range": 4
+      },
+      "abilities": [
+        "movement",
+        "attack"
+      ],
+      "name": "Shooter"
+    },
+    {
+      "id": "p",
+      "side": 1,
+      "Image": "unit1a.png",
+      "maxHP": 5,
+      "maxMoves": 1,
+      "maxAP": 1,
+      "extraData": {
+        "speed": 4,
+        "damage": 3,
+        "range": 4
+      },
+      "abilities": [
+        "movement",
+        "attack"
+      ],
+      "name": "Shooter"
+    },
+    {
+      "id": "X",
+      "side": 0,
+      "Image": "unit2.png",
+      "maxHP": 10,
+      "maxMoves": 1,
+      "maxAP": 1,
+      "extraData": {
+        "speed": 3,
+        "damage": 4,
+        "range": 1
+      },
+      "abilities": [
+        "movement",
+        "attackRepeat"
+      ],
+      "name": "Basher"
+    },
+    {
+      "id": "x",
+      "side": 1,
+      "Image": "unit2a.png",
+      "maxHP": 10,
+      "maxMoves": 2,
+      "maxAP": 2,
+      "extraData": {
+        "speed": 3,
+        "damage": 4,
+        "range": 1
+      },
+      "abilities": [
+        "movement",
+        "attackRepeat"
+      ],
+      "name": "Basher"
+    },
+    {
+      "id": "M",
+      "side": 0,
+      "Image": "Rb.png",
+      "maxHP": 25,
+      "maxMoves": 1,
+      "maxAP": 0,
+      "extraData": {
+        "speed": 4,
+        "stored": 0
+      },
+      "abilities": [
+        "movement",
+        "spawn1",
+        "spawn2"
+      ],
+      "name": "Spawner"
+    },
+    {
+      "id": "m",
+      "side": 1,
+      "Image": "Rw.png",
+      "maxHP": 25,
+      "maxMoves": 1,
+      "maxAP": 0,
+      "extraData": {
+        "speed": 4,
+        "stored": 0
+      },
+      "abilities": [
+        "movement",
+        "spawn1a",
+        "spawn2a"
+      ],
+      "name": "Spawner"
+    }
+  ]
+}

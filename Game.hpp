@@ -16,8 +16,8 @@ public:
     int mapHeight, mapWidth;
 	string fileName;
 	bool withinBounds(coord pos);
-	std::shared_ptr<Image> actionIcon, movementIcon;
-	int actionIconSeperation, movementIconSeperation;
+	std::shared_ptr<Image> actionIcon, movementIcon, hpIcon, hpEmptyIcon;
+	int actionIconSeperation, movementIconSeperation, iconOffset;
 private:
 };
 

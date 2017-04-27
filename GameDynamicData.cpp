@@ -125,7 +125,9 @@ void GameDynamicData::startTurn() {
 		UnitType &type = game->unitTypes.at(u.unitTypeID);
 		u.data_keys["movesRemaining"] = type.movesPerTurn;
 		u.data_keys["actionsRemaining"] = type.actionsPerTurn;
-		luaHelper(u, TurnStart);
+		if (u.owner == currentPlayer) {
+			luaHelper(u, TurnStart);
+		}
 	}
 }
 
@@ -133,7 +135,9 @@ void GameDynamicData::endTurn() {
 	//TODO: All kinds of exciting end turn stuff.
 	for (auto unit : this->getAllUnits()) {
 		Unit &u = units.at(unit);
-		luaHelper(u, TurnEnd);
+		if (u.owner == currentPlayer) {
+			luaHelper(u, TurnEnd);
+		}
 	}
 
 	currentPlayer = (currentPlayer == 0) ? 1 : 0;
