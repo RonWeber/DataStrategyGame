@@ -116,7 +116,7 @@ bool Window::initGL()
 	return true;
 }
 
-GLuint Window::loadTexture(std::string path)
+imgData Window::loadTexture(std::string path)
 {
 	GLuint TextureID;
 	SDL_Surface* Surface = IMG_Load(path.c_str());
@@ -149,7 +149,7 @@ GLuint Window::loadTexture(std::string path)
 	glDisable(GL_TEXTURE_2D);
 	SDL_FreeSurface(Surface);
 
-	return TextureID;//increment for next texture
+	return { TextureID, Surface->w, Surface->h };//increment for next texture
 }
 
 

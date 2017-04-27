@@ -9,11 +9,13 @@ public:
 	void update();
 	int scrollOffsetX = 0;
 	int scrollOffsetY = 0;
+	void clearSelection();
 	void playerWins(sideID player);
 private:
 	void scroll();
 	void drawBackground();
 	void drawUnits();
+	void drawUnitsHUD();
 	void drawTerrain();
 	void drawForeground();
 	void drawGrid(double x, double y, double width, double height);

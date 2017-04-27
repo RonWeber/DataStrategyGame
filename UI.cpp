@@ -13,12 +13,12 @@ UI::UI() {
 	scrollOffsetX = -(gfx->SCREEN_WIDTH - (game->mapWidth * 32)) / 2;
 	scrollOffsetY = -(gfx->SCREEN_HEIGHT - (game->mapHeight * 32)) / 2;
 }
-
 void UI::draw() {
-	ui->drawTerrain();
-	ui->drawBackground();
-	ui->drawUnits();
-	ui->drawForeground();
+	drawTerrain();
+	drawBackground();
+	drawUnits();
+	drawUnitsHUD();
+	drawForeground();
 }
 #ifdef WIN32
 #pragma warning( push )
@@ -27,6 +27,9 @@ void UI::draw() {
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wsign-compare"
 #endif
+void UI::clearSelection() {
+	selectionLevel = none;
+}
 void UI::update() {
 	scroll();
 	gridX = (gfx->mouseX + scrollOffsetX) / 32;
@@ -121,9 +124,9 @@ void UI::drawSquare(coord pos, float r, float g, float b) {
 		glColor3f(r, g, b);
 		glVertex2f(pos.x * 32 - scrollOffsetX, pos.y * 32 - scrollOffsetY);
 		glVertex2f(pos.x * 32 + 32 - scrollOffsetX, pos.y * 32 - scrollOffsetY);
-		glVertex2f(pos.x * 32 - scrollOffsetX, pos.y * 32 + 32 - scrollOffsetY);
-		glVertex2f(pos.x * 32 + 32 - scrollOffsetX, pos.y * 32 + 32 - scrollOffsetY);
-		glEnd();
+glVertex2f(pos.x * 32 - scrollOffsetX, pos.y * 32 + 32 - scrollOffsetY);
+glVertex2f(pos.x * 32 + 32 - scrollOffsetX, pos.y * 32 + 32 - scrollOffsetY);
+glEnd();
 	}
 }
 void UI::drawSquare(coord pos, float r, float g, float b, float a) {
@@ -141,7 +144,7 @@ void UI::drawSquare(coord pos, float r, float g, float b, float a) {
 }
 
 void UI::drawBackground() {
-	drawGrid(-scrollOffsetX, -scrollOffsetY, game->mapWidth*32, game->mapHeight * 32);
+	drawGrid(-scrollOffsetX, -scrollOffsetY, game->mapWidth * 32, game->mapHeight * 32);
 
 	//draw square selection
 	switch (selectionLevel) {
@@ -153,7 +156,7 @@ void UI::drawBackground() {
 		break;
 	case ability:
 		auto allLocs = allowedLocations.get();
-		for(coord locs: *allLocs) {
+		for (coord locs : *allLocs) {
 			drawSquare(locs, 1, 1, 1, .5);
 		}
 		drawSquare({ gridX, gridY }, .4f, .4f, .4f);
@@ -167,11 +170,11 @@ void UI::drawGrid(double xStart, double yStart, double width, double height) {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 	const double lineSize = 4;
-	for (double x = xStart; x < xStart+width; x += 32) {
+	for (double x = xStart; x < xStart + width; x += 32) {
 		glBegin(GL_TRIANGLE_STRIP);
 		glColor3f(0.0f, 0.0f, 0.0f);
 		glVertex2f(x - lineSize, yStart);
-		glVertex2f(x - lineSize, yStart+height);
+		glVertex2f(x - lineSize, yStart + height);
 		glColor3f(0.05f, 0.05f, .4f);
 		glVertex2f(x, yStart);
 		glVertex2f(x, yStart + height);
@@ -185,7 +188,7 @@ void UI::drawGrid(double xStart, double yStart, double width, double height) {
 		glBegin(GL_TRIANGLE_STRIP);
 		glColor3f(0.0f, 0.0f, 0.0f);
 		glVertex2f(xStart, y - lineSize);
-		glVertex2f(xStart+width, y - lineSize);
+		glVertex2f(xStart + width, y - lineSize);
 		glColor3f(0.05f, 0.05f, .4f);
 		glVertex2f(xStart, y);
 		glVertex2f(xStart + width, y);
@@ -204,19 +207,38 @@ void UI::drawTerrain() {
 		for (int y = 0; y < dynamicData->terrain[x].size(); y++) {
 			TerrainID id = dynamicData->terrain[x][y];
 			if (game->terrainTypes.count(id) > 0)
-				game->terrainTypes.at(id).image->draw_at({x,y});
+				game->terrainTypes.at(id).image->draw_at({ x,y });
 		}
 	}
 }
 
 
 void UI::drawUnits() {
-	for(unitID uID: dynamicData->getAllUnits()) {
+	for (unitID uID : dynamicData->getAllUnits()) {
 		Unit u = dynamicData->units.at(uID);
 		game->unitTypes.at(u.unitTypeID).image->draw_at(u.coordinate);
 	}
 }
-
+void UI::drawUnitsHUD() {
+	for (unitID uID : dynamicData->getAllUnits()) {
+		Unit u = dynamicData->units.at(uID);
+		if (u.owner == dynamicData->currentPlayer) {
+			int xx = 0;
+			if (game->movementIcon) {
+				for (int i = 0; i < u.data_keys["movesRemaining"]; i++) {
+					game->movementIcon->draw_at(u.coordinate, xx, 16);
+					xx += game->movementIconSeperation;
+				}
+			}
+			if (game->actionIcon) {
+				for (int i = 0; i < u.data_keys["actionsRemaining"]; i++) {
+					game->actionIcon->draw_at(u.coordinate, xx, 16);
+					xx += (float)game->actionIconSeperation;
+				}
+			}
+		}
+	}
+}
 
 void UI::drawForeground() {
 	switch (selectionLevel) {

@@ -1,5 +1,11 @@
 #pragma once
 
+
+struct imgData {
+	GLuint tex;
+	int width, height;
+};
+
 class Window {
 public:
 	Window();//should probably add options for resolution and the like
@@ -21,8 +27,8 @@ public:
 	int SCREEN_WIDTH = 1024;
 	int SCREEN_HEIGHT = 768;
 
-	//Loads individual image as texture
-	GLuint loadTexture(std::string path);
+	//Loads individual image as texture.
+	imgData loadTexture(std::string path);
 
 private:
 	//Starts up SDL and creates window

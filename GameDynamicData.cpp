@@ -137,6 +137,7 @@ void GameDynamicData::endTurn() {
 	}
 
 	currentPlayer = (currentPlayer == 0) ? 1 : 0;
+	ui->clearSelection();
 	startTurn(); //The next turn.
 }
 

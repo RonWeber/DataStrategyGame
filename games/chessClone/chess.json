@@ -1,5 +1,6 @@
 {
   "displayRNG": false,
+  "movementIcon": "MovementPoint.png",
   "luaFiles": [
     "chess.lua"
   ],
@@ -152,7 +153,7 @@
       "side": 0,
       "Image": "Pw.png",
       "maxHP": 1,
-      "maxMoves": 1,
+      "maxMoves": 0,
       "maxAP": 0,
       "extraData": {},
       "abilities": [
@@ -230,7 +231,7 @@
       "side": 1,
       "Image": "Pb.png",
       "maxHP": 1,
-      "maxMoves": 1,
+      "maxMoves": 0,
       "maxAP": 0,
       "extraData": {},
       "abilities": [

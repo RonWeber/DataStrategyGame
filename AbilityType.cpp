@@ -18,7 +18,7 @@ AbilityType::AbilityType(json json) {
 	id = json["id"];
 	Name = json["description"];
 	selectionAbility = json["selection"];
-	image = std::shared_ptr<Image>(new Image(json["Image"].get<string>()));
+	image = std::shared_ptr<Image>(new Image(json["Image"].get<string>(), true));
 	conditionalAdd(json, Available, "availableFn");
 	conditionalAdd(json, Action, "actionFn");
 	conditionalAdd(json, AllowedLocations, "allowedLocationsFn");

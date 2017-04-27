@@ -6,7 +6,7 @@
 UnitType::UnitType(json jsonSection) {
 	id = jsonSection["id"].get<string>().at(0);
 	side = jsonSection["side"];
-	image = std::shared_ptr<Image>(new Image(jsonSection["Image"].get<string>()));
+	image = std::shared_ptr<Image>(new Image(jsonSection["Image"].get<string>(), true));
 	maxHP = jsonSection["maxHP"];
 	movesPerTurn = jsonSection["maxMoves"];
 	actionsPerTurn = jsonSection["maxAP"];

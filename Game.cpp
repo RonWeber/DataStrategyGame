@@ -19,11 +19,11 @@ Game::Game(string globalFileName, int mapHeight, int mapWidth) {
 	displayRNG = json["displayRNG"];
 
 	if (json.find("actionIcon") != json.end()) {
-		actionIcon = std::shared_ptr<Image>(new Image(json["actionIcon"].get<string>()));
-	} 	
+		actionIcon = std::shared_ptr<Image>(new Image(json["actionIcon"].get<string>(), false));
+	}
 	if (json.find("movementIcon") != json.end()) {
-		movementIcon = std::shared_ptr<Image>(new Image(json["movementIcon"].get<string>()));
-	} 		
+		movementIcon = std::shared_ptr<Image>(new Image(json["movementIcon"].get<string>(), false));
+	}
 	if (json.find("actionIconSeperation") != json.end()) {
 		actionIconSeperation = json["actionIconSeperation"];
 	} else {
