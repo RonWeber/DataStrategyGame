@@ -1,0 +1,22 @@
+14 10 tactics.json
+M            m
+ P          p 
+  X        x  
+ P          p 
+              
+              
+ P          p 
+  X        x  
+ P          p 
+M            m
+
+..xxxxxxxxxx..
+..####xxxxx...
+...x##xxxxx...
+...xxxxxxxx...
+.##.######.##.
+.##.######.##.
+...xxxxxxxx...
+...xxxxx##x...
+...xxxxx####..
+..xxxxxxxxxx..

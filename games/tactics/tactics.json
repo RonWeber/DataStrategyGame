@@ -45,7 +45,7 @@
     {
       "id": "attackRepeat",
       "description": "Attack an enemy",
-      "Image": "shoot.png",
+      "Image": "sword.png",
       "selection": true,
       "availableFn": "actionAvailable",
       "actionFn": "attackBase",

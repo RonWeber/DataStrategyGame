@@ -123,9 +123,20 @@ void UI::drawSquare(coord pos, float r, float g, float b) {
 		glColor3f(r, g, b);
 		glVertex2f(pos.x * gridSize - scrollOffsetX, pos.y * gridSize - scrollOffsetY);
 		glVertex2f(pos.x * gridSize + gridSize - scrollOffsetX, pos.y * gridSize - scrollOffsetY);
-glVertex2f(pos.x * gridSize - scrollOffsetX, pos.y * gridSize + gridSize - scrollOffsetY);
-glVertex2f(pos.x * gridSize + gridSize - scrollOffsetX, pos.y * gridSize + gridSize - scrollOffsetY);
-glEnd();
+		glVertex2f(pos.x * gridSize - scrollOffsetX, pos.y * gridSize + gridSize - scrollOffsetY);
+		glVertex2f(pos.x * gridSize + gridSize - scrollOffsetX, pos.y * gridSize + gridSize - scrollOffsetY);
+		glEnd();
+	}
+}
+void UI::drawSquareAbsolute(coord pos, float r, float g, float b) {
+	if (game->withinBounds(pos)) {
+		glBegin(GL_TRIANGLE_STRIP);
+		glColor3f(r, g, b);
+		glVertex2f(pos.x * gridSize , pos.y * gridSize );
+		glVertex2f(pos.x * gridSize + gridSize , pos.y * gridSize );
+		glVertex2f(pos.x * gridSize , pos.y * gridSize + gridSize );
+		glVertex2f(pos.x * gridSize + gridSize , pos.y * gridSize + gridSize );
+		glEnd();
 	}
 }
 void UI::drawSquare(coord pos, float r, float g, float b, float a) {
@@ -149,10 +160,10 @@ void UI::drawBackground() {
 	//draw square selection
 	switch (selectionLevel) {
 	case none:
-		drawSquare({ gridX, gridY }, .6f, .6f, .6f);
+		drawSquare({ gridX, gridY }, .5f, .5f, .6f);
 		break;
 	case unit:
-		drawSquare(dynamicData->getPos(unitSelected), .6f, .6f, .6f);
+		drawSquare(dynamicData->getPos(unitSelected), .5f, .5f, .6f);
 		break;
 	case ability:
 		auto allLocs = allowedLocations.get();
@@ -160,7 +171,7 @@ void UI::drawBackground() {
 			drawSquare(locs, .5f, .5f, 1.f, .7);
 		}
 		drawSquare({ gridX, gridY }, .4f, .4f, .4f);
-		drawSquare(dynamicData->getPos(unitSelected), .6f, .6f, .6f);
+		drawSquare(dynamicData->getPos(unitSelected), .5f, .5f, .6f);
 		break;
 	}
 
@@ -264,7 +275,7 @@ void UI::drawForeground() {
 	switch (selectionLevel) {
 	case none: break;
 	case ability:
-		drawSquare({ abilitySelectionPosition , gfx->SCREEN_HEIGHT / gridSize - 1 }, .2, .2, .2);
+		drawSquareAbsolute({ abilitySelectionPosition , gfx->SCREEN_HEIGHT / gridSize - 1 }, .2, .2, .2);
 	case unit:
 		drawSquare(dynamicData->getPos(unitSelected), 1.f, 1.f, 1.f, 0.2f);//draw second highlighter square
 		if (selectedUnitIsOurs()) {
