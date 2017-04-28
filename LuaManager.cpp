@@ -6,18 +6,24 @@
 std::unique_ptr<LuaManager> lua;
 
 //Functions lua code calls
-static int getValue(lua_State *L) {
-	int unitID = (int)lua_tointeger(L, -2);
-	const char* key = lua_tostring(L, -1);
-	lua_pushinteger(L, dynamicData->getValue(unitID, key));
-	return 1;
-}
 static int getOwner(lua_State *L) {
 	int unitID = (int)lua_tointeger(L, -1);
 	lua_pushinteger(L, dynamicData->getOwner(unitID));
 	return 1;
 }
 
+static int isAlive(lua_State *L) {
+	int unitID = (int)lua_tointeger(L, -1);
+	lua_pushinteger(L, dynamicData->isAlive(unitID));
+	return 1;
+}
+
+static int getValue(lua_State *L) {
+	int unitID = (int)lua_tointeger(L, -2);
+	const char* key = lua_tostring(L, -1);
+	lua_pushinteger(L, dynamicData->getValue(unitID, key));
+	return 1;
+}
 static int setValue(lua_State *L) {
 	int unitID = (int)lua_tointeger(L, -3);
 	const char* key = lua_tostring(L, -2);
@@ -117,11 +123,13 @@ LuaManager::LuaManager() {
 	L = luaL_newstate();
 
 	luaL_openlibs(L);
-
-	lua_pushcfunction(L, getValue);
-	lua_setglobal(L, "getValue");
+	
+	lua_pushcfunction(L, isAlive);
+	lua_setglobal(L, "isAlive");
 	lua_pushcfunction(L, getOwner);
 	lua_setglobal(L, "getOwner");
+	lua_pushcfunction(L, getValue);
+	lua_setglobal(L, "getValue");
 	lua_pushcfunction(L, setValue);
 	lua_setglobal(L, "setValue");
 	lua_pushcfunction(L, addValue);
