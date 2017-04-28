@@ -14,7 +14,7 @@ static int getOwner(lua_State *L) {
 
 static int isAlive(lua_State *L) {
 	int unitID = (int)lua_tointeger(L, -1);
-	lua_pushinteger(L, dynamicData->isAlive(unitID));
+	lua_pushboolean(L, dynamicData->isAlive(unitID));
 	return 1;
 }
 
