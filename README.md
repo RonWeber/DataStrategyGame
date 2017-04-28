@@ -54,6 +54,7 @@ Documentation for lua in general is available at https://www.lua.org/manual/5.3/
 Errors from the lua code will be printed on the console, so make sure to pay attention to it.
 
 All lua functions used directly by the abilities must take the following form:
+
 availableFn(unitID) returns a boolean  
 actionFn(unitID) returns nothing, used in non-selection abilities  
 actionFn(unitID, x, y) returns nothing, used in selection abilities  
@@ -84,7 +85,11 @@ list of unitIDs getAllUnits()
 
 terrainID getTerrain(x, y)  
 
-To kill a unit, use setValue to set its "hp" value to 0. Also exposed is the special unitID value NO_UNIT.
+The follwing special values are used by the default rules engine:  
+"hp": once it hits 0, the unit dies. Use this to kill a unit  
+"movesRemaining" and "actionsRemaining": these have special icon displays on units  
+
+Also exposed is the special unitID value NO_UNIT.
 
 
 ### maps
